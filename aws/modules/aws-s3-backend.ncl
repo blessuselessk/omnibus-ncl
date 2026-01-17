@@ -6,7 +6,6 @@ let Aws = import "./types.ncl" in
       key = "terraform/state",
       region = 'us-west-2,
     },
-
   config.terraform.backend.s3 = {
     bucket = aws.state.bucket,
     key = aws.state.key,
