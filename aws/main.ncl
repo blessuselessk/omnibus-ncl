@@ -36,12 +36,12 @@ let private-key-path = "./<placeholder-private-key>" in
     config = {
       data.external.ssh_key = {
         program = ["./ssh-pubkey.sh", private-key-path],
-     },
+      },
 
       resource.aws_key_pair.ssh_key = {
         public_key = "${data.external.ssh_key.result.public_key}",
       },
-     output."instance_ip".value = aws.simple.ec2.instances.test.public_ip,
+      output."instance_ip".value = aws.simple.ec2.instances.test.public_ip,
     },
   }
     | Aws.Simple
