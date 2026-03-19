@@ -87,7 +87,7 @@ test-data-processor:
     @nickel export --format json sandbox/examples/data-processor.ncl
     @echo ""
     @echo "=== Structure Check ==="
-    @nickel export --format json sandbox/examples/data-processor.ncl | python3 -c "import sys,json;d=json.load(sys.stdin);print('skill_id:',d.get('skill_id'));print('resources:',d.get('resources'))"
+    @nickel export --format json sandbox/examples/data-processor.ncl | python3 scripts/print_skill_summary.py
 
 # Test web-scraper example
 test-web-scraper:
