@@ -1,0 +1,63 @@
+{
+  "add": {
+    "description": "Add two numbers together",
+    "inputSchema": {
+      "properties": {
+        "a": {
+          "description": "First number",
+          "type": "number"
+        },
+        "b": {
+          "description": "Second number",
+          "type": "number"
+        }
+      },
+      "required": [
+        "a",
+        "b"
+      ],
+      "type": "object"
+    }
+  },
+  "greet": {
+    "description": "Generate a greeting message",
+    "inputSchema": {
+      "properties": {
+        "language": {
+          "description": "Language for the greeting",
+          "enum": [
+            "en",
+            "es",
+            "fr"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to greet",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    }
+  },
+  "list_items": {
+    "description": "List items with optional filtering",
+    "inputSchema": {
+      "properties": {
+        "category": {
+          "description": "Filter by category",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Max items to return",
+          "type": "number"
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "add": {
+    "category": "local",
+    "description": "Stage a file for commit",
+    "params": [
+      "options"
+    ]
+  },
+  "branch": {
+    "category": "local",
+    "description": "List, create, or delete branches",
+    "params": [
+      "options"
+    ]
+  },
+  "checkout": {
+    "category": "local",
+    "description": "Switch branches or restore files",
+    "params": [
+      "options"
+    ]
+  },
+  "clone": {
+    "category": "remote",
+    "description": "Clone a remote repository",
+    "params": [
+      "options"
+    ]
+  },
+  "commit": {
+    "category": "local",
+    "description": "Create a commit with staged changes",
+    "params": [
+      "options"
+    ]
+  },
+  "diff": {
+    "category": "local",
+    "description": "Show changes between working tree and HEAD",
+    "params": [
+      "options"
+    ]
+  },
+  "fetch": {
+    "category": "remote",
+    "description": "Download objects and refs from a remote",
+    "params": [
+      "options"
+    ]
+  },
+  "init": {
+    "category": "local",
+    "description": "Initialize a new git repository",
+    "params": [
+      "options"
+    ]
+  },
+  "log": {
+    "category": "local",
+    "description": "Show commit history",
+    "params": [
+      "options"
+    ]
+  },
+  "pull": {
+    "category": "remote",
+    "description": "Fetch and merge from a remote",
+    "params": [
+      "options"
+    ]
+  },
+  "push": {
+    "category": "remote",
+    "description": "Upload local commits to a remote",
+    "params": [
+      "options"
+    ]
+  },
+  "remote": {
+    "category": "remote",
+    "description": "Manage remote repository connections",
+    "params": [
+      "options"
+    ]
+  },
+  "rm": {
+    "category": "local",
+    "description": "Remove a file from tracking",
+    "params": [
+      "options"
+    ]
+  },
+  "status": {
+    "category": "local",
+    "description": "Show working tree status",
+    "params": [
+      "options"
+    ]
+  }
+}

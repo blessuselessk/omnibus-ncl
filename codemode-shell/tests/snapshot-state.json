@@ -1,0 +1,360 @@
+{
+  "appendFile": {
+    "category": "file-io",
+    "description": "Append content to a file",
+    "params": [
+      "path",
+      "content"
+    ]
+  },
+  "applyEditPlan": {
+    "category": "edit",
+    "description": "Apply a previously planned set of edits",
+    "params": [
+      "plan",
+      "options"
+    ]
+  },
+  "applyEdits": {
+    "category": "edit",
+    "description": "Apply edits directly (without planning step)",
+    "params": [
+      "edits",
+      "options"
+    ]
+  },
+  "compressFile": {
+    "category": "archive",
+    "description": "Compress a file (gzip)",
+    "params": [
+      "path",
+      "destination"
+    ]
+  },
+  "copyTree": {
+    "category": "file-ops",
+    "description": "Recursively copy a directory tree",
+    "params": [
+      "src",
+      "dest"
+    ]
+  },
+  "cp": {
+    "category": "file-ops",
+    "description": "Copy a file or directory",
+    "params": [
+      "src",
+      "dest",
+      "options"
+    ]
+  },
+  "createArchive": {
+    "category": "archive",
+    "description": "Create an archive from source paths",
+    "params": [
+      "path",
+      "sources"
+    ]
+  },
+  "decompressFile": {
+    "category": "archive",
+    "description": "Decompress a file (gzip)",
+    "params": [
+      "path",
+      "destination"
+    ]
+  },
+  "detectFile": {
+    "category": "archive",
+    "description": "Detect file type and MIME type",
+    "params": [
+      "path"
+    ]
+  },
+  "diff": {
+    "category": "file-ops",
+    "description": "Compute unified diff between two files",
+    "params": [
+      "pathA",
+      "pathB"
+    ]
+  },
+  "diffContent": {
+    "category": "file-ops",
+    "description": "Compute diff between a file and new content string",
+    "params": [
+      "path",
+      "newContent"
+    ]
+  },
+  "exists": {
+    "category": "metadata",
+    "description": "Check if a path exists",
+    "params": [
+      "path"
+    ]
+  },
+  "extractArchive": {
+    "category": "archive",
+    "description": "Extract an archive to a destination directory",
+    "params": [
+      "path",
+      "destination"
+    ]
+  },
+  "find": {
+    "category": "tree",
+    "description": "Find files/directories matching criteria (name, type, size, date)",
+    "params": [
+      "path",
+      "options"
+    ]
+  },
+  "getCapabilities": {
+    "category": "metadata",
+    "description": "Get workspace capabilities and feature flags"
+  },
+  "glob": {
+    "category": "file-ops",
+    "description": "Find files matching a glob pattern",
+    "params": [
+      "pattern"
+    ]
+  },
+  "hashFile": {
+    "category": "archive",
+    "description": "Compute hash of a file (SHA-256 default)",
+    "params": [
+      "path",
+      "options"
+    ]
+  },
+  "listArchive": {
+    "category": "archive",
+    "description": "List entries in an archive",
+    "params": [
+      "path"
+    ]
+  },
+  "lstat": {
+    "category": "metadata",
+    "description": "Get file/directory metadata (does not follow symlinks)",
+    "params": [
+      "path"
+    ]
+  },
+  "mkdir": {
+    "category": "directory",
+    "description": "Create a directory (with optional recursive creation)",
+    "params": [
+      "path",
+      "options"
+    ]
+  },
+  "moveTree": {
+    "category": "file-ops",
+    "description": "Recursively move a directory tree",
+    "params": [
+      "src",
+      "dest"
+    ]
+  },
+  "mv": {
+    "category": "file-ops",
+    "description": "Move/rename a file or directory",
+    "params": [
+      "src",
+      "dest",
+      "options"
+    ]
+  },
+  "planEdits": {
+    "category": "edit",
+    "description": "Plan a batch of file edits from instructions",
+    "params": [
+      "instructions"
+    ]
+  },
+  "queryJson": {
+    "category": "json",
+    "description": "Query a JSON file with a dot-path expression",
+    "params": [
+      "path",
+      "query"
+    ]
+  },
+  "readFile": {
+    "category": "file-io",
+    "description": "Read a file as UTF-8 text",
+    "params": [
+      "path"
+    ]
+  },
+  "readFileBytes": {
+    "category": "file-io",
+    "description": "Read a file as raw bytes (Uint8Array)",
+    "params": [
+      "path"
+    ]
+  },
+  "readJson": {
+    "category": "json",
+    "description": "Read and parse a JSON file",
+    "params": [
+      "path"
+    ]
+  },
+  "readdir": {
+    "category": "directory",
+    "description": "List entries in a directory",
+    "params": [
+      "path"
+    ]
+  },
+  "readdirWithFileTypes": {
+    "category": "directory",
+    "description": "List directory entries with type information",
+    "params": [
+      "path"
+    ]
+  },
+  "readlink": {
+    "category": "file-ops",
+    "description": "Read the target of a symbolic link",
+    "params": [
+      "path"
+    ]
+  },
+  "realpath": {
+    "category": "file-ops",
+    "description": "Resolve a path to its absolute real path",
+    "params": [
+      "path"
+    ]
+  },
+  "removeTree": {
+    "category": "file-ops",
+    "description": "Recursively remove a directory tree",
+    "params": [
+      "path"
+    ]
+  },
+  "replaceInFile": {
+    "category": "search",
+    "description": "Replace text in a single file",
+    "params": [
+      "path",
+      "search",
+      "replacement",
+      "options"
+    ]
+  },
+  "replaceInFiles": {
+    "category": "search",
+    "description": "Replace text across files matching a glob pattern",
+    "params": [
+      "pattern",
+      "search",
+      "replacement",
+      "options"
+    ]
+  },
+  "resolvePath": {
+    "category": "file-ops",
+    "description": "Resolve a relative path against a base",
+    "params": [
+      "base",
+      "path"
+    ]
+  },
+  "rm": {
+    "category": "file-ops",
+    "description": "Remove a file or directory",
+    "params": [
+      "path",
+      "options"
+    ]
+  },
+  "searchFiles": {
+    "category": "search",
+    "description": "Search for text across files matching a glob pattern",
+    "params": [
+      "pattern",
+      "query",
+      "options"
+    ]
+  },
+  "searchText": {
+    "category": "search",
+    "description": "Search for text in a single file",
+    "params": [
+      "path",
+      "query",
+      "options"
+    ]
+  },
+  "stat": {
+    "category": "metadata",
+    "description": "Get file/directory metadata (follows symlinks)",
+    "params": [
+      "path"
+    ]
+  },
+  "summarizeTree": {
+    "category": "tree",
+    "description": "Summarize directory tree (file count, total size, types)",
+    "params": [
+      "path",
+      "options"
+    ]
+  },
+  "symlink": {
+    "category": "file-ops",
+    "description": "Create a symbolic link",
+    "params": [
+      "target",
+      "linkPath"
+    ]
+  },
+  "updateJson": {
+    "category": "json",
+    "description": "Apply set/delete operations to a JSON file",
+    "params": [
+      "path",
+      "operations"
+    ]
+  },
+  "walkTree": {
+    "category": "tree",
+    "description": "Walk directory tree and return nested node structure",
+    "params": [
+      "path",
+      "options"
+    ]
+  },
+  "writeFile": {
+    "category": "file-io",
+    "description": "Write UTF-8 text to a file (creates or overwrites)",
+    "params": [
+      "path",
+      "content"
+    ]
+  },
+  "writeFileBytes": {
+    "category": "file-io",
+    "description": "Write raw bytes to a file",
+    "params": [
+      "path",
+      "content"
+    ]
+  },
+  "writeJson": {
+    "category": "json",
+    "description": "Write a value as formatted JSON to a file",
+    "params": [
+      "path",
+      "value",
+      "options"
+    ]
+  }
+}

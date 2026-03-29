@@ -1,0 +1,256 @@
+{
+  "addComment": {
+    "description": "Add a comment to a task",
+    "inputSchema": {
+      "properties": {
+        "author": {
+          "description": "Author name",
+          "type": "string"
+        },
+        "content": {
+          "description": "Comment content",
+          "type": "string"
+        },
+        "taskId": {
+          "description": "Task ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "taskId",
+        "content"
+      ],
+      "type": "object"
+    }
+  },
+  "createProject": {
+    "description": "Create a new project",
+    "inputSchema": {
+      "properties": {
+        "description": {
+          "description": "Project description",
+          "type": "string"
+        },
+        "name": {
+          "description": "Project name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    }
+  },
+  "createSprint": {
+    "description": "Create a sprint for a project",
+    "inputSchema": {
+      "properties": {
+        "endDate": {
+          "description": "End date (ISO 8601)",
+          "type": "string"
+        },
+        "name": {
+          "description": "Sprint name",
+          "type": "string"
+        },
+        "projectId": {
+          "description": "Project ID",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Start date (ISO 8601)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "projectId",
+        "name"
+      ],
+      "type": "object"
+    }
+  },
+  "createTask": {
+    "description": "Create a task in a project",
+    "inputSchema": {
+      "properties": {
+        "assignee": {
+          "description": "Assignee name",
+          "type": "string"
+        },
+        "description": {
+          "description": "Task description",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Priority level",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "urgent"
+          ],
+          "type": "string"
+        },
+        "projectId": {
+          "description": "Project ID",
+          "type": "string"
+        },
+        "sprintId": {
+          "description": "Sprint ID",
+          "type": "string"
+        },
+        "status": {
+          "description": "Task status",
+          "enum": [
+            "todo",
+            "in_progress",
+            "in_review",
+            "done"
+          ],
+          "type": "string"
+        },
+        "title": {
+          "description": "Task title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "projectId",
+        "title"
+      ],
+      "type": "object"
+    }
+  },
+  "deleteTask": {
+    "description": "Delete a task and its comments",
+    "inputSchema": {
+      "properties": {
+        "id": {
+          "description": "Task ID to delete",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    }
+  },
+  "listComments": {
+    "description": "List comments on a task",
+    "inputSchema": {
+      "properties": {
+        "taskId": {
+          "description": "Task ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "taskId"
+      ],
+      "type": "object"
+    }
+  },
+  "listProjects": {
+    "description": "List all projects",
+    "inputSchema": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "listSprints": {
+    "description": "List sprints, optionally by project",
+    "inputSchema": {
+      "properties": {
+        "projectId": {
+          "description": "Filter by project ID",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  },
+  "listTasks": {
+    "description": "List tasks with optional filters",
+    "inputSchema": {
+      "properties": {
+        "assignee": {
+          "description": "Filter by assignee",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Filter by priority",
+          "type": "string"
+        },
+        "projectId": {
+          "description": "Filter by project ID",
+          "type": "string"
+        },
+        "sprintId": {
+          "description": "Filter by sprint ID",
+          "type": "string"
+        },
+        "status": {
+          "description": "Filter by status",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  },
+  "updateTask": {
+    "description": "Update a task's fields",
+    "inputSchema": {
+      "properties": {
+        "assignee": {
+          "description": "New assignee",
+          "type": "string"
+        },
+        "description": {
+          "description": "New description",
+          "type": "string"
+        },
+        "id": {
+          "description": "Task ID",
+          "type": "string"
+        },
+        "priority": {
+          "description": "New priority",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "urgent"
+          ],
+          "type": "string"
+        },
+        "sprintId": {
+          "description": "New sprint ID",
+          "type": "string"
+        },
+        "status": {
+          "description": "New status",
+          "enum": [
+            "todo",
+            "in_progress",
+            "in_review",
+            "done"
+          ],
+          "type": "string"
+        },
+        "title": {
+          "description": "New title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    }
+  }
+}
