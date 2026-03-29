@@ -1,0 +1,299 @@
+{
+  "curl": {
+    "description": "Make HTTP requests. Supports GET, POST, PUT, DELETE with headers and body.",
+    "flakeRef": "nixpkgs#curl",
+    "inputSchema": {
+      "properties": {
+        "data": {
+          "description": "Request body data",
+          "type": "string"
+        },
+        "headers": {
+          "description": "HTTP headers",
+          "items": {
+            "description": "Header in 'Key: Value' format",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "method": {
+          "description": "HTTP method",
+          "enum": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ],
+          "type": "string"
+        },
+        "output": {
+          "description": "Write response to file instead of stdout",
+          "type": "string"
+        },
+        "silent": {
+          "description": "Silent mode — hide progress meter",
+          "type": "boolean"
+        },
+        "url": {
+          "description": "URL to request",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "type": "object"
+    },
+    "name": "curl",
+    "sandbox": {
+      "filesystem": {
+        "allowed_paths": [
+          "/tmp",
+          "/nix"
+        ],
+        "mode": "ro"
+      },
+      "network": {
+        "enabled": true,
+        "mode": "full"
+      },
+      "resources": {
+        "rlimit_as": 268435456,
+        "rlimit_cpu": 60,
+        "rlimit_nofile": 128
+      },
+      "timeout": 60
+    },
+    "securityLevel": "network"
+  },
+  "ffmpeg": {
+    "description": "Convert and process audio/video files. Supports format conversion, trimming, encoding.",
+    "flakeRef": "nixpkgs#ffmpeg",
+    "inputSchema": {
+      "properties": {
+        "codec": {
+          "description": "Codec to use (e.g., libx264, aac)",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration to extract (HH:MM:SS or seconds)",
+          "type": "string"
+        },
+        "extra_args": {
+          "description": "Additional ffmpeg arguments",
+          "items": {
+            "description": "arg",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "format": {
+          "description": "Output format (e.g., mp4, mp3, wav)",
+          "type": "string"
+        },
+        "input": {
+          "description": "Input file path",
+          "type": "string"
+        },
+        "output": {
+          "description": "Output file path",
+          "type": "string"
+        },
+        "start_time": {
+          "description": "Start time for trimming (HH:MM:SS or seconds)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input",
+        "output"
+      ],
+      "type": "object"
+    },
+    "name": "ffmpeg",
+    "sandbox": {
+      "filesystem": {
+        "allowed_paths": [
+          "/tmp",
+          "/nix",
+          "/tmp/nix-tool-work"
+        ],
+        "mode": "whitelist"
+      },
+      "network": {
+        "enabled": false,
+        "mode": "deny"
+      },
+      "resources": {
+        "rlimit_as": 536870912,
+        "rlimit_cpu": 300,
+        "rlimit_nofile": 256
+      },
+      "timeout": 300
+    },
+    "securityLevel": "io"
+  },
+  "jq": {
+    "description": "Process JSON data using jq filter expressions. Reads from stdin or a file.",
+    "flakeRef": "nixpkgs#jq",
+    "inputSchema": {
+      "properties": {
+        "filter": {
+          "description": "jq filter expression (e.g., '.[] | .name')",
+          "type": "string"
+        },
+        "input": {
+          "description": "JSON input string to process",
+          "type": "string"
+        },
+        "raw_output": {
+          "description": "Output raw strings without JSON quoting (-r)",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "filter",
+        "input"
+      ],
+      "type": "object"
+    },
+    "name": "jq",
+    "sandbox": {
+      "filesystem": {
+        "allowed_paths": [
+          "/tmp",
+          "/nix"
+        ],
+        "mode": "ro"
+      },
+      "network": {
+        "enabled": false,
+        "mode": "deny"
+      },
+      "resources": {
+        "rlimit_as": 134217728,
+        "rlimit_cpu": 30,
+        "rlimit_nofile": 64
+      },
+      "timeout": 30
+    },
+    "securityLevel": "strict"
+  },
+  "pandoc": {
+    "description": "Convert documents between formats. Supports Markdown, HTML, PDF, DOCX, LaTeX, and more.",
+    "flakeRef": "nixpkgs#pandoc",
+    "inputSchema": {
+      "properties": {
+        "from": {
+          "description": "Input format (e.g., markdown, html, latex)",
+          "type": "string"
+        },
+        "input": {
+          "description": "Input file path",
+          "type": "string"
+        },
+        "output": {
+          "description": "Output file path",
+          "type": "string"
+        },
+        "standalone": {
+          "description": "Produce standalone document (-s)",
+          "type": "boolean"
+        },
+        "template": {
+          "description": "Template file for output formatting",
+          "type": "string"
+        },
+        "to": {
+          "description": "Output format (e.g., html, pdf, docx)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input",
+        "output"
+      ],
+      "type": "object"
+    },
+    "name": "pandoc",
+    "sandbox": {
+      "filesystem": {
+        "allowed_paths": [
+          "/tmp",
+          "/nix",
+          "/tmp/nix-tool-work"
+        ],
+        "mode": "whitelist"
+      },
+      "network": {
+        "enabled": false,
+        "mode": "deny"
+      },
+      "resources": {
+        "rlimit_as": 536870912,
+        "rlimit_cpu": 300,
+        "rlimit_nofile": 256
+      },
+      "timeout": 300
+    },
+    "securityLevel": "io"
+  },
+  "ripgrep": {
+    "description": "Search file contents using regular expressions. Fast recursive search.",
+    "flakeRef": "nixpkgs#ripgrep",
+    "inputSchema": {
+      "properties": {
+        "case_insensitive": {
+          "description": "Case insensitive search (-i)",
+          "type": "boolean"
+        },
+        "context": {
+          "description": "Show N lines of context around matches (-C)",
+          "type": "integer"
+        },
+        "fixed_strings": {
+          "description": "Treat pattern as literal string (-F)",
+          "type": "boolean"
+        },
+        "glob": {
+          "description": "Only search files matching this glob (e.g., '*.ts')",
+          "type": "string"
+        },
+        "path": {
+          "description": "File or directory to search (default: current dir)",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Regex pattern to search for",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pattern"
+      ],
+      "type": "object"
+    },
+    "name": "ripgrep",
+    "sandbox": {
+      "filesystem": {
+        "allowed_paths": [
+          "/tmp",
+          "/nix"
+        ],
+        "mode": "ro"
+      },
+      "network": {
+        "enabled": false,
+        "mode": "deny"
+      },
+      "resources": {
+        "rlimit_as": 134217728,
+        "rlimit_cpu": 30,
+        "rlimit_nofile": 64
+      },
+      "timeout": 30
+    },
+    "securityLevel": "strict"
+  }
+}
