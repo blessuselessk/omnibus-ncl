@@ -1,0 +1,36 @@
+# Justfile for non-Nix users. Requires: nickel, jq
+# Also needs _deps/ populated — run: just deps
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Print _deps setup instructions
+deps:
+    @echo "Set up _deps/ manually:"
+    @echo "  mkdir -p _deps"
+    @echo "  ln -sfn /path/to/codemode-ncl _deps/codemode-ncl"
+    @echo "Or use: nix develop"
+
+# Export demo tools as JSON
+export:
+    nickel export --format json examples/demo-tools-export.ncl
+
+# Export server config
+export-server:
+    nickel export --format json examples/server-config.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/demo-tools-export.ncl > /dev/null && echo "Demo tools: OK"
+    @nickel export --format json examples/server-config.ncl > /dev/null && echo "Server config: OK"
+
+# Alias for validate
+check: validate
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Format all .ncl files (excluding _deps)
+fmt:
+    @fd -e ncl -E _deps -x nickel format {}

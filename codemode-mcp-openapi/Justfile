@@ -1,0 +1,49 @@
+# Justfile for non-Nix users. Requires: nickel, jq
+# Also needs _deps/ populated — run: just deps
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Print _deps setup instructions
+deps:
+    @echo "Set up _deps/ manually:"
+    @echo "  mkdir -p _deps"
+    @echo "  ln -sfn /path/to/codemode-ncl _deps/codemode-ncl"
+    @echo "  cp -r /path/to/codemode-mcp-ncl _deps/codemode-mcp-ncl"
+    @echo "  mkdir -p _deps/codemode-mcp-ncl/_deps"
+    @echo "  ln -sfn /path/to/codemode-ncl _deps/codemode-mcp-ncl/_deps/codemode-ncl"
+    @echo "Or use: nix develop"
+
+# Export MCP tools as JSON
+export:
+    nickel export --format json examples/mcp-tools-export.ncl
+
+# Export MCP server config
+export-server:
+    nickel export --format json examples/mcp-server.ncl
+
+# Export OpenAPI server config
+export-openapi:
+    nickel export --format json examples/openapi-server.ncl
+
+# Export request examples
+export-requests:
+    nickel export --format json examples/request-examples.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/mcp-tools-export.ncl > /dev/null && echo "MCP tools: OK"
+    @nickel export --format json examples/mcp-server.ncl > /dev/null && echo "MCP server: OK"
+    @nickel export --format json examples/openapi-server.ncl > /dev/null && echo "OpenAPI server: OK"
+    @nickel export --format json examples/request-examples.ncl > /dev/null && echo "Request examples: OK"
+
+# Alias for validate
+check: validate
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Format all .ncl files (excluding _deps)
+fmt:
+    @fd -e ncl -E _deps -x nickel format {}

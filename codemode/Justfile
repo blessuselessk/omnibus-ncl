@@ -1,0 +1,28 @@
+# Justfile for non-Nix users. Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export PM tools as JSON Schema
+export:
+    nickel export --format json examples/pm-tools-export.ncl
+
+# Export single-tool example
+export-single:
+    nickel export --format json examples/single-tool.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/pm-tools-export.ncl > /dev/null && echo "PM tools: OK"
+    @nickel export --format json examples/single-tool.ncl > /dev/null && echo "Single tool: OK"
+
+# Alias for validate
+check: validate
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}
