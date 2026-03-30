@@ -1,0 +1,202 @@
+{
+  "agents": [
+    {
+      "body": "You are a senior frontend architect for a React/TypeScript application.\nYou design component hierarchies, manage state architecture, and review\nimplementation quality. When you encounter security concerns, hand off\nto the security reviewer agent.",
+      "description": "Frontend architect with security review handoff",
+      "handoffs": [
+        "security-reviewer.agent.md"
+      ],
+      "tools": [
+        "codebase",
+        "terminal",
+        "search"
+      ]
+    },
+    {
+      "body": "You maintain project documentation. After significant changes,\nupdate relevant .memory.md files with lessons learned and\n.context.md files with architectural changes.",
+      "description": "Documentation writer"
+    }
+  ],
+  "agents_md": [],
+  "chatmodes": [
+    {
+      "body": "You are a security engineer reviewing a frontend application.\nFocus on:\n- XSS vectors in JSX (dangerouslySetInnerHTML, unsanitized user input)\n- Secrets or tokens in client-side code\n- CORS misconfigurations in API calls\n- Dependency vulnerabilities (check package.json)\nAlways suggest the fix, not just the problem.",
+      "description": "Security-focused code review",
+      "model": "Claude Sonnet 4",
+      "tools": [
+        "codebase",
+        "terminal",
+        "fetch"
+      ]
+    },
+    {
+      "body": "You audit React components for WCAG 2.1 AA compliance.\nCheck for:\n- Missing aria labels and roles\n- Keyboard navigation support\n- Color contrast issues\n- Screen reader compatibility\nProvide specific code fixes with before/after examples.",
+      "description": "Accessibility auditor",
+      "tools": [
+        "codebase",
+        "fetch"
+      ]
+    }
+  ],
+  "compositions": [
+    {
+      "direction": "invoke",
+      "from": "agent",
+      "to": "agent",
+      "verb": "hands-off-to"
+    },
+    {
+      "direction": "auto_load",
+      "from": "agent",
+      "to": "instruction",
+      "verb": "auto-loads"
+    },
+    {
+      "direction": "reference",
+      "from": "agent",
+      "to": "context",
+      "verb": "references"
+    },
+    {
+      "direction": "reference",
+      "from": "agent",
+      "to": "memory",
+      "verb": "reads"
+    },
+    {
+      "direction": "produce",
+      "from": "agent",
+      "to": "memory",
+      "verb": "updates"
+    },
+    {
+      "direction": "auto_load",
+      "from": "agent",
+      "to": "skill",
+      "verb": "auto-discovers"
+    },
+    {
+      "direction": "invoke",
+      "from": "prompt",
+      "to": "agent",
+      "verb": "activates"
+    },
+    {
+      "direction": "reference",
+      "from": "prompt",
+      "to": "spec",
+      "verb": "consumes"
+    },
+    {
+      "direction": "produce",
+      "from": "prompt",
+      "to": "spec",
+      "verb": "produces"
+    },
+    {
+      "direction": "reference",
+      "from": "prompt",
+      "to": "context",
+      "verb": "references"
+    }
+  ],
+  "contexts": [
+    {
+      "body": "The backend API runs at `http://localhost:3001` in development.\n\nKey endpoints:\n- `/api/v1/users` — user CRUD\n- `/api/v1/projects` — project management\n- `/api/v1/projects/:id/tasks` — task management within projects\n\nAuth: Bearer token in Authorization header.\nRate limits: 100 req/min per user, 1000 req/min per IP.\nAll responses follow `{ data, error, meta }` envelope.",
+      "title": "API documentation"
+    },
+    {
+      "body": "- Frontend: Vite + React 19, deployed on Cloudflare Pages\n- Backend: Hono on Cloudflare Workers\n- Database: Turso (libSQL) with Drizzle ORM\n- Auth: custom OAuth2 implementation (see specs/auth-flow.spec.md)\n- CI: GitHub Actions, runs on every PR\n- Monitoring: Sentry for errors, Axiom for logs",
+      "title": "Infrastructure overview"
+    }
+  ],
+  "instructions": [
+    {
+      "apply_to": "**/*.{ts,tsx}",
+      "body": "- Use `strict: true` in tsconfig\n- Prefer `interface` over `type` for object shapes\n- No `any` — use `unknown` and narrow with type guards\n- All exported functions must have explicit return types",
+      "description": "TypeScript strict mode conventions"
+    },
+    {
+      "apply_to": "**/*.{css,scss}",
+      "body": "- Use CSS modules for component styles\n- No inline styles except for dynamic values\n- Follow BEM naming in global stylesheets\n- Design tokens live in `src/styles/tokens.css`",
+      "description": "CSS architecture rules"
+    },
+    {
+      "apply_to": "src/components/**/*.tsx",
+      "body": "- Functional components only\n- Props interface named `{ComponentName}Props`\n- Co-locate tests: `Component.test.tsx` next to `Component.tsx`\n- Extract hooks into `use{Name}.ts` when logic exceeds 10 lines",
+      "description": "React component patterns"
+    }
+  ],
+  "memories": [
+    {
+      "body": "- Vite HMR breaks with circular imports in `src/utils/` — restart dev server\n- CSS modules require `.module.css` suffix exactly — `.module.scss` works too\n- The `@/` path alias maps to `src/` (configured in tsconfig + vite.config)\n- Playwright tests need `just e2e-setup` before first run on a new machine",
+      "title": "Build system quirks"
+    },
+    {
+      "body": "- PRs require at least one approval from `@frontend-team`\n- Feature branches: `feat/TICKET-123-short-description`\n- Commits follow Conventional Commits (enforced by commitlint)\n- No direct pushes to main — CI blocks force-push",
+      "title": "Team conventions learned"
+    }
+  ],
+  "prompts": [
+    {
+      "body": "Review the changes on branch `${input:branch}` against main.\n\nCheck for:\n1. TypeScript strict mode violations\n2. Missing or inadequate tests\n3. Component patterns (see .instructions.md)\n4. Performance anti-patterns (unnecessary re-renders, missing memoization)\n5. Accessibility regressions\n\nProvide a structured review with severity levels: critical, warning, suggestion.",
+      "description": "Review a pull request for code quality and conventions",
+      "input": [
+        "branch"
+      ],
+      "mode": "agent",
+      "tools": [
+        "codebase",
+        "terminal"
+      ]
+    },
+    {
+      "body": "Create a new React component `${input:name}` in `${input:directory}/`:\n\nFiles to create:\n- `${input:name}.tsx` — component implementation\n- `${input:name}.test.tsx` — unit tests with React Testing Library\n- `${input:name}.module.css` — CSS module styles\n- `index.ts` — barrel export\n\nFollow the project's component conventions from .instructions.md.",
+      "description": "Generate a new React component with tests and stories",
+      "input": [
+        "name",
+        "directory"
+      ],
+      "mode": "edit",
+      "tools": [
+        "codebase"
+      ]
+    },
+    {
+      "body": "Analyze the current project structure and explain:\n- Key modules and their responsibilities\n- Data flow between components\n- External dependencies and integration points\n- Areas of technical debt or complexity\n\nKeep it concise — aim for a 2-minute read.",
+      "description": "Explain the architecture of a directory"
+    }
+  ],
+  "root_instructions": ".github/copilot-instructions.md",
+  "skills": [
+    {
+      "description": "Auto-fix linting and formatting issues across the codebase",
+      "name": "lint-fix",
+      "references": [
+        "references/eslint-config.md",
+        "references/prettier-config.md"
+      ],
+      "scripts": [
+        "scripts/lint-fix.sh"
+      ]
+    },
+    {
+      "description": "Generate and run database migrations with Drizzle",
+      "name": "db-migrate",
+      "references": [
+        "references/drizzle-schema.md"
+      ],
+      "scripts": [
+        "scripts/migrate-generate.sh",
+        "scripts/migrate-run.sh"
+      ]
+    }
+  ],
+  "specs": [
+    {
+      "body": "## Problem\nUsers need secure authentication with OAuth2 providers (Google, GitHub)\nand optional email/password fallback.\n\n## Requirements\n- OAuth2 PKCE flow for SPA security\n- JWT access tokens with 15-minute expiry\n- Refresh token rotation\n- Session persistence across tabs via BroadcastChannel\n\n## API Contract\n- `POST /auth/login` — initiate login flow\n- `POST /auth/callback` — exchange code for tokens\n- `POST /auth/refresh` — rotate refresh token\n- `POST /auth/logout` — revoke session\n\n## Validation Criteria\n- [ ] OAuth flow completes in under 3 seconds\n- [ ] Tokens never appear in URL or localStorage\n- [ ] Refresh rotation invalidates previous tokens\n- [ ] Concurrent tab sessions stay synchronized",
+      "category": "feature",
+      "title": "Authentication Flow"
+    }
+  ]
+}

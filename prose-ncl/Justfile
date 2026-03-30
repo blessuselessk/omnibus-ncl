@@ -1,0 +1,38 @@
+# Justfile for non-Nix users. Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export workspace as JSON
+export:
+    nickel export --format json examples/workspace-export.ncl
+
+# Export single skill as JSON
+export-skill:
+    nickel export --format json examples/single-skill.ncl
+
+# Export composability graph as JSON
+export-graph:
+    nickel export --format json examples/graph-export.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/workspace-export.ncl > /dev/null && echo "Workspace: OK"
+    @nickel export --format json examples/single-skill.ncl > /dev/null && echo "Single skill: OK"
+    @nickel export --format json examples/graph-export.ncl > /dev/null && echo "Graph: OK"
+
+# Alias for validate
+check: validate
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Update snapshot from current export
+snapshot:
+    nickel export --format json examples/workspace-export.ncl | jq -S . > tests/snapshot.json
+    @echo "Snapshot updated"
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}

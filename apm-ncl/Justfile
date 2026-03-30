@@ -1,0 +1,38 @@
+# Justfile for non-Nix users. Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export full manifest as JSON
+export:
+    nickel export --format json examples/manifest-export.ncl
+
+# Export simple manifest as JSON
+export-simple:
+    nickel export --format json examples/simple-manifest.ncl
+
+# Export lockfile as JSON
+export-lockfile:
+    nickel export --format json examples/lockfile-example.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/manifest-export.ncl > /dev/null && echo "Full manifest: OK"
+    @nickel export --format json examples/simple-manifest.ncl > /dev/null && echo "Simple manifest: OK"
+    @nickel export --format json examples/lockfile-example.ncl > /dev/null && echo "Lockfile: OK"
+
+# Alias for validate
+check: validate
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Update snapshot from current Nickel export
+snapshot:
+    @nickel export --format json examples/manifest-export.ncl | jq -S . > tests/snapshot.json
+    @echo "Snapshot updated: tests/snapshot.json"
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}

@@ -134,6 +134,16 @@ test-examples:
     nickel export --format json codemode-nix/examples/nix-tools-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
     echo "13. codemode-nix/nix-registry.ncl"
     nickel export --format json codemode-nix/examples/nix-registry.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "14. apm-ncl/manifest-export.ncl"
+    nickel export --format json apm-ncl/examples/manifest-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "15. apm-ncl/simple-manifest.ncl"
+    nickel export --format json apm-ncl/examples/simple-manifest.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "16. apm-ncl/lockfile-example.ncl"
+    nickel export --format json apm-ncl/examples/lockfile-example.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "17. prose-ncl/workspace-export.ncl"
+    nickel export --format json prose-ncl/examples/workspace-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "18. prose-ncl/single-skill.ncl"
+    nickel export --format json prose-ncl/examples/single-skill.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
 
 # ==============================================================================
 # Codemode
@@ -261,6 +271,70 @@ cnix-run tool *args:
     @bash codemode-nix/scripts/nix-tool-runner.sh /tmp/nix-tool-registry.json {{tool}} {{args}}
 
 # ==============================================================================
+# APM (Agent Package Manager)
+# ==============================================================================
+
+# Export APM manifest as JSON
+apm-export:
+    @nickel export --format json apm-ncl/examples/manifest-export.ncl
+
+# Export simple APM manifest
+apm-simple:
+    @nickel export --format json apm-ncl/examples/simple-manifest.ncl
+
+# Export APM lockfile as JSON
+apm-lockfile:
+    @nickel export --format json apm-ncl/examples/lockfile-example.ncl
+
+# Validate all apm-ncl .ncl files
+apm-validate:
+    @echo "=== Validating apm-ncl ==="
+    @nickel export --format json apm-ncl/examples/manifest-export.ncl > /dev/null && echo "Full manifest: OK"
+    @nickel export --format json apm-ncl/examples/simple-manifest.ncl > /dev/null && echo "Simple manifest: OK"
+    @nickel export --format json apm-ncl/examples/lockfile-example.ncl > /dev/null && echo "Lockfile: OK"
+
+# Run apm-ncl tests
+apm-test:
+    @bash apm-ncl/tests/validate.sh
+
+# Update snapshot from current Nickel export
+apm-snapshot:
+    @nickel export --format json apm-ncl/examples/manifest-export.ncl | jq -S . > apm-ncl/tests/snapshot.json
+    @echo "Snapshot updated: apm-ncl/tests/snapshot.json"
+
+# ==============================================================================
+# PROSE (AI-Native Primitives)
+# ==============================================================================
+
+# Export PROSE workspace as JSON
+prose-export:
+    @nickel export --format json prose-ncl/examples/workspace-export.ncl
+
+# Export single skill example
+prose-skill:
+    @nickel export --format json prose-ncl/examples/single-skill.ncl
+
+# Export composability graph as JSON
+prose-graph:
+    @nickel export --format json prose-ncl/examples/graph-export.ncl
+
+# Validate all prose-ncl .ncl files
+prose-validate:
+    @echo "=== Validating prose-ncl ==="
+    @nickel export --format json prose-ncl/examples/workspace-export.ncl > /dev/null && echo "Workspace: OK"
+    @nickel export --format json prose-ncl/examples/single-skill.ncl > /dev/null && echo "Single skill: OK"
+    @nickel export --format json prose-ncl/examples/graph-export.ncl > /dev/null && echo "Graph: OK"
+
+# Run prose-ncl tests
+prose-test:
+    @bash prose-ncl/tests/validate.sh
+
+# Update snapshot from current Nickel export
+prose-snapshot:
+    @nickel export --format json prose-ncl/examples/workspace-export.ncl | jq -S . > prose-ncl/tests/snapshot.json
+    @echo "Snapshot updated: prose-ncl/tests/snapshot.json"
+
+# ==============================================================================
 # Pytest
 # ==============================================================================
 
@@ -317,6 +391,22 @@ help:
     @echo "  just cnix-test           # Run tests"
     @echo "  just cnix-snapshot       # Update test snapshots"
     @echo "  just cnix-run <tool>     # Run a Nix tool inside sandbox"
+    @echo ""
+    @echo "APM (Agent Package Manager):"
+    @echo "  just apm-export          # Export full manifest as JSON"
+    @echo "  just apm-simple          # Export simple manifest"
+    @echo "  just apm-lockfile        # Export lockfile as JSON"
+    @echo "  just apm-validate        # Validate apm-ncl NCL files"
+    @echo "  just apm-test            # Run tests"
+    @echo "  just apm-snapshot        # Update test snapshot"
+    @echo ""
+    @echo "PROSE (AI-Native Primitives):"
+    @echo "  just prose-export        # Export workspace as JSON"
+    @echo "  just prose-skill         # Export single skill example"
+    @echo "  just prose-graph         # Export composability graph"
+    @echo "  just prose-validate      # Validate prose-ncl NCL files"
+    @echo "  just prose-test          # Run tests"
+    @echo "  just prose-snapshot      # Update test snapshot"
     @echo ""
     @echo "Examples:"
     @echo "  just test-data-processor # Test data-processor example"

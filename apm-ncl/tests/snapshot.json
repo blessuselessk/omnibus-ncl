@@ -1,0 +1,81 @@
+{
+  "author": "acme-corp",
+  "compilation": {
+    "exclude": [
+      "tests/**",
+      "*.test.md"
+    ],
+    "output": "AGENTS.md",
+    "placement": {
+      "min_instructions_per_file": 3
+    },
+    "resolve_links": true,
+    "source_attribution": true,
+    "strategy": "single-file",
+    "target": "claude"
+  },
+  "dependencies": {
+    "apm": [
+      "anthropics/courses",
+      "acme-corp/shared-prompts#v1.2.0",
+      {
+        "alias": "tools",
+        "git": "https://github.com/acme-corp/internal-tools.git",
+        "path": "packages/agent-tools",
+        "ref": "main"
+      }
+    ],
+    "mcp": [
+      "@anthropic/mcp-github",
+      {
+        "args": [
+          "-y",
+          "@acme/db-mcp-server"
+        ],
+        "command": "npx",
+        "env": {
+          "DB_HOST": "localhost",
+          "DB_PORT": "5432"
+        },
+        "name": "custom-db-server",
+        "tools": [
+          "query",
+          "list_tables",
+          "describe_table"
+        ],
+        "transport": "stdio"
+      },
+      {
+        "headers": {
+          "Authorization": "Bearer ${API_TOKEN}"
+        },
+        "name": "api-gateway",
+        "tools": [
+          "search",
+          "create_ticket"
+        ],
+        "transport": "streamable-http",
+        "url": "https://mcp.acme.internal/v1"
+      }
+    ]
+  },
+  "description": "Production support agent with tool integrations",
+  "devDependencies": {
+    "apm": [
+      "anthropics/prompt-testing"
+    ],
+    "mcp": [
+      "@anthropic/mcp-inspector"
+    ]
+  },
+  "license": "MIT",
+  "name": "acme-support-agent",
+  "scripts": {
+    "build": "apm compile",
+    "lint": "apm lint --fix",
+    "test": "apm validate"
+  },
+  "target": "claude",
+  "type": "hybrid",
+  "version": "2.1.0"
+}
