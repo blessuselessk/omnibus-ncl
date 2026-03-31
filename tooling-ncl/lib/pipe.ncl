@@ -4,17 +4,40 @@
 # pipeline chains an array of nodes.
 # The output is a Pipeline record with the nodes and their wiring.
 let { CodeNode, .. } = import "node.ncl" in
+let { schemas_compatible, .. } = import "schema.ncl" in
+
+# Contract: validates that adjacent nodes have compatible schemas.
+# Applied to the nodes array — checked when the pipeline is exported.
+let ValidChain =
+  std.contract.from_predicate (fun nodes =>
+    let len = std.array.length nodes in
+    if len <= 1 then
+      true
+    else
+      std.array.all
+        (fun i =>
+          if i < len - 1 then
+            let a = std.array.at i nodes in
+            let b = std.array.at (i + 1) nodes in
+            schemas_compatible a.output_schema b.input_schema
+          else
+            true
+        )
+        (std.array.generate (fun i => i) len)
+  )
+in
 
 {
   Pipeline
     | doc m%"
       An ordered sequence of CodeNodes where each node's output
-      feeds the next node's input.
+      feeds the next node's input. Schema compatibility is checked
+      at pipeline construction time.
     "%
     | not_exported
     = {
       name | String,
-      nodes | Array CodeNode,
+      nodes | Array CodeNode | ValidChain,
       description | String | optional,
     },
 
@@ -22,7 +45,8 @@ let { CodeNode, .. } = import "node.ncl" in
     | doc m%"
       Connect two CodeNodes — A's output feeds B's input.
 
-      Returns a Pipeline with both nodes.
+      Validates schema compatibility at export time via the
+      ValidChain contract on the Pipeline.nodes field.
 
       # Examples
 
@@ -35,12 +59,15 @@ let { CodeNode, .. } = import "node.ncl" in
       fun _b =>
         {
           name = "%{_a.name}|%{_b.name}",
-          nodes = [_a, _b],
+          nodes | ValidChain = [_a, _b],
         },
 
   pipeline
     | doc m%"
       Chain an array of CodeNodes into a Pipeline.
+
+      Validates schema compatibility between every adjacent pair
+      at export time via the ValidChain contract.
 
       # Examples
 
@@ -53,7 +80,7 @@ let { CodeNode, .. } = import "node.ncl" in
       fun _nodes =>
         {
           name = _name,
-          nodes = _nodes,
+          nodes | ValidChain = _nodes,
         },
 
   to_process_compose
