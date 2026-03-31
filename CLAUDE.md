@@ -106,6 +106,60 @@ just cmo-validate           # Validate all cmo NCL files
 just cmo-test               # Cross-repo tests
 ```
 
+### Process Compose (`process-compose-ncl/`)
+
+Nickel contracts for [Process Compose](https://github.com/F1bonacc1/process-compose) — docker-compose for bare processes. Models the full `process-compose.yaml` surface: processes, dependencies, health probes, restart policies, namespaces, and scheduling. Includes bridge adapters from `envelope-ncl` and `porkg-ncl` — nested envelopes become Process Compose processes with dependency ordering, porkg worker/job hierarchies become daemon + dependent processes.
+
+```bash
+just pc-export              # Export standalone config as JSON
+just pc-envelope            # Export envelope bridge
+just pc-porkg               # Export porkg bridge
+just pc-validate            # Validate all process-compose-ncl NCL files
+just pc-test                # Run tests
+just pc-snapshot            # Update test snapshot
+```
+
+### porkg (`porkg-ncl/`)
+
+Nickel contracts for [porkg](https://github.com/porkg/porkg)'s process hierarchy — a Nix-like package manager with parent → worker → job architecture. Models Linux namespace isolation (PID, mount, user, net, IPC, UTS, cgroup), MessagePack IPC protocol (5-byte header + msgpack body), privilege escalation rules, worker configuration, and job specifications.
+
+```bash
+just porkg-export           # Export nix pipeline config as JSON
+just porkg-locked           # Export locked-down pipeline
+just porkg-proto            # Export protocol tag map
+just porkg-validate         # Validate all porkg-ncl NCL files
+just porkg-test             # Run tests
+just porkg-snapshot         # Update test snapshot
+```
+
+### Envelope (`envelope-ncl/`)
+
+Composable, nestable runtime envelopes — a shared composition layer for all omnibus-ncl subprojects. Every runtime boundary (sandbox, workflow, MCP server, tool) can be expressed as an Envelope and nested with monotonic constraint restriction (inner envelopes can never exceed outer envelope permissions).
+
+Adapters lift existing configs (`from_sandbox`, `from_workflow`, `from_tool`, `from_nix_tool`, `from_mcp_server`) into the common Envelope shape. The `nest` function composes envelopes, clamping inner constraints. The `flatten` function exports nested envelopes as a flat array of layers.
+
+```bash
+just env-tool               # Export tool-in-sandbox nesting
+just env-three              # Export three-layer nesting
+just env-flatten            # Flatten to array of layers
+just env-validate           # Validate all envelope-ncl NCL files
+just env-test               # Run tests
+just env-snapshot           # Update test snapshots
+```
+
+### Massless Driver (`massless-driver/`)
+
+Nickel configuration surface for massless-driver (actions-batch) — turns GitHub Actions into a compute platform. Models jobs, workflows, runners, secrets, artifacts, Tailscale mesh, Nix flake configs, and platform targets. One composable `to_workflow` builder replaces the Go project's two duplicate text/templates.
+
+```bash
+just md-export              # Export workflow as GitHub Actions JSON
+just md-nix                 # Export nix workflow variant
+just md-manifest            # Export job manifest
+just md-validate            # Validate all massless-driver NCL files
+just md-test                # Run tests
+just md-snapshot            # Update test snapshots
+```
+
 ## Nickel Conventions
 
 The repo root has authoritative Nickel style guides — read these before writing .ncl code:

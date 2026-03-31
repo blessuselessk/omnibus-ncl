@@ -144,6 +144,30 @@ test-examples:
     nickel export --format json prose-ncl/examples/workspace-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
     echo "18. prose-ncl/single-skill.ncl"
     nickel export --format json prose-ncl/examples/single-skill.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "19. massless-driver/workflow-export.ncl"
+    nickel export --format json massless-driver/examples/workflow-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "20. massless-driver/nix-workflow-export.ncl"
+    nickel export --format json massless-driver/examples/nix-workflow-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "21. massless-driver/manifest-export.ncl"
+    nickel export --format json massless-driver/examples/manifest-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "22. envelope-ncl/tool-in-sandbox.ncl"
+    nickel export --format json envelope-ncl/examples/tool-in-sandbox.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "23. envelope-ncl/three-layer.ncl"
+    nickel export --format json envelope-ncl/examples/three-layer.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "24. envelope-ncl/flatten-export.ncl"
+    nickel export --format json envelope-ncl/examples/flatten-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "25. porkg-ncl/config-export.ncl"
+    nickel export --format json porkg-ncl/examples/config-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "26. porkg-ncl/pipeline-export.ncl"
+    nickel export --format json porkg-ncl/examples/pipeline-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "27. porkg-ncl/proto-export.ncl"
+    nickel export --format json porkg-ncl/examples/proto-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "28. process-compose-ncl/standalone-export.ncl"
+    nickel export --format json process-compose-ncl/examples/standalone-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "29. process-compose-ncl/envelope-bridge-export.ncl"
+    nickel export --format json process-compose-ncl/examples/envelope-bridge-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
+    echo "30. process-compose-ncl/porkg-bridge-export.ncl"
+    nickel export --format json process-compose-ncl/examples/porkg-bridge-export.ncl > /dev/null 2>&1 && echo "   OK" || echo "   FAILED"
 
 # ==============================================================================
 # Codemode
@@ -335,6 +359,140 @@ prose-snapshot:
     @echo "Snapshot updated: prose-ncl/tests/snapshot.json"
 
 # ==============================================================================
+# Massless Driver (GitHub Actions as Compute)
+# ==============================================================================
+
+# Export workflow as GitHub Actions JSON
+md-export:
+    @nickel export --format json massless-driver/examples/workflow-export.ncl
+
+# Export nix workflow variant
+md-nix:
+    @nickel export --format json massless-driver/examples/nix-workflow-export.ncl
+
+# Export job manifest
+md-manifest:
+    @nickel export --format json massless-driver/examples/manifest-export.ncl
+
+# Validate all massless-driver .ncl files
+md-validate:
+    @echo "=== Validating massless-driver ==="
+    @nickel export --format json massless-driver/examples/workflow-export.ncl > /dev/null && echo "Workflow: OK"
+    @nickel export --format json massless-driver/examples/nix-workflow-export.ncl > /dev/null && echo "Nix workflow: OK"
+    @nickel export --format json massless-driver/examples/manifest-export.ncl > /dev/null && echo "Manifest: OK"
+
+# Run massless-driver tests
+md-test:
+    @bash massless-driver/tests/validate.sh
+
+# Update snapshots from current Nickel export
+md-snapshot:
+    @nickel export --format json massless-driver/examples/workflow-export.ncl | jq -S . > massless-driver/tests/snapshot-workflow.json
+    @nickel export --format json massless-driver/examples/manifest-export.ncl | jq -S . > massless-driver/tests/snapshot-manifest.json
+    @echo "Snapshots updated"
+
+# ==============================================================================
+# Process Compose
+# ==============================================================================
+
+# Export standalone process-compose config
+pc-export:
+    @nickel export --format json process-compose-ncl/examples/standalone-export.ncl
+
+# Export envelope bridge (nested envelopes → process-compose)
+pc-envelope:
+    @nickel export --format json process-compose-ncl/examples/envelope-bridge-export.ncl
+
+# Export porkg bridge (porkg config → process-compose)
+pc-porkg:
+    @nickel export --format json process-compose-ncl/examples/porkg-bridge-export.ncl
+
+# Validate all process-compose-ncl .ncl files
+pc-validate:
+    @echo "=== Validating process-compose-ncl ==="
+    @nickel export --format json process-compose-ncl/examples/standalone-export.ncl > /dev/null && echo "Standalone: OK"
+    @nickel export --format json process-compose-ncl/examples/envelope-bridge-export.ncl > /dev/null && echo "Envelope bridge: OK"
+    @nickel export --format json process-compose-ncl/examples/porkg-bridge-export.ncl > /dev/null && echo "porkg bridge: OK"
+
+# Run process-compose-ncl tests
+pc-test:
+    @bash process-compose-ncl/tests/validate.sh
+
+# Update snapshot
+pc-snapshot:
+    @nickel export --format json process-compose-ncl/examples/standalone-export.ncl | jq -S . > process-compose-ncl/tests/snapshot.json
+    @echo "Snapshot updated"
+
+# ==============================================================================
+# porkg (Process Hierarchy)
+# ==============================================================================
+
+# Export porkg nix pipeline config
+porkg-export:
+    @nickel export --format json porkg-ncl/examples/config-export.ncl
+
+# Export locked-down pipeline
+porkg-locked:
+    @nickel export --format json porkg-ncl/examples/pipeline-export.ncl
+
+# Export protocol tag map
+porkg-proto:
+    @nickel export --format json porkg-ncl/examples/proto-export.ncl
+
+# Validate all porkg-ncl .ncl files
+porkg-validate:
+    @echo "=== Validating porkg-ncl ==="
+    @nickel export --format json porkg-ncl/examples/config-export.ncl > /dev/null && echo "Config: OK"
+    @nickel export --format json porkg-ncl/examples/pipeline-export.ncl > /dev/null && echo "Pipeline: OK"
+    @nickel export --format json porkg-ncl/examples/proto-export.ncl > /dev/null && echo "Proto: OK"
+
+# Run porkg-ncl tests
+porkg-test:
+    @bash porkg-ncl/tests/validate.sh
+
+# Update snapshot
+porkg-snapshot:
+    @nickel export --format json porkg-ncl/examples/config-export.ncl | jq -S . > porkg-ncl/tests/snapshot.json
+    @echo "Snapshot updated"
+
+# ==============================================================================
+# Envelope (Composable Runtime Envelopes)
+# ==============================================================================
+
+# Export tool-in-sandbox nesting
+env-tool:
+    @nickel export --format json envelope-ncl/examples/tool-in-sandbox.ncl
+
+# Export sandbox-in-workflow nesting
+env-sandbox:
+    @nickel export --format json envelope-ncl/examples/sandbox-in-workflow.ncl
+
+# Export three-layer nesting (tool → sandbox → workflow)
+env-three:
+    @nickel export --format json envelope-ncl/examples/three-layer.ncl
+
+# Flatten nested envelope to array
+env-flatten:
+    @nickel export --format json envelope-ncl/examples/flatten-export.ncl
+
+# Validate all envelope-ncl .ncl files
+env-validate:
+    @echo "=== Validating envelope-ncl ==="
+    @nickel export --format json envelope-ncl/examples/tool-in-sandbox.ncl > /dev/null && echo "Tool-in-sandbox: OK"
+    @nickel export --format json envelope-ncl/examples/sandbox-in-workflow.ncl > /dev/null && echo "Sandbox-in-workflow: OK"
+    @nickel export --format json envelope-ncl/examples/three-layer.ncl > /dev/null && echo "Three-layer: OK"
+    @nickel export --format json envelope-ncl/examples/flatten-export.ncl > /dev/null && echo "Flatten: OK"
+
+# Run envelope-ncl tests
+env-test:
+    @bash envelope-ncl/tests/validate.sh
+
+# Update snapshot from current Nickel export
+env-snapshot:
+    @nickel export --format json envelope-ncl/examples/three-layer.ncl | jq -S . > envelope-ncl/tests/snapshot-three-layer.json
+    @echo "Snapshots updated"
+
+# ==============================================================================
 # Pytest
 # ==============================================================================
 
@@ -407,6 +565,39 @@ help:
     @echo "  just prose-validate      # Validate prose-ncl NCL files"
     @echo "  just prose-test          # Run tests"
     @echo "  just prose-snapshot      # Update test snapshot"
+    @echo ""
+    @echo "Process Compose:"
+    @echo "  just pc-export           # Export standalone config"
+    @echo "  just pc-envelope         # Export envelope bridge"
+    @echo "  just pc-porkg            # Export porkg bridge"
+    @echo "  just pc-validate         # Validate process-compose-ncl NCL files"
+    @echo "  just pc-test             # Run tests"
+    @echo "  just pc-snapshot         # Update test snapshot"
+    @echo ""
+    @echo "porkg (Process Hierarchy):"
+    @echo "  just porkg-export        # Export nix pipeline config"
+    @echo "  just porkg-locked        # Export locked-down pipeline"
+    @echo "  just porkg-proto         # Export protocol tag map"
+    @echo "  just porkg-validate      # Validate porkg-ncl NCL files"
+    @echo "  just porkg-test          # Run tests"
+    @echo "  just porkg-snapshot      # Update test snapshot"
+    @echo ""
+    @echo "Envelope (Composable Runtime Envelopes):"
+    @echo "  just env-tool            # Export tool-in-sandbox nesting"
+    @echo "  just env-sandbox         # Export sandbox-in-workflow nesting"
+    @echo "  just env-three           # Export three-layer nesting"
+    @echo "  just env-flatten         # Flatten nested envelope to array"
+    @echo "  just env-validate        # Validate envelope-ncl NCL files"
+    @echo "  just env-test            # Run tests"
+    @echo "  just env-snapshot        # Update test snapshots"
+    @echo ""
+    @echo "Massless Driver (GitHub Actions as Compute):"
+    @echo "  just md-export           # Export workflow as JSON"
+    @echo "  just md-nix              # Export nix workflow variant"
+    @echo "  just md-manifest         # Export job manifest"
+    @echo "  just md-validate         # Validate massless-driver NCL files"
+    @echo "  just md-test             # Run tests"
+    @echo "  just md-snapshot         # Update test snapshots"
     @echo ""
     @echo "Examples:"
     @echo "  just test-data-processor # Test data-processor example"
