@@ -1,0 +1,41 @@
+# Justfile for envelope-ncl composable runtime envelopes
+# Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export tool-in-sandbox example
+export-tool:
+    nickel export --format json examples/tool-in-sandbox.ncl
+
+# Export sandbox-in-workflow example
+export-sandbox:
+    nickel export --format json examples/sandbox-in-workflow.ncl
+
+# Export three-layer nesting
+export-three:
+    nickel export --format json examples/three-layer.ncl
+
+# Flatten three-layer nesting to array
+export-flatten:
+    nickel export --format json examples/flatten-export.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/tool-in-sandbox.ncl > /dev/null && echo "Tool-in-sandbox: OK"
+    @nickel export --format json examples/sandbox-in-workflow.ncl > /dev/null && echo "Sandbox-in-workflow: OK"
+    @nickel export --format json examples/three-layer.ncl > /dev/null && echo "Three-layer: OK"
+    @nickel export --format json examples/flatten-export.ncl > /dev/null && echo "Flatten: OK"
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Update snapshots
+snapshot:
+    nickel export --format json examples/three-layer.ncl | jq -S . > tests/snapshot-three-layer.json
+    @echo "Snapshots updated"
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}

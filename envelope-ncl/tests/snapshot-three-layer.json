@@ -1,0 +1,91 @@
+{
+  "constraints": {
+    "fs": {
+      "mode": "rw"
+    },
+    "network": {
+      "mode": "full"
+    },
+    "resources": {
+      "timeout_seconds": 120
+    },
+    "secrets": []
+  },
+  "inner": {
+    "constraints": {
+      "env": [],
+      "fs": {
+        "allowed_paths": [
+          "/tmp",
+          "/nix",
+          "/usr/bin"
+        ],
+        "mode": "ro"
+      },
+      "network": {
+        "allowed_hosts": [],
+        "mode": "deny"
+      },
+      "resources": {
+        "max_cpu_seconds": 30,
+        "max_file_descriptors": 64,
+        "max_memory_mb": 128,
+        "timeout_seconds": 60
+      },
+      "secrets": []
+    },
+    "inner": {
+      "constraints": {
+        "env": [],
+        "fs": {
+          "allowed_paths": [
+            "/tmp",
+            "/nix",
+            "/usr/bin"
+          ],
+          "mode": "ro"
+        },
+        "network": {
+          "allowed_hosts": [],
+          "mode": "deny"
+        },
+        "resources": {
+          "max_cpu_seconds": 10,
+          "max_file_descriptors": 32,
+          "max_memory_mb": 64,
+          "timeout_seconds": 30
+        },
+        "secrets": []
+      },
+      "name": "jq",
+      "payload": {
+        "description": "Process JSON with jq",
+        "flake_ref": "nixpkgs#jq",
+        "kind": "nix_flake"
+      },
+      "target": {
+        "kind": "sandbox",
+        "sandbox_backend": "nsjail"
+      }
+    },
+    "name": "macos-sandbox",
+    "payload": {
+      "description": "Seatbelt sandbox for macOS",
+      "kind": "script",
+      "script": null
+    },
+    "target": {
+      "kind": "sandbox",
+      "sandbox_backend": "seatbelt"
+    }
+  },
+  "name": "sandboxed-jq",
+  "payload": {
+    "kind": "script",
+    "script": null
+  },
+  "target": {
+    "kind": "workflow",
+    "runner_label": "macos-14"
+  }
+}
