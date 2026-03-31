@@ -1,0 +1,93 @@
+{
+  "environment": [],
+  "is_strict": false,
+  "log_level": "info",
+  "ordered_shutdown": true,
+  "processes": {
+    "api": {
+      "availability": {
+        "backoff_seconds": 60,
+        "restart": "on_failure"
+      },
+      "command": "node server.js",
+      "depends_on": {
+        "postgres": {
+          "condition": "process_healthy"
+        }
+      },
+      "disabled": false,
+      "environment": [
+        "PORT=3000",
+        "NODE_ENV=development"
+      ],
+      "is_daemon": true,
+      "is_elevated": false,
+      "is_foreground": false,
+      "is_tty": false,
+      "readiness_probe": {
+        "failure_threshold": 3,
+        "http_get": {
+          "host": "localhost",
+          "path": "/health",
+          "port": "3000",
+          "scheme": "http"
+        },
+        "initial_delay_seconds": 0,
+        "period_seconds": 5,
+        "success_threshold": 1,
+        "timeout_seconds": 1
+      },
+      "replicas": 1,
+      "working_dir": "/app"
+    },
+    "postgres": {
+      "availability": {
+        "backoff_seconds": 5,
+        "restart": "always"
+      },
+      "command": "postgres -D /var/lib/postgres/data",
+      "depends_on": {},
+      "disabled": false,
+      "environment": [],
+      "is_daemon": true,
+      "is_elevated": false,
+      "is_foreground": false,
+      "is_tty": false,
+      "namespace": "data",
+      "readiness_probe": {
+        "exec": {
+          "command": "pg_isready -h localhost"
+        },
+        "failure_threshold": 10,
+        "initial_delay_seconds": 0,
+        "period_seconds": 5,
+        "success_threshold": 1,
+        "timeout_seconds": 1
+      },
+      "replicas": 1,
+      "shutdown": {
+        "signal": 15
+      }
+    },
+    "worker": {
+      "availability": {
+        "backoff_seconds": 60,
+        "restart": "on_failure"
+      },
+      "command": "celery -A tasks worker --loglevel=info",
+      "depends_on": {
+        "api": {
+          "condition": "process_healthy"
+        }
+      },
+      "disabled": false,
+      "environment": [],
+      "is_daemon": false,
+      "is_elevated": false,
+      "is_foreground": false,
+      "is_tty": false,
+      "replicas": 1
+    }
+  },
+  "version": "0.5"
+}

@@ -1,0 +1,36 @@
+# Justfile for process-compose-ncl
+# Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export standalone config
+export:
+    nickel export --format json examples/standalone-export.ncl
+
+# Export envelope bridge
+export-envelope:
+    nickel export --format json examples/envelope-bridge-export.ncl
+
+# Export porkg bridge
+export-porkg:
+    nickel export --format json examples/porkg-bridge-export.ncl
+
+# Validate all exports
+validate:
+    @nickel export --format json examples/standalone-export.ncl > /dev/null && echo "Standalone: OK"
+    @nickel export --format json examples/envelope-bridge-export.ncl > /dev/null && echo "Envelope bridge: OK"
+    @nickel export --format json examples/porkg-bridge-export.ncl > /dev/null && echo "porkg bridge: OK"
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Update snapshot
+snapshot:
+    nickel export --format json examples/standalone-export.ncl | jq -S . > tests/snapshot.json
+    @echo "Snapshot updated"
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}
