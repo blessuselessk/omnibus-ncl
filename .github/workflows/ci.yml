@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate all Nickel exports
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Enter dev shell and run all examples
+        run: |
+          nix develop -c just test-examples
+
+  test-suites:
+    name: Run test suites
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: massless-driver tests
+        run: nix develop -c just md-test
+
+      - name: envelope-ncl tests
+        run: nix develop -c just env-test
+
+      - name: porkg-ncl tests
+        run: nix develop -c just porkg-test
+
+      - name: process-compose-ncl tests
+        run: nix develop -c just pc-test
+
+      - name: prose-ncl tests
+        run: nix develop -c just prose-test
+
+  format-check:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check all .ncl files are formatted
+        run: nix develop -c just fmt-check
