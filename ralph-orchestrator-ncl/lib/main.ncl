@@ -6,4 +6,5 @@
   skill = import "skill.ncl",
   config = import "config.ncl",
   builders = import "builders.ncl",
+  deploy = import "deploy.ncl",
 }
