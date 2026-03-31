@@ -3,11 +3,13 @@ set -euo pipefail
 
 # ncl-run — execute a .ncl file by dispatching to the right runtime
 #
-# Usage:
-#   ncl-run tooling-ncl/examples/markdown-script.ncl < README.md
-#   ncl-run process-compose-ncl/examples/standalone-export.ncl
-#   ncl-run --dry-run massless-driver/examples/workflow-export.ncl
-#   ncl-run --json envelope-ncl/examples/three-layer.ncl
+# All six config types dispatch to real runtimes:
+#   .script       → exec bash script (stdin passes through)
+#   .processes    → exec process-compose up
+#   .jobs.*       → run locally with act (requires Docker)
+#   .target.kind  → envelope: extract innermost payload, run it
+#   .worker       → porkg: run jobs sequentially
+#   (version 1)   → seatbelt: sandbox-exec
 
 # --- Tool resolution ---
 if command -v nickel &>/dev/null; then
@@ -25,6 +27,26 @@ elif command -v nix &>/dev/null; then
 else
   echo "error: jq not found" >&2; exit 1
 fi
+
+run_act() {
+  if command -v act &>/dev/null; then
+    act "$@"
+  elif command -v nix &>/dev/null; then
+    nix run nixpkgs#act -- "$@"
+  else
+    echo "error: act not found. Install: nix shell nixpkgs#act" >&2; return 1
+  fi
+}
+
+run_pc() {
+  if command -v process-compose &>/dev/null; then
+    process-compose "$@"
+  elif command -v nix &>/dev/null; then
+    nix run nixpkgs#process-compose -- "$@"
+  else
+    echo "error: process-compose not found" >&2; return 1
+  fi
+}
 
 # --- Flags ---
 DRY_RUN=false
@@ -46,13 +68,13 @@ while [[ $# -gt 0 ]]; do
       echo "  --json       Export JSON and stop"
       echo "  --verbose    Show extra detail"
       echo ""
-      echo "Dispatches:"
-      echo "  .script          → runs the bash script (pipe stdin through it)"
-      echo "  .processes       → process-compose up"
-      echo "  .jobs.*.runs-on  → writes GHA workflow JSON"
-      echo "  .target.kind     → shows envelope info"
-      echo "  .worker          → shows porkg config"
-      echo "  (version 1)      → writes seatbelt profile"
+      echo "Dispatches (all execute by default):"
+      echo "  .script          → bash script (stdin pipes through)"
+      echo "  .processes       → process-compose up --tui=false"
+      echo "  .jobs.*.runs-on  → act (local GHA via Docker)"
+      echo "  .target.kind     → envelope payload (sandbox-exec on macOS)"
+      echo "  .worker          → porkg jobs (sequential)"
+      echo "  (version 1)      → sandbox-exec -f <profile> <cmd>"
       exit 0 ;;
     -*) echo "Unknown flag: $1"; exit 1 ;;
     *)  break ;;
@@ -73,11 +95,11 @@ if [[ "$TEXT" == "(version 1)"* ]]; then
   fi
   TMP=$(mktemp /tmp/ncl-run-XXXXXX.sb)
   echo "$TEXT" > "$TMP"
-  echo "==> Profile: $TMP" >&2
   if [[ $# -gt 0 ]]; then
     echo "==> Running: sandbox-exec -f $TMP $*" >&2
-    sandbox-exec -f "$TMP" "$@"
+    exec sandbox-exec -f "$TMP" "$@"
   else
+    echo "==> Profile: $TMP" >&2
     echo "==> Run: sandbox-exec -f $TMP <command>" >&2
   fi
   exit 0
@@ -93,7 +115,7 @@ fi
 
 # --- Step 3: Detect and dispatch ---
 
-# Shell script pipeline? (has .script field)
+# 1. Shell script pipeline? (has .script field)
 if echo "$JSON" | jq_ -e '.script // empty' &>/dev/null; then
   SCRIPT=$(echo "$JSON" | jq_ -r '.script')
   LINES=$(echo "$SCRIPT" | wc -l | tr -d ' ')
@@ -102,15 +124,13 @@ if echo "$JSON" | jq_ -e '.script // empty' &>/dev/null; then
     echo "$SCRIPT" >&2
     exit 0
   fi
-  # Write script to temp, execute it — stdin passes through
   TMP=$(mktemp /tmp/ncl-run-XXXXXX.sh)
   echo "$SCRIPT" > "$TMP"
   chmod +x "$TMP"
-  if $VERBOSE; then echo "==> Running: $TMP" >&2; fi
   exec bash "$TMP" "$@"
 fi
 
-# Process Compose?
+# 2. Process Compose? (has .processes)
 if echo "$JSON" | jq_ -e '.processes // empty | keys[0] // empty' &>/dev/null; then
   PROCS=$(echo "$JSON" | jq_ -r '.processes | keys | join(", ")')
   COUNT=$(echo "$JSON" | jq_ '.processes | length')
@@ -118,20 +138,11 @@ if echo "$JSON" | jq_ -e '.processes // empty | keys[0] // empty' &>/dev/null; t
   if $DRY_RUN; then exit 0; fi
   TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
   echo "$JSON" | jq_ . > "$TMP"
-  if command -v process-compose &>/dev/null; then
-    echo "==> Starting process-compose..." >&2
-    exec process-compose -f "$TMP" up --tui=false
-  elif command -v nix &>/dev/null; then
-    echo "==> Starting process-compose via nix..." >&2
-    exec nix run nixpkgs#process-compose -- -f "$TMP" up --tui=false
-  else
-    echo "==> Written to $TMP" >&2
-    echo "    process-compose -f $TMP up" >&2
-    exit 1
-  fi
+  echo "==> Starting process-compose..." >&2
+  exec run_pc -f "$TMP" up --tui=false
 fi
 
-# GitHub Actions workflow?
+# 3. GitHub Actions workflow? (has .jobs.*.runs-on) → act
 if echo "$JSON" | jq_ -e '.jobs // empty | to_entries[0].value["runs-on"] // empty' &>/dev/null; then
   NAME=$(echo "$JSON" | jq_ -r '.name // "unnamed"')
   RUNNER=$(echo "$JSON" | jq_ -r '[.jobs[]["runs-on"]] | first')
@@ -139,38 +150,84 @@ if echo "$JSON" | jq_ -e '.jobs // empty | to_entries[0].value["runs-on"] // emp
   echo "==> Detected: GitHub Actions workflow" >&2
   echo "    Name: $NAME | Runner: $RUNNER | Steps: $STEPS" >&2
   if $DRY_RUN; then exit 0; fi
-  TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
-  echo "$JSON" | jq_ . > "$TMP"
-  echo "==> Written to $TMP" >&2
-  echo "    cp $TMP .github/workflows/run.json" >&2
-  exit 0
+
+  TMPDIR=$(mktemp -d /tmp/ncl-run-gha-XXXXXX)
+  mkdir -p "$TMPDIR/.github/workflows"
+  echo "$JSON" | jq_ . > "$TMPDIR/.github/workflows/run.json"
+  echo "==> Running locally with act (requires Docker)..." >&2
+  exec run_act -W "$TMPDIR/.github/workflows" push
 fi
 
-# Envelope?
+# 4. Envelope? (has .target.kind) → extract innermost payload, run it
 TARGET=$(echo "$JSON" | jq_ -r '.target.kind // empty' 2>/dev/null || true)
 if [[ -n "$TARGET" ]]; then
   NAME=$(echo "$JSON" | jq_ -r '.name // "unnamed"')
   NET=$(echo "$JSON" | jq_ -r '.constraints.network.mode // "?"' 2>/dev/null || echo "?")
   FS=$(echo "$JSON" | jq_ -r '.constraints.fs.mode // "?"' 2>/dev/null || echo "?")
-  NESTED=$(echo "$JSON" | jq_ 'has("inner")' 2>/dev/null || echo false)
   echo "==> Detected: envelope ($TARGET)" >&2
-  echo "    Name: $NAME | Network: $NET | FS: $FS | Nested: $NESTED" >&2
+  echo "    Name: $NAME | Network: $NET | FS: $FS" >&2
   if $DRY_RUN; then exit 0; fi
-  echo "$JSON" | jq_ .
-  exit 0
+
+  # Walk to innermost payload
+  PAYLOAD_CMD=$(echo "$JSON" | jq_ -r '
+    def innermost: if has("inner") then .inner | innermost else . end;
+    innermost | .payload |
+      if .kind == "nix_flake" then "nix run " + .flake_ref
+      elif .kind == "script" then .script // empty
+      else .tool_name // empty
+      end
+  ' 2>/dev/null || true)
+
+  if [[ -z "$PAYLOAD_CMD" || "$PAYLOAD_CMD" == "null" ]]; then
+    echo "    No runnable payload in envelope" >&2
+    echo "$JSON" | jq_ .
+    exit 0
+  fi
+
+  echo "    Payload: $PAYLOAD_CMD" >&2
+
+  # On macOS with seatbelt backend, sandbox it
+  BACKEND=$(echo "$JSON" | jq_ -r '.target.sandbox_backend // empty' 2>/dev/null || true)
+  if [[ "$BACKEND" == "seatbelt" ]] && [[ "$(uname -s)" == "Darwin" ]]; then
+    PROFILE="(version 1)\n(allow default)"
+    [[ "$NET" == "deny" ]] && PROFILE="$PROFILE\n(deny network-outbound)\n(deny network-inbound)"
+    PROFILE_TMP=$(mktemp /tmp/ncl-run-XXXXXX.sb)
+    printf '%b' "$PROFILE" > "$PROFILE_TMP"
+    echo "==> Running in seatbelt sandbox..." >&2
+    exec sandbox-exec -f "$PROFILE_TMP" bash -c "$PAYLOAD_CMD"
+  fi
+
+  echo "==> Running payload directly..." >&2
+  exec bash -c "$PAYLOAD_CMD"
 fi
 
-# porkg?
+# 5. porkg? (has .worker.namespaces) → run jobs sequentially
 if echo "$JSON" | jq_ -e '.worker.namespaces // empty' &>/dev/null; then
   WNAME=$(echo "$JSON" | jq_ -r '.worker.name // "worker"')
-  JOBS=$(echo "$JSON" | jq_ '.jobs | length')
+  JOB_COUNT=$(echo "$JSON" | jq_ '.jobs | length')
   NS=$(echo "$JSON" | jq_ -r '[.worker.namespaces | to_entries[] | select(.value) | .key] | join(",")')
   echo "==> Detected: porkg config" >&2
-  echo "    Worker: $WNAME | Jobs: $JOBS | Namespaces: $NS" >&2
+  echo "    Worker: $WNAME | Jobs: $JOB_COUNT | Namespaces: $NS" >&2
   if $DRY_RUN; then exit 0; fi
-  echo "$JSON" | jq_ .
+
+  echo "==> Running $JOB_COUNT jobs sequentially..." >&2
+  FAILED=0
+  for i in $(seq 0 $((JOB_COUNT - 1))); do
+    JOB_NAME=$(echo "$JSON" | jq_ -r ".jobs[$i].name")
+    JOB_CMD=$(echo "$JSON" | jq_ -r ".jobs[$i].command | join(\" \")")
+    JOB_ENV=$(echo "$JSON" | jq_ -r ".jobs[$i].env // {} | to_entries[] | \"\(.key)=\(.value)\"" 2>/dev/null || true)
+
+    echo "--- [$((i+1))/$JOB_COUNT] $JOB_NAME: $JOB_CMD" >&2
+    # Export env vars individually to handle values with spaces/equals
+    while IFS= read -r envline; do
+      [[ -n "$envline" ]] && export "$envline"
+    done < <(echo "$JSON" | jq_ -r ".jobs[$i].env // {} | to_entries[] | \"\(.key)=\(.value)\"" 2>/dev/null || true)
+    bash -c "$JOB_CMD" && echo "    OK" >&2 || { echo "    FAILED" >&2; FAILED=$((FAILED+1)); }
+  done
+  echo "==> Done: $((JOB_COUNT - FAILED))/$JOB_COUNT passed" >&2
+  [[ $FAILED -eq 0 ]] || exit 1
   exit 0
 fi
 
-# Fallback — just print
+# Fallback
 echo "$JSON" | jq_ .
