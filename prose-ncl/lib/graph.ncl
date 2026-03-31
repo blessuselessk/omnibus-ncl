@@ -11,16 +11,18 @@
     | not_exported
     =
       std.contract.from_predicate (fun value =>
-        std.array.elem value [
-          'agent,
-          'instruction,
-          'prompt,
-          'context,
-          'memory,
-          'spec,
-          'skill,
-          'agents_md,
-        ]
+        std.array.elem
+          value
+          [
+            'agent,
+            'instruction,
+            'prompt,
+            'context,
+            'memory,
+            'spec,
+            'skill,
+            'agents_md,
+          ]
       ),
 
   Tier
@@ -36,12 +38,14 @@
     | not_exported
     =
       std.contract.from_predicate (fun value =>
-        std.array.elem value [
-          'invoke,
-          'auto_load,
-          'reference,
-          'produce,
-        ]
+        std.array.elem
+          value
+          [
+            'invoke,
+            'auto_load,
+            'reference,
+            'produce,
+          ]
       ),
 
   Edge
@@ -123,146 +127,169 @@
     = [
       # ── agent outbound ──
       {
-        from = 'agent, to = 'agent,
+        from = 'agent,
+        to = 'agent,
         verb = "hands-off-to",
         mechanism = "handoffs: frontmatter field",
         direction = 'invoke,
         note = "Sequential delegation — agent A completes its phase, passes context to agent B.",
       },
       {
-        from = 'agent, to = 'agent,
+        from = 'agent,
+        to = 'agent,
         verb = "spawns",
         mechanism = "agent/runSubagent tool",
         direction = 'invoke,
         note = "Parent-child — agent A creates a scoped subagent for a subtask. Concurrent.",
       },
       {
-        from = 'agent, to = 'instruction,
+        from = 'agent,
+        to = 'instruction,
         verb = "auto-loads",
         mechanism = "applyTo glob match on active files",
         direction = 'auto_load,
       },
       {
-        from = 'agent, to = 'context,
+        from = 'agent,
+        to = 'context,
         verb = "references",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'agent, to = 'memory,
+        from = 'agent,
+        to = 'memory,
         verb = "reads",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'agent, to = 'memory,
+        from = 'agent,
+        to = 'memory,
         verb = "updates",
         mechanism = "writes decisions after significant outcomes",
         direction = 'produce,
       },
       {
-        from = 'agent, to = 'skill,
+        from = 'agent,
+        to = 'skill,
         verb = "auto-discovers",
         mechanism = "description match to current task",
         direction = 'auto_load,
       },
       {
-        from = 'agent, to = 'agents_md,
+        from = 'agent,
+        to = 'agents_md,
         verb = "inherits",
         mechanism = "directory tree walk, closest file wins",
         direction = 'auto_load,
       },
       # ── prompt outbound ──
       {
-        from = 'prompt, to = 'agent,
+        from = 'prompt,
+        to = 'agent,
         verb = "activates",
         mechanism = "mode: or agent: frontmatter field",
         direction = 'invoke,
       },
       {
-        from = 'prompt, to = 'context,
+        from = 'prompt,
+        to = 'context,
         verb = "references",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'prompt, to = 'memory,
+        from = 'prompt,
+        to = 'memory,
         verb = "reads",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'prompt, to = 'memory,
+        from = 'prompt,
+        to = 'memory,
         verb = "updates",
         mechanism = "learning integration phase output",
         direction = 'produce,
       },
       {
-        from = 'prompt, to = 'spec,
+        from = 'prompt,
+        to = 'spec,
         verb = "consumes",
         mechanism = "markdown links or ${specFile} parameter",
         direction = 'reference,
       },
       {
-        from = 'prompt, to = 'spec,
+        from = 'prompt,
+        to = 'spec,
         verb = "produces",
         mechanism = "specification workflow output",
         direction = 'produce,
       },
       {
-        from = 'prompt, to = 'instruction,
+        from = 'prompt,
+        to = 'instruction,
         verb = "references",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'prompt, to = 'instruction,
+        from = 'prompt,
+        to = 'instruction,
         verb = "updates",
         mechanism = "discovery-driven enhancement",
         direction = 'produce,
       },
       {
-        from = 'prompt, to = 'prompt,
+        from = 'prompt,
+        to = 'prompt,
         verb = "chains-to",
         mechanism = "sequential invocation (human-mediated)",
         direction = 'invoke,
       },
       # ── instruction outbound ──
       {
-        from = 'instruction, to = 'context,
+        from = 'instruction,
+        to = 'context,
         verb = "references",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'instruction, to = 'memory,
+        from = 'instruction,
+        to = 'memory,
         verb = "references",
         mechanism = "markdown links in body",
         direction = 'reference,
       },
       {
-        from = 'instruction, to = 'agents_md,
+        from = 'instruction,
+        to = 'agents_md,
         verb = "compiles-into",
         mechanism = "apm compile merges by applyTo group",
         direction = 'produce,
       },
       # ── context outbound ──
       {
-        from = 'context, to = 'context,
+        from = 'context,
+        to = 'context,
         verb = "references",
         mechanism = "markdown cross-links",
         direction = 'reference,
       },
       # ── skill outbound ──
       {
-        from = 'skill, to = 'context,
+        from = 'skill,
+        to = 'context,
         verb = "references",
         mechanism = "links to references/ subdirectory",
         direction = 'reference,
       },
       # ── meta production ──
       {
-        from = 'agents_md, to = 'agent,
+        from = 'agents_md,
+        to = 'agent,
         verb = "inherited-by",
         mechanism = "runtime directory tree walk",
         direction = 'auto_load,
@@ -378,34 +405,39 @@
   is_direction_allowed
     | doc "Check if a direction is permitted for a primitive's tier"
     | not_exported
-    = fun ptype => fun dir =>
-      let tier = tier_of ptype in
-      let allowed = directions_for_tier tier in
-      std.array.elem dir allowed,
+    = fun ptype =>
+      fun dir =>
+        let tier = tier_of ptype in
+        let allowed = directions_for_tier tier in
+        std.array.elem dir allowed,
 
   matches_invalid_rule
     | doc "Check if a proposed edge matches any invalid_edges rule"
     | not_exported
-    = fun _from => fun _to => fun _verb =>
-      std.array.any
-        (fun rule =>
-          rule.from == _from
-          && std.array.elem _to rule.to
-          && rule.verb == _verb
-        )
-        invalid_edges,
+    = fun _from =>
+      fun _to =>
+        fun _verb =>
+          std.array.any
+            (fun rule =>
+              rule.from == _from
+              && std.array.elem _to rule.to
+              && rule.verb == _verb
+            )
+            invalid_edges,
 
   has_valid_edge
     | doc "Check if a proposed edge exists in valid_edges"
     | not_exported
-    = fun _from => fun _to => fun _direction =>
-      std.array.any
-        (fun edge =>
-          edge.from == _from
-          && edge.to == _to
-          && edge.direction == _direction
-        )
-        valid_edges,
+    = fun _from =>
+      fun _to =>
+        fun _direction =>
+          std.array.any
+            (fun edge =>
+              edge.from == _from
+              && edge.to == _to
+              && edge.direction == _direction
+            )
+            valid_edges,
 
   ProposedEdge
     | doc m%"

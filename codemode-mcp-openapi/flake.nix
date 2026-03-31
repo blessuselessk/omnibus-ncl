@@ -9,14 +9,20 @@
     codemode-mcp-ncl.inputs.codemode-ncl.follows = "codemode-ncl";
   };
 
-  outputs = { self, nixpkgs, flake-utils, codemode-ncl, codemode-mcp-ncl }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    codemode-ncl,
+    codemode-mcp-ncl,
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
 
-        # Prepare working tree with _deps/ for both upstreams.
-        # codemode-mcp-ncl itself needs _deps/codemode-ncl/ for its imports.
-        withDeps = src: pkgs.runCommand "codemode-mcp-openapi-src" {} ''
+      # Prepare working tree with _deps/ for both upstreams.
+      # codemode-mcp-ncl itself needs _deps/codemode-ncl/ for its imports.
+      withDeps = src:
+        pkgs.runCommand "codemode-mcp-openapi-src" {} ''
           cp -r ${src} $out
           chmod -R +w $out
 
@@ -30,71 +36,72 @@
           mkdir -p $out/_deps/codemode-mcp-ncl/_deps
           ln -s ${codemode-ncl} $out/_deps/codemode-mcp-ncl/_deps/codemode-ncl
         '';
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          packages = [ pkgs.nickel pkgs.just pkgs.fd pkgs.jq ];
+    in {
+      devShells.default = pkgs.mkShell {
+        packages = [pkgs.nickel pkgs.just pkgs.fd pkgs.jq];
 
-          shellHook = ''
-            mkdir -p _deps
-            ln -sfn ${codemode-ncl} _deps/codemode-ncl
+        shellHook = ''
+          mkdir -p _deps
+          ln -sfn ${codemode-ncl} _deps/codemode-ncl
 
-            # codemode-mcp-ncl needs its own _deps/, so copy + populate
-            rm -rf _deps/codemode-mcp-ncl
-            cp -r ${codemode-mcp-ncl} _deps/codemode-mcp-ncl
-            chmod -R +w _deps/codemode-mcp-ncl
-            mkdir -p _deps/codemode-mcp-ncl/_deps
-            ln -sfn ${codemode-ncl} _deps/codemode-mcp-ncl/_deps/codemode-ncl
+          # codemode-mcp-ncl needs its own _deps/, so copy + populate
+          rm -rf _deps/codemode-mcp-ncl
+          cp -r ${codemode-mcp-ncl} _deps/codemode-mcp-ncl
+          chmod -R +w _deps/codemode-mcp-ncl
+          mkdir -p _deps/codemode-mcp-ncl/_deps
+          ln -sfn ${codemode-ncl} _deps/codemode-mcp-ncl/_deps/codemode-ncl
 
-            echo "codemode-mcp-openapi dev shell (_deps/ populated)"
-          '';
-        };
+          echo "codemode-mcp-openapi dev shell (_deps/ populated)"
+        '';
+      };
 
-        apps.validate = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cmo-validate" ''
-            export PATH="${pkgs.lib.makeBinPath [ pkgs.nickel pkgs.jq ]}:$PATH"
-            exec ${pkgs.bash}/bin/bash ${withDeps self}/tests/validate.sh
-          '');
-        };
+      apps.validate = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cmo-validate" ''
+          export PATH="${pkgs.lib.makeBinPath [pkgs.nickel pkgs.jq]}:$PATH"
+          exec ${pkgs.bash}/bin/bash ${withDeps self}/tests/validate.sh
+        '');
+      };
 
-        apps.export = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cmo-export" ''
-            exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/mcp-tools-export.ncl
-          '');
-        };
+      apps.export = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cmo-export" ''
+          exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/mcp-tools-export.ncl
+        '');
+      };
 
-        apps.export-server = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cmo-export-server" ''
-            exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/mcp-server.ncl
-          '');
-        };
+      apps.export-server = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cmo-export-server" ''
+          exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/mcp-server.ncl
+        '');
+      };
 
-        apps.export-openapi = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cmo-export-openapi" ''
-            exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/openapi-server.ncl
-          '');
-        };
+      apps.export-openapi = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cmo-export-openapi" ''
+          exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/openapi-server.ncl
+        '');
+      };
 
-        apps.export-requests = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cmo-export-requests" ''
-            exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/request-examples.ncl
-          '');
-        };
+      apps.export-requests = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cmo-export-requests" ''
+          exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/request-examples.ncl
+        '');
+      };
 
-        packages.default = pkgs.runCommand "codemode-mcp-openapi-tools" {
-          nativeBuildInputs = [ pkgs.nickel pkgs.jq ];
+      packages.default =
+        pkgs.runCommand "codemode-mcp-openapi-tools" {
+          nativeBuildInputs = [pkgs.nickel pkgs.jq];
         } ''
           cd ${withDeps self}
           nickel export --format json examples/mcp-tools-export.ncl | jq -S . > $out
         '';
 
-        packages.all = pkgs.runCommand "codemode-mcp-openapi-all" {
-          nativeBuildInputs = [ pkgs.nickel pkgs.jq ];
+      packages.all =
+        pkgs.runCommand "codemode-mcp-openapi-all" {
+          nativeBuildInputs = [pkgs.nickel pkgs.jq];
         } ''
           mkdir -p $out
           cd ${withDeps self}
@@ -104,8 +111,9 @@
           nickel export --format json examples/request-examples.ncl | jq -S . > $out/request-examples.json
         '';
 
-        checks.default = pkgs.runCommand "codemode-mcp-openapi-check" {
-          nativeBuildInputs = [ pkgs.nickel pkgs.jq ];
+      checks.default =
+        pkgs.runCommand "codemode-mcp-openapi-check" {
+          nativeBuildInputs = [pkgs.nickel pkgs.jq];
         } ''
           cd ${withDeps self}
 
@@ -136,5 +144,5 @@
           echo "All checks passed"
           touch $out
         '';
-      });
+    });
 }

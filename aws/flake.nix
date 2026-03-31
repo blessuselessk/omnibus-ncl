@@ -5,16 +5,15 @@
   };
 
   nixConfig = {
-    extra-substituters = [ "https://tweag-nickel.cachix.org" ];
-    extra-trusted-public-keys = [ "tweag-nickel.cachix.org-1:GIthuiK4LRgnW64ALYEoioVUQBWs0jexyoYVeLDBwRA=" ];
+    extra-substituters = ["https://tweag-nickel.cachix.org"];
+    extra-trusted-public-keys = ["tweag-nickel.cachix.org-1:GIthuiK4LRgnW64ALYEoioVUQBWs0jexyoYVeLDBwRA="];
   };
 
-  outputs = inputs: inputs.utils.lib.eachDefaultSystem (system:
-    {
-      devShell = inputs.tf-ncl.lib.${system}.mkDevShell {
-        providers = p: {
-          inherit (p) aws null external;
-        };
+  outputs = inputs: inputs.utils.lib.eachDefaultSystem (system: {
+    devShell = inputs.tf-ncl.lib.${system}.mkDevShell {
+      providers = p: {
+        inherit (p) aws null external;
       };
-    });
+    };
+  });
 }

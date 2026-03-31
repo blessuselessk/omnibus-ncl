@@ -12,29 +12,35 @@ let N = import "../envelope-ncl/lib/nesting.ncl" in
 let bridge = import "../process-compose-ncl/lib/bridge.ncl" in
 
 let jq_envelope =
-  A.from_nix_tool "jq" {
-    flakeRef = "nixpkgs#jq",
-    securityLevel = "strict",
-    description = "Process JSON — no network, read-only, minimal resources",
-  }
+  A.from_nix_tool
+    "jq"
+    {
+      flakeRef = "nixpkgs#jq",
+      securityLevel = "strict",
+      description = "Process JSON — no network, read-only, minimal resources",
+    }
 in
 
 let curl_envelope =
-  A.from_nix_tool "curl" {
-    flakeRef = "nixpkgs#curl",
-    securityLevel = "network",
-    description = "HTTP client — outbound network, read-only filesystem",
-    allowedHosts = ["api.github.com", "registry.npmjs.org"],
-  }
+  A.from_nix_tool
+    "curl"
+    {
+      flakeRef = "nixpkgs#curl",
+      securityLevel = "network",
+      description = "HTTP client — outbound network, read-only filesystem",
+      allowedHosts = ["api.github.com", "registry.npmjs.org"],
+    }
 in
 
 let pandoc_envelope =
-  A.from_nix_tool "pandoc" {
-    flakeRef = "nixpkgs#pandoc",
-    securityLevel = "io",
-    description = "Document converter — filesystem write, no network",
-    allowedPaths = ["/tmp/pandoc-work", "/tmp/output"],
-  }
+  A.from_nix_tool
+    "pandoc"
+    {
+      flakeRef = "nixpkgs#pandoc",
+      securityLevel = "io",
+      description = "Document converter — filesystem write, no network",
+      allowedPaths = ["/tmp/pandoc-work", "/tmp/output"],
+    }
 in
 
 # Show what each tool's constraints look like

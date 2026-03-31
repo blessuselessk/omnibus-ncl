@@ -8,27 +8,32 @@ let N = import "../envelope-ncl/lib/nesting.ncl" in
 
 # curl wants full network access
 let curl_tool =
-  A.from_nix_tool "curl" {
-    flakeRef = "nixpkgs#curl",
-    securityLevel = "network",
-    description = "Wants full network access",
-    allowedHosts = ["api.github.com"],
-  }
+  A.from_nix_tool
+    "curl"
+    {
+      flakeRef = "nixpkgs#curl",
+      securityLevel = "network",
+      description = "Wants full network access",
+      allowedHosts = ["api.github.com"],
+    }
 in
 
 # But we put it in a strict sandbox — no network
 let strict_sandbox =
-  A.from_sandbox "lockdown" 'nsjail {
-    network = { mode = 'deny },
-    fs = { mode = 'ro },
-    resources = {
-      max_memory_mb = 32,
-      max_cpu_seconds = 5,
-      max_file_descriptors = 16,
-      timeout_seconds = 10,
-    },
-    description = "Maximum restriction sandbox",
-  }
+  A.from_sandbox
+    "lockdown"
+    'nsjail
+    {
+      network = { mode = 'deny },
+      fs = { mode = 'ro },
+      resources = {
+        max_memory_mb = 32,
+        max_cpu_seconds = 5,
+        max_file_descriptors = 16,
+        timeout_seconds = 10,
+      },
+      description = "Maximum restriction sandbox",
+    }
 in
 
 let nested = N.nest strict_sandbox curl_tool in

@@ -12,35 +12,32 @@ let { Skill, .. } = import "skill.ncl" in
 let G = import "graph.ncl" in
 
 let
-  # Collect which primitive types are populated (have at least one entry)
-  populated_types = fun ws =>
-    (if std.array.length ws.agents > 0 then ['agent] else [])
-    @ (if std.array.length ws.instructions > 0 then ['instruction] else [])
-    @ (if std.array.length ws.prompts > 0 then ['prompt] else [])
-    @ (if std.array.length ws.specs > 0 then ['spec] else [])
-    @ (if std.array.length ws.memories > 0 then ['memory] else [])
-    @ (if std.array.length ws.contexts > 0 then ['context] else [])
-    @ (if std.array.length ws.skills > 0 then ['skill] else [])
-    @ (if std.array.length ws.agents_md > 0 then ['agents_md] else [])
-in
+# Collect which primitive types are populated (have at least one entry)
+populated_types = fun ws =>
+  (if std.array.length ws.agents > 0 then ['agent] else [])
+  @ (if std.array.length ws.instructions > 0 then ['instruction] else [])
+  @ (if std.array.length ws.prompts > 0 then ['prompt] else [])
+  @ (if std.array.length ws.specs > 0 then ['spec] else [])
+  @ (if std.array.length ws.memories > 0 then ['memory] else [])
+  @ (if std.array.length ws.contexts > 0 then ['context] else [])
+  @ (if std.array.length ws.skills > 0 then ['skill] else [])
+  @ (if std.array.length ws.agents_md > 0 then ['agents_md] else []) in
 
 let
-  # Collect all primitive types that appear in any composition (from or to)
-  wired_types = fun compositions =>
-    let from_types = std.array.map (fun c => c.from) compositions in
-    let to_types = std.array.map (fun c => c.to) compositions in
-    from_types @ to_types
-in
+# Collect all primitive types that appear in any composition (from or to)
+wired_types = fun compositions =>
+  let from_types = std.array.map (fun c => c.from) compositions in
+  let to_types = std.array.map (fun c => c.to) compositions in
+  from_types @ to_types in
 
 let
-  # Check: every populated type appears in at least one composition
-  all_types_wired = fun ws =>
-    let populated = populated_types ws in
-    let wired = wired_types ws.compositions in
-    std.array.all
-      (fun ptype => std.array.elem ptype wired)
-      populated
-in
+# Check: every populated type appears in at least one composition
+all_types_wired = fun ws =>
+  let populated = populated_types ws in
+  let wired = wired_types ws.compositions in
+  std.array.all
+    (fun ptype => std.array.elem ptype wired)
+    populated in
 
 {
   Workspace

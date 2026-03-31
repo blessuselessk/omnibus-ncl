@@ -53,13 +53,17 @@ let { profiles, .. } = import "security.ncl" in
             network = {
               enabled = level_config.network.enabled,
               mode =
-                if level_config.network.mode == 'deny then "deny"
-                else "full",
+                if level_config.network.mode == 'deny then
+                  "deny"
+                else
+                  "full",
             },
             filesystem = {
               mode =
-                if level_config.fs.mode == 'ro then "ro"
-                else "whitelist",
+                if level_config.fs.mode == 'ro then
+                  "ro"
+                else
+                  "whitelist",
               allowed_paths =
                 level_config.fs.allowed_paths
                 @ ["/nix"]

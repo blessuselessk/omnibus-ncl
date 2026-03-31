@@ -8,11 +8,13 @@ let NS = import "../porkg-ncl/lib/namespace.ncl" in
 let bridge = import "../process-compose-ncl/lib/bridge.ncl" in
 
 let porkg_config =
-  B.config "rust-builder" [
-    B.job "check" ["cargo", "check", "--all-targets"],
-    B.job "clippy" ["cargo", "clippy", "--all-targets", "--", "-D", "warnings"],
-    B.job "test" ["cargo", "test", "--release"],
-  ]
+  B.config
+    "rust-builder"
+    [
+      B.job "check" ["cargo", "check", "--all-targets"],
+      B.job "clippy" ["cargo", "clippy", "--all-targets", "--", "-D", "warnings"],
+      B.job "test" ["cargo", "test", "--release"],
+    ]
   & {
     worker = {
       name = "rust-builder",

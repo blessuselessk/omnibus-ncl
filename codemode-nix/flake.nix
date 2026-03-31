@@ -7,53 +7,58 @@
     codemode-ncl.url = "github:blessuselessk/codemode-ncl";
   };
 
-  outputs = { self, nixpkgs, flake-utils, codemode-ncl }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    codemode-ncl,
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
 
-        withDeps = src: pkgs.runCommand "codemode-nix-src" {} ''
+      withDeps = src:
+        pkgs.runCommand "codemode-nix-src" {} ''
           cp -r ${src} $out
           chmod -R +w $out
           mkdir -p $out/_deps
           ln -s ${codemode-ncl} $out/_deps/codemode-ncl
         '';
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          packages = [ pkgs.nickel pkgs.just pkgs.fd pkgs.jq ];
+    in {
+      devShells.default = pkgs.mkShell {
+        packages = [pkgs.nickel pkgs.just pkgs.fd pkgs.jq];
 
-          shellHook = ''
-            mkdir -p _deps
-            ln -sfn ${codemode-ncl} _deps/codemode-ncl
-            echo "codemode-nix dev shell (_deps/ populated)"
-          '';
-        };
+        shellHook = ''
+          mkdir -p _deps
+          ln -sfn ${codemode-ncl} _deps/codemode-ncl
+          echo "codemode-nix dev shell (_deps/ populated)"
+        '';
+      };
 
-        apps.validate = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cnix-validate" ''
-            export PATH="${pkgs.lib.makeBinPath [ pkgs.nickel pkgs.jq ]}:$PATH"
-            exec ${pkgs.bash}/bin/bash ${withDeps self}/tests/validate.sh
-          '');
-        };
+      apps.validate = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cnix-validate" ''
+          export PATH="${pkgs.lib.makeBinPath [pkgs.nickel pkgs.jq]}:$PATH"
+          exec ${pkgs.bash}/bin/bash ${withDeps self}/tests/validate.sh
+        '');
+      };
 
-        apps.export = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cnix-export" ''
-            exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/nix-tools-export.ncl
-          '');
-        };
+      apps.export = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cnix-export" ''
+          exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/nix-tools-export.ncl
+        '');
+      };
 
-        apps.export-registry = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "cnix-export-registry" ''
-            exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/nix-registry.ncl
-          '');
-        };
+      apps.export-registry = {
+        type = "app";
+        program = toString (pkgs.writeShellScript "cnix-export-registry" ''
+          exec ${pkgs.nickel}/bin/nickel export --format json ${withDeps self}/examples/nix-registry.ncl
+        '');
+      };
 
-        packages.default = pkgs.runCommand "codemode-nix-tools" {
-          nativeBuildInputs = [ pkgs.nickel pkgs.jq ];
+      packages.default =
+        pkgs.runCommand "codemode-nix-tools" {
+          nativeBuildInputs = [pkgs.nickel pkgs.jq];
         } ''
           mkdir -p $out
           cd ${withDeps self}
@@ -62,8 +67,9 @@
           nickel export --format json examples/provider-config.ncl | jq -S . > $out/provider-config.json
         '';
 
-        checks.default = pkgs.runCommand "codemode-nix-check" {
-          nativeBuildInputs = [ pkgs.nickel pkgs.jq ];
+      checks.default =
+        pkgs.runCommand "codemode-nix-check" {
+          nativeBuildInputs = [pkgs.nickel pkgs.jq];
         } ''
           cd ${withDeps self}
 
@@ -85,5 +91,5 @@
           echo "All checks passed"
           touch $out
         '';
-      });
+    });
 }

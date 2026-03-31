@@ -20,9 +20,10 @@ let base_job = {
 }
 in
 
-let mk_workflow = fun _name => fun _runner =>
-  let validated = (base_job & { name = _name, runner = _runner }) | Job in
-  B.to_workflow validated | Workflow
+let mk_workflow = fun _name =>
+  fun _runner =>
+    let validated = (base_job & { name = _name, runner = _runner }) | Job in
+    B.to_workflow validated | Workflow
 in
 
 {
