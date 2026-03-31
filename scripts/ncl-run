@@ -4,9 +4,10 @@ set -euo pipefail
 # ncl-run — execute a .ncl file by dispatching to the right runtime
 #
 # Usage:
-#   ncl-run examples/workflow-export.ncl
-#   ncl-run --dry-run examples/workflow-export.ncl
-#   ncl-run --json examples/workflow-export.ncl
+#   ncl-run tooling-ncl/examples/markdown-script.ncl < README.md
+#   ncl-run process-compose-ncl/examples/standalone-export.ncl
+#   ncl-run --dry-run massless-driver/examples/workflow-export.ncl
+#   ncl-run --json envelope-ncl/examples/three-layer.ncl
 
 # --- Tool resolution ---
 if command -v nickel &>/dev/null; then
@@ -36,11 +37,22 @@ while [[ $# -gt 0 ]]; do
     --json)    JSON_ONLY=true; shift ;;
     --verbose) VERBOSE=true; shift ;;
     --help|-h)
-      echo "ncl-run — dispatch a .ncl file to the right runtime"
+      echo "ncl-run — export a .ncl file and dispatch to the right runtime"
       echo ""
-      echo "Usage: ncl-run [--dry-run|--json|--verbose] <file.ncl>"
+      echo "Usage: ncl-run [flags] <file.ncl> [-- args...]"
       echo ""
-      echo "Detects: GHA workflow, process-compose, envelope, porkg, seatbelt"
+      echo "Flags:"
+      echo "  --dry-run    Show what would run, don't execute"
+      echo "  --json       Export JSON and stop"
+      echo "  --verbose    Show extra detail"
+      echo ""
+      echo "Dispatches:"
+      echo "  .script          → runs the bash script (pipe stdin through it)"
+      echo "  .processes       → process-compose up"
+      echo "  .jobs.*.runs-on  → writes GHA workflow JSON"
+      echo "  .target.kind     → shows envelope info"
+      echo "  .worker          → shows porkg config"
+      echo "  (version 1)      → writes seatbelt profile"
       exit 0 ;;
     -*) echo "Unknown flag: $1"; exit 1 ;;
     *)  break ;;
@@ -48,20 +60,26 @@ while [[ $# -gt 0 ]]; do
 done
 
 NCL_FILE="${1:?Usage: ncl-run <file.ncl>}"
+shift || true
 [[ -f "$NCL_FILE" ]] || { echo "error: $NCL_FILE not found" >&2; exit 1; }
 
 # --- Step 1: Try seatbelt (text export) ---
 TEXT=$(ncl export --format text "$NCL_FILE" 2>/dev/null || true)
 if [[ "$TEXT" == "(version 1)"* ]]; then
-  echo "==> Detected: seatbelt profile"
+  echo "==> Detected: seatbelt profile" >&2
   if $DRY_RUN; then
-    echo "==> Would run: sandbox-exec -f <profile> <command>"
+    echo "==> Would run: sandbox-exec -f <profile> <command>" >&2
     exit 0
   fi
   TMP=$(mktemp /tmp/ncl-run-XXXXXX.sb)
   echo "$TEXT" > "$TMP"
-  echo "==> Written to $TMP"
-  echo "==> Run: sandbox-exec -f $TMP <command>"
+  echo "==> Profile: $TMP" >&2
+  if [[ $# -gt 0 ]]; then
+    echo "==> Running: sandbox-exec -f $TMP $*" >&2
+    sandbox-exec -f "$TMP" "$@"
+  else
+    echo "==> Run: sandbox-exec -f $TMP <command>" >&2
+  fi
   exit 0
 fi
 
@@ -75,39 +93,56 @@ fi
 
 # --- Step 3: Detect and dispatch ---
 
-# GitHub Actions workflow?
-if echo "$JSON" | jq_ -e '.jobs // empty | to_entries[0].value["runs-on"] // empty' &>/dev/null; then
-  NAME=$(echo "$JSON" | jq_ -r '.name // "unnamed"')
-  RUNNER=$(echo "$JSON" | jq_ -r '[.jobs[]["runs-on"]] | first')
-  STEPS=$(echo "$JSON" | jq_ '[.jobs[].steps | length] | add')
-  echo "==> Detected: GitHub Actions workflow"
-  echo "    Name: $NAME"
-  echo "    Runner: $RUNNER"
-  echo "    Steps: $STEPS"
-  if $DRY_RUN; then exit 0; fi
-  TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
-  echo "$JSON" | jq_ . > "$TMP"
-  echo "==> Written to $TMP"
-  echo "    cp $TMP .github/workflows/run.json"
-  exit 0
+# Shell script pipeline? (has .script field)
+if echo "$JSON" | jq_ -e '.script // empty' &>/dev/null; then
+  SCRIPT=$(echo "$JSON" | jq_ -r '.script')
+  LINES=$(echo "$SCRIPT" | wc -l | tr -d ' ')
+  echo "==> Detected: shell script ($LINES lines)" >&2
+  if $DRY_RUN; then
+    echo "$SCRIPT" >&2
+    exit 0
+  fi
+  # Write script to temp, execute it — stdin passes through
+  TMP=$(mktemp /tmp/ncl-run-XXXXXX.sh)
+  echo "$SCRIPT" > "$TMP"
+  chmod +x "$TMP"
+  if $VERBOSE; then echo "==> Running: $TMP" >&2; fi
+  exec bash "$TMP" "$@"
 fi
 
 # Process Compose?
 if echo "$JSON" | jq_ -e '.processes // empty | keys[0] // empty' &>/dev/null; then
   PROCS=$(echo "$JSON" | jq_ -r '.processes | keys | join(", ")')
   COUNT=$(echo "$JSON" | jq_ '.processes | length')
-  echo "==> Detected: process-compose config"
-  echo "    Processes ($COUNT): $PROCS"
+  echo "==> Detected: process-compose ($COUNT processes: $PROCS)" >&2
   if $DRY_RUN; then exit 0; fi
   TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
   echo "$JSON" | jq_ . > "$TMP"
   if command -v process-compose &>/dev/null; then
-    echo "==> Starting..."
-    process-compose -f "$TMP" up
+    echo "==> Starting process-compose..." >&2
+    exec process-compose -f "$TMP" up --tui=false
+  elif command -v nix &>/dev/null; then
+    echo "==> Starting process-compose via nix..." >&2
+    exec nix run nixpkgs#process-compose -- -f "$TMP" up --tui=false
   else
-    echo "==> Written to $TMP"
-    echo "    nix run nixpkgs#process-compose -- -f $TMP up"
+    echo "==> Written to $TMP" >&2
+    echo "    process-compose -f $TMP up" >&2
+    exit 1
   fi
+fi
+
+# GitHub Actions workflow?
+if echo "$JSON" | jq_ -e '.jobs // empty | to_entries[0].value["runs-on"] // empty' &>/dev/null; then
+  NAME=$(echo "$JSON" | jq_ -r '.name // "unnamed"')
+  RUNNER=$(echo "$JSON" | jq_ -r '[.jobs[]["runs-on"]] | first')
+  STEPS=$(echo "$JSON" | jq_ '[.jobs[].steps | length] | add')
+  echo "==> Detected: GitHub Actions workflow" >&2
+  echo "    Name: $NAME | Runner: $RUNNER | Steps: $STEPS" >&2
+  if $DRY_RUN; then exit 0; fi
+  TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
+  echo "$JSON" | jq_ . > "$TMP"
+  echo "==> Written to $TMP" >&2
+  echo "    cp $TMP .github/workflows/run.json" >&2
   exit 0
 fi
 
@@ -118,20 +153,9 @@ if [[ -n "$TARGET" ]]; then
   NET=$(echo "$JSON" | jq_ -r '.constraints.network.mode // "?"' 2>/dev/null || echo "?")
   FS=$(echo "$JSON" | jq_ -r '.constraints.fs.mode // "?"' 2>/dev/null || echo "?")
   NESTED=$(echo "$JSON" | jq_ 'has("inner")' 2>/dev/null || echo false)
-  echo "==> Detected: envelope ($TARGET)"
-  echo "    Name: $NAME"
-  echo "    Network: $NET | FS: $FS | Nested: $NESTED"
+  echo "==> Detected: envelope ($TARGET)" >&2
+  echo "    Name: $NAME | Network: $NET | FS: $FS | Nested: $NESTED" >&2
   if $DRY_RUN; then exit 0; fi
-  case "$TARGET" in
-    sandbox)
-      BACKEND=$(echo "$JSON" | jq_ -r '.target.sandbox_backend // "nsjail"')
-      echo "    Backend: $BACKEND"
-      ;;
-    workflow)
-      RUNNER=$(echo "$JSON" | jq_ -r '.target.runner_label // "ubuntu-latest"')
-      echo "    Runner: $RUNNER"
-      ;;
-  esac
   echo "$JSON" | jq_ .
   exit 0
 fi
@@ -141,14 +165,12 @@ if echo "$JSON" | jq_ -e '.worker.namespaces // empty' &>/dev/null; then
   WNAME=$(echo "$JSON" | jq_ -r '.worker.name // "worker"')
   JOBS=$(echo "$JSON" | jq_ '.jobs | length')
   NS=$(echo "$JSON" | jq_ -r '[.worker.namespaces | to_entries[] | select(.value) | .key] | join(",")')
-  echo "==> Detected: porkg config"
-  echo "    Worker: $WNAME"
-  echo "    Jobs: $JOBS"
-  echo "    Namespaces: $NS"
+  echo "==> Detected: porkg config" >&2
+  echo "    Worker: $WNAME | Jobs: $JOBS | Namespaces: $NS" >&2
   if $DRY_RUN; then exit 0; fi
   echo "$JSON" | jq_ .
   exit 0
 fi
 
-# Fallback
+# Fallback — just print
 echo "$JSON" | jq_ .
