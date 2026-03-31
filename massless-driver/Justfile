@@ -1,0 +1,37 @@
+# Justfile for massless-driver Nickel configs
+# Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export full job as GitHub Actions workflow JSON
+export:
+    nickel export --format json examples/workflow-export.ncl
+
+# Export nix variant workflow
+export-nix:
+    nickel export --format json examples/nix-workflow-export.ncl
+
+# Export job manifest JSON
+export-manifest:
+    nickel export --format json examples/manifest-export.ncl
+
+# Validate all .ncl files export cleanly
+validate:
+    @nickel export --format json examples/workflow-export.ncl > /dev/null && echo "Workflow: OK"
+    @nickel export --format json examples/nix-workflow-export.ncl > /dev/null && echo "Nix workflow: OK"
+    @nickel export --format json examples/manifest-export.ncl > /dev/null && echo "Manifest: OK"
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Update snapshots from current export
+snapshot:
+    nickel export --format json examples/workflow-export.ncl | jq -S . > tests/snapshot-workflow.json
+    nickel export --format json examples/manifest-export.ncl | jq -S . > tests/snapshot-manifest.json
+    @echo "Snapshots updated"
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}

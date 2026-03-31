@@ -1,0 +1,64 @@
+{
+  "jobs": {
+    "build": {
+      "runs-on": "actuated-4cpu-16gb",
+      "steps": [
+        {
+          "name": "Checkout",
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "Join Tailscale",
+          "uses": "tailscale/github-action@v2",
+          "with": {
+            "authkey": "${{ secrets.TS_AUTHKEY }}"
+          }
+        },
+        {
+          "env": {
+            "API_KEY": "${{ secrets.API_KEY }}",
+            "DB_PASSWORD": "${{ secrets.DB_PASSWORD }}",
+            "DOCKER_TOKEN": "${{ secrets.DOCKER_TOKEN }}"
+          },
+          "name": "Run Job",
+          "run": "chmod +x job.sh && ./job.sh"
+        },
+        {
+          "id": "check_uploads",
+          "name": "Check for uploads",
+          "run": "test -d ./uploads && echo 'has_uploads=true' >> $GITHUB_OUTPUT || echo 'has_uploads=false' >> $GITHUB_OUTPUT"
+        },
+        {
+          "if": "steps.check_uploads.outputs.has_uploads == 'true'",
+          "name": "Upload artifact",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "compression-level": 1,
+            "name": "integration-test",
+            "path": "./uploads/",
+            "retention-days": 3
+          }
+        }
+      ]
+    }
+  },
+  "name": "integration-test",
+  "on": {
+    "pull_request": {},
+    "push": {
+      "branches": [
+        "master",
+        "main"
+      ]
+    }
+  },
+  "permissions": {
+    "actions": "write",
+    "checks": "write",
+    "contents": "write",
+    "id-token": "write",
+    "issues": "write",
+    "packages": "write",
+    "statuses": "write"
+  }
+}

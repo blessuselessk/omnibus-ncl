@@ -1,0 +1,13 @@
+{
+  "artifacts_enabled": true,
+  "auto_delete": true,
+  "name": "integration-test",
+  "owner": "myorg",
+  "release_enabled": true,
+  "runner": "actuated-4cpu-16gb",
+  "secret_count": 3,
+  "tailscale_enabled": true,
+  "timeout_seconds": 600,
+  "variant": "bash",
+  "visibility": "private"
+}
