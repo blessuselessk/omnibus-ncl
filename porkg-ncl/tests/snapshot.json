@@ -1,0 +1,102 @@
+{
+  "jobs": [
+    {
+      "allowed_paths": [],
+      "command": [
+        "nix",
+        "build",
+        ".#cli"
+      ],
+      "env": {
+        "NIX_CONFIG": "experimental-features = nix-command flakes"
+      },
+      "name": "build-cli"
+    },
+    {
+      "allowed_paths": [],
+      "command": [
+        "nix",
+        "build",
+        ".#daemon"
+      ],
+      "env": {
+        "NIX_CONFIG": "experimental-features = nix-command flakes"
+      },
+      "name": "build-daemon"
+    },
+    {
+      "allowed_paths": [],
+      "command": [
+        "nix",
+        "flake",
+        "check"
+      ],
+      "env": {
+        "NIX_CONFIG": "experimental-features = nix-command flakes"
+      },
+      "name": "run-tests"
+    }
+  ],
+  "log_level": "debug",
+  "log_timestamps": "unix",
+  "tag_map": {
+    "messages": [
+      {
+        "description": "Trigger privilege escalation to root",
+        "direction": "parent_to_worker",
+        "payload_fields": [],
+        "tag": "begin"
+      },
+      {
+        "description": "Spawn a new job subprocess",
+        "direction": "worker_to_job",
+        "payload_fields": [],
+        "tag": "start"
+      },
+      {
+        "description": "Graceful termination signal",
+        "direction": "bidirectional",
+        "payload_fields": [],
+        "tag": "quit"
+      }
+    ],
+    "proto": {
+      "buffer_reuse_threshold": 1048576,
+      "byte_order": "big_endian",
+      "max_message_bytes": 4294967295,
+      "serialization": "msgpack"
+    }
+  },
+  "worker": {
+    "max_jobs": 4,
+    "name": "nix-builder",
+    "namespaces": {
+      "cgroup": false,
+      "ipc": false,
+      "mount": true,
+      "net": true,
+      "pid": true,
+      "user": true,
+      "uts": false
+    },
+    "privilege": {
+      "allow_escalation": true,
+      "initial_level": "user",
+      "rules": [
+        {
+          "from": "user",
+          "requires_user_namespace": true,
+          "to": "root",
+          "trigger": "begin"
+        }
+      ]
+    },
+    "proto": {
+      "buffer_reuse_threshold": 1048576,
+      "byte_order": "big_endian",
+      "max_message_bytes": 4294967295,
+      "serialization": "msgpack"
+    },
+    "shutdown_timeout_seconds": 30
+  }
+}

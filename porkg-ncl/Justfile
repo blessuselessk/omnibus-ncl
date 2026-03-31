@@ -1,0 +1,36 @@
+# Justfile for porkg-ncl process hierarchy contracts
+# Requires: nickel, jq
+
+set dotenv-load := false
+set shell := ["bash", "-uc"]
+
+# Export nix pipeline config
+export:
+    nickel export --format json examples/config-export.ncl
+
+# Export locked-down pipeline
+export-locked:
+    nickel export --format json examples/pipeline-export.ncl
+
+# Export protocol tag map
+export-proto:
+    nickel export --format json examples/proto-export.ncl
+
+# Validate all .ncl files
+validate:
+    @nickel export --format json examples/config-export.ncl > /dev/null && echo "Config: OK"
+    @nickel export --format json examples/pipeline-export.ncl > /dev/null && echo "Pipeline: OK"
+    @nickel export --format json examples/proto-export.ncl > /dev/null && echo "Proto: OK"
+
+# Run tests
+test:
+    bash tests/validate.sh
+
+# Update snapshot
+snapshot:
+    nickel export --format json examples/config-export.ncl | jq -S . > tests/snapshot.json
+    @echo "Snapshot updated"
+
+# Format all .ncl files
+fmt:
+    @fd -e ncl -x nickel format {}
