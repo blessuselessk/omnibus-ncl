@@ -38,6 +38,7 @@ resource "aws_instance" "example" {
 ### Variables
 
 **Terraform:**
+
 ```hcl
 variable "region" {
   type    = string
@@ -46,6 +47,7 @@ variable "region" {
 ```
 
 **Nickel:**
+
 ```nickel
 let region | std.string.NonEmpty | default = "us-east-1" in
 ```
@@ -53,6 +55,7 @@ let region | std.string.NonEmpty | default = "us-east-1" in
 ### Count/For Each
 
 **Terraform:**
+
 ```hcl
 resource "aws_instance" "servers" {
   count = 3
@@ -61,6 +64,7 @@ resource "aws_instance" "servers" {
 ```
 
 **Nickel:**
+
 ```nickel
 {
   servers = [
@@ -74,6 +78,7 @@ resource "aws_instance" "servers" {
 ### Modules
 
 **Terraform:**
+
 ```hcl
 module "vpc" {
   source  = "./vpc"
@@ -82,6 +87,7 @@ module "vpc" {
 ```
 
 **Nickel:**
+
 ```nickel
 {
   vpc = import "./vpc/main.ncl",

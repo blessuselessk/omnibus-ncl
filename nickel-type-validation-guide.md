@@ -5,19 +5,19 @@
 ## Table of Contents
 
 1. [Core Philosophy](#core-philosophy)
-2. [Contract Fundamentals](#contract-fundamentals)
-3. [Contract Composition Patterns](#contract-composition-patterns)
-4. [Label and Error Messaging](#label-and-error-messaging)
-5. [Enum Patterns](#enum-patterns)
-6. [Array Patterns](#array-patterns)
-7. [Record Patterns](#record-patterns)
-8. [Function Contracts](#function-contracts)
-9. [Polymorphic Contracts](#polymorphic-contracts)
-10. [Advanced Patterns](#advanced-patterns)
-11. [Complete Examples](#complete-examples)
-12. [Quick Reference](#quick-reference)
+1. [Contract Fundamentals](#contract-fundamentals)
+1. [Contract Composition Patterns](#contract-composition-patterns)
+1. [Label and Error Messaging](#label-and-error-messaging)
+1. [Enum Patterns](#enum-patterns)
+1. [Array Patterns](#array-patterns)
+1. [Record Patterns](#record-patterns)
+1. [Function Contracts](#function-contracts)
+1. [Polymorphic Contracts](#polymorphic-contracts)
+1. [Advanced Patterns](#advanced-patterns)
+1. [Complete Examples](#complete-examples)
+1. [Quick Reference](#quick-reference)
 
----
+______________________________________________________________________
 
 ## Core Philosophy
 
@@ -51,7 +51,7 @@ let MyContract = std.contract.custom (fun label value =>
 ) in
 ```
 
----
+______________________________________________________________________
 
 ## Contract Fundamentals
 
@@ -106,7 +106,7 @@ in
 true | "$bool"  # => true
 ```
 
----
+______________________________________________________________________
 
 ## Contract Composition Patterns
 
@@ -189,7 +189,7 @@ let NotNumber = std.contract.not Number in
 # Delayed checks may not be caught
 ```
 
----
+______________________________________________________________________
 
 ## Label and Error Messaging
 
@@ -253,7 +253,7 @@ let Nullable = fun Contract =>
 in
 ```
 
----
+______________________________________________________________________
 
 ## Enum Patterns
 
@@ -335,7 +335,7 @@ std.enum.to_tag_and_arg ('Foo "arg")  # => { tag = "Foo", arg = "arg" }
 std.enum.from_tag_and_arg { tag = "Foo", arg = "arg" }  # => ('Foo "arg")
 ```
 
----
+______________________________________________________________________
 
 ## Array Patterns
 
@@ -410,7 +410,7 @@ let UniqueArray = fun Contract =>
 in
 ```
 
----
+______________________________________________________________________
 
 ## Record Patterns
 
@@ -483,7 +483,7 @@ in
 }
 ```
 
----
+______________________________________________________________________
 
 ## Function Contracts
 
@@ -512,7 +512,7 @@ let is_even = fun n => n % 2 == 0 in
 is_even | EvenPredicate  # => passes
 ```
 
----
+______________________________________________________________________
 
 ## Polymorphic Contracts
 
@@ -541,7 +541,7 @@ in
 # Handles extra fields in records with type variables
 ```
 
----
+______________________________________________________________________
 
 ## Advanced Patterns
 
@@ -590,7 +590,7 @@ in
 find_first (fun x => x > 5) [1, 3, 7, 2]  # => 'Some 7
 ```
 
----
+______________________________________________________________________
 
 ## Inline Contracts Pattern (AWS Style)
 
@@ -625,9 +625,9 @@ let Sandbox = import "interface.ncl" in
 ### Key Points
 
 1. **`..` allows extra fields** - Records can have more fields than just those listed in the contract
-2. **Inline enums** - Use `|'tag` directly in the record
-3. **No wrapping needed** - `{ field | Type }` is already a contract
-4. **Composable** - Contracts can be used anywhere with `| ContractName`
+1. **Inline enums** - Use `|'tag` directly in the record
+1. **No wrapping needed** - `{ field | Type }` is already a contract
+1. **Composable** - Contracts can be used anywhere with `| ContractName`
 
 ### Open vs Closed Records
 
@@ -667,7 +667,7 @@ let Sandbox = import "interface.ncl" in
 }
 ```
 
----
+______________________________________________________________________
 
 ## Complete Examples
 
@@ -834,7 +834,7 @@ let Sandbox = import "interface.ncl" in
 }
 ```
 
----
+______________________________________________________________________
 
 ## Quick Reference
 
@@ -899,41 +899,42 @@ let Sandbox = import "interface.ncl" in
 | `std.is_function x` | Check Function type |
 | `std.is_record x` | Check Record type |
 
----
+______________________________________________________________________
 
 ## Key Learnings from Stdlib
 
 1. **Use `custom` for advanced contracts** - `from_predicate` and `from_validator` are simpler but limited
 
-2. **Label manipulation for errors** - Stack diagnostics for nested contract violations
+1. **Label manipulation for errors** - Stack diagnostics for nested contract violations
 
-3. **Delayed contracts** - Records and arrays have lazy evaluation, contracts propagate inside
+1. **Delayed contracts** - Records and arrays have lazy evaluation, contracts propagate inside
 
-4. **Polymorphism via sealing** - Internal mechanism for `forall` contracts
+1. **Polymorphism via sealing** - Internal mechanism for `forall` contracts
 
-5. **Enum vs Tag vs Variant** - Understand the difference for proper contracts
+1. **Enum vs Tag vs Variant** - Understand the difference for proper contracts
 
-6. **check vs apply** - Use `check` for subcontracts, `apply` at top level
+1. **check vs apply** - Use `check` for subcontracts, `apply` at top level
 
-7. **Type primops** - Use `%typeof%`, `%array/*`, `%record/*` for introspection
+1. **Type primops** - Use `%typeof%`, `%array/*`, `%record/*` for introspection
 
----
+______________________________________________________________________
 
 ## 13. Pure Nickel vs. Generated Schemas
 
 When using `json-schema-to-nickel`, the resulting code often mimics the functional, predicate-based validation of JSON Schema. While robust, this can be more verbose and harder to read than native Nickel contracts.
 
 ### Why Native Contracts are Better:
+
 1. **Performance**: Native contracts (like `{ name | String }`) are optimized by the Nickel interpreter.
-2. **Readability**: Native contracts are more concise and idiomatic.
-3. **Integration**: Native contracts integrate better with Nickel's type checking and error reporting.
-4. **Laziness**: Native record contracts are lazy by default, only validating fields when they are accessed.
+1. **Readability**: Native contracts are more concise and idiomatic.
+1. **Integration**: Native contracts integrate better with Nickel's type checking and error reporting.
+1. **Laziness**: Native record contracts are lazy by default, only validating fields when they are accessed.
 
 **Best Practice**: Use generated schemas for existing JSON Schema assets, but favor native Nickel contracts and `std.contract.custom` for new development.
 
 For more on this, see [Nickel Best Practices](nickel-best-practices.md).
 
----
+______________________________________________________________________
 
 ## References
 

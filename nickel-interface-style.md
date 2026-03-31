@@ -2,11 +2,12 @@
 
 > **Authority Guide**: This document is the authoritative guide for Nickel user interface design, based on the [Organist](https://github.com/nickel-lang/organist) project.
 > **Companion Documents**:
+>
 > - [Nickel Module System](nickel-modules.md) - Module system architecture (Foundation Document)
 > - [Nickel Best Practices](nickel-best-practices.md) - Code style and LLM notes
 > - [Nickel Type Validation Guide](nickel-type-validation-guide.md) - Advanced contracts and type validation
 
----
+______________________________________________________________________
 
 ## 1. Core Principle: Schema-Config Separation
 
@@ -31,7 +32,7 @@ The fundamental pattern in Nickel interface design is separating **what users co
 - **Config**: The actual user-provided values
 - **Validation**: `config | Schema` validates config against Schema
 
----
+______________________________________________________________________
 
 ## 2. The Module Pattern
 
@@ -62,7 +63,7 @@ Organist's module pattern defines a clean interface structure:
 | `config \| Schema` | Validates config against Schema |
 | `config \| Schema = {}` | Config with defaults |
 
----
+______________________________________________________________________
 
 ## 3. Composable Modules with `&`
 
@@ -85,13 +86,13 @@ organist.OrganistExpression
 
 This creates a **layered configuration** where each module contributes its Schema and config.
 
----
+______________________________________________________________________
 
 ## 4. Documentation Pattern
 
 Always document interfaces using `| doc m%"..."%`:
 
-```nickel
+````nickel
 {
   MyOption
     | doc m%"
@@ -106,17 +107,17 @@ Always document interfaces using `| doc m%"..."%`:
       "%
     = { value | String },
 }
-```
+````
 
 ### Documentation Rules
 
 1. **Brief description** - One line explaining the option
-2. **Blank line** - Separate description from examples
-3. **# Examples section** - Show usage patterns
-4. **Code blocks** - Use ```nickel ```
-5. **Expected output** - Use `# => value`
+1. **Blank line** - Separate description from examples
+1. **# Examples section** - Show usage patterns
+1. **Code blocks** - Use `nickel `
+1. **Expected output** - Use `# => value`
 
----
+______________________________________________________________________
 
 ## 5. Contract Composition
 
@@ -148,7 +149,7 @@ field | [| 'option_a, 'option_b |]
 config | { field | String, .. }
 ```
 
----
+______________________________________________________________________
 
 ## 6. Type Annotations vs Contracts
 
@@ -177,7 +178,7 @@ Nickel has both static types and runtime contracts:
 | Structural checking | Domain-specific rules |
 | IDE support | User-facing contracts |
 
----
+______________________________________________________________________
 
 ## 7. Function Design
 
@@ -203,7 +204,7 @@ let process = fun data =>
   |> std.record.map (fun k v => { key = k, value = v })
 ```
 
----
+______________________________________________________________________
 
 ## 8. Extensibility Patterns
 
@@ -230,7 +231,7 @@ let process = fun data =>
 }
 ```
 
----
+______________________________________________________________________
 
 ## 9. Module Organization
 
@@ -257,7 +258,7 @@ lib/
 }
 ```
 
----
+______________________________________________________________________
 
 ## 10. Error Messages
 
@@ -278,7 +279,7 @@ in
 (70000 | PortNumber)  # Error: Port must be between 1-65535
 ```
 
----
+______________________________________________________________________
 
 ## 11. Complete Example: A Sandbox Interface
 
@@ -338,7 +339,7 @@ Sandbox
 }
 ```
 
----
+______________________________________________________________________
 
 ## 12. Anti-Patterns to Avoid
 
@@ -382,7 +383,7 @@ Sandbox
 { option | String | doc "A crucial setting" }
 ```
 
----
+______________________________________________________________________
 
 ## 13. Summary Checklist
 
@@ -399,7 +400,7 @@ When designing a Nickel interface:
 - [ ] Test with `nickel export`
 - [ ] Document examples with `# =>`
 
----
+______________________________________________________________________
 
 ## References
 
@@ -408,7 +409,7 @@ When designing a Nickel interface:
 - [Nickel contracts](https://nickel-lang.org/user-guide/contracts/) - Contract system
 - [Nickel Module System](nickel-modules.md) - Module system architecture
 
----
+______________________________________________________________________
 
 ## Related Documents
 

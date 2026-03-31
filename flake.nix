@@ -17,6 +17,11 @@
           projectRootFile = "flake.nix";
           programs.alejandra.enable = true;
           programs.nickel.enable = true;
+          programs.mdformat.enable = true;
+          settings.formatter.nufmt = {
+            command = "${pkgs.nufmt}/bin/nufmt";
+            includes = ["*.nu"];
+          };
         }
     );
   in {

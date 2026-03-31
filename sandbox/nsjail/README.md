@@ -246,17 +246,17 @@ let bad_config = {
 ## Best Practices
 
 1. **Use Presets**: Start with a preset and customize
-2. **Least Privilege**: Start with restrictive settings, relax as needed
-3. **Test Configurations**: Use `nickel check config.ncl` to validate before running
-4. **Log Appropriately**: Enable logging for troubleshooting
-5. **UID Mapping**: Always map to a non-root user for production
+1. **Least Privilege**: Start with restrictive settings, relax as needed
+1. **Test Configurations**: Use `nickel check config.ncl` to validate before running
+1. **Log Appropriately**: Enable logging for troubleshooting
+1. **UID Mapping**: Always map to a non-root user for production
 
 ## Contributing
 
 1. Create a new example in `examples/`
-2. Add new presets to existing modules
-3. Create new modules for additional nsjail features
-4. Update documentation
+1. Add new presets to existing modules
+1. Create new modules for additional nsjail features
+1. Update documentation
 
 ## License
 

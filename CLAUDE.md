@@ -27,6 +27,7 @@ just test-web-scraper       # Validate web-scraper example
 ```
 
 **Seatbelt sandbox commands (macOS only):**
+
 ```bash
 just sb-minimal             # Generate + run minimal seatbelt profile
 just sb-standard            # Generate + run standard profile
@@ -36,6 +37,7 @@ just sb-run [profile] [cmd]        # Run command inside sandbox
 ```
 
 **Direct Nickel usage:**
+
 ```bash
 nickel export --format json path/to/file.ncl        # Export as JSON
 nickel export --format text path/to/file.ncl         # Export as text (seatbelt profiles)
@@ -50,8 +52,8 @@ nickel format --check file.ncl                        # Check single file
 The core domain. Three layers:
 
 1. **`lib/`** — shared primitives (mounts, network policies, seccomp filters, resource limits, type definitions). `lib/main.ncl` re-exports everything.
-2. **`seatbelt/interface.ncl`** — builder pattern: `Sandbox.build { config } |> Sandbox.to_profile` produces macOS sandbox-exec profile text.
-3. **`backends/`**, **`nsjail/`**, **`profiles/`** — backend-specific configs and reusable profile presets.
+1. **`seatbelt/interface.ncl`** — builder pattern: `Sandbox.build { config } |> Sandbox.to_profile` produces macOS sandbox-exec profile text.
+1. **`backends/`**, **`nsjail/`**, **`profiles/`** — backend-specific configs and reusable profile presets.
 
 `sandbox/examples/` contains concrete configurations (seatbelt-minimal, seatbelt-standard, seatbelt-development, data-processor, web-scraper, python-script-runner).
 
@@ -171,6 +173,7 @@ The repo root has authoritative Nickel style guides — read these before writin
 - `nickel-language-handbook-llm.md` — language basics (LLM-optimized)
 
 Key patterns used throughout:
+
 - **Contracts (`|`) over bare types (`:`)** for domain validation
 - **Enum tags** (`'deny`, `'seatbelt`) instead of strings for modes/variants
 - **Record merge (`&`)** for composing configs — Nickel is lazy, merging is the primary composition mechanism

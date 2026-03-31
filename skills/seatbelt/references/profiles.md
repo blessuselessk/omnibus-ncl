@@ -54,6 +54,7 @@ Sandbox.build {
 ```
 
 Output:
+
 ```sbpl
 (version 1)
 (allow default)

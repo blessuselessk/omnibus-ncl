@@ -1,22 +1,6 @@
----
-name: nsjail
-description: Use when configuring Linux sandboxing with nsjail, generating security profiles, or configuring process isolation for skills.
-metadata:
-  author: xiuxian-artisan-workshop
-  version: "1.0.0"
-  source: "https://github.com/tao3k/xiuxian-artisan-workshop/tree/main/packages/ncl/sandbox/nsjail"
-  routing_keywords:
-    - "nsjail"
-    - "sandbox"
-    - "linux"
-    - "namespace"
-    - "container"
-    - "isolation"
-    - "process"
-    - "security"
-    - "chroot"
-    - "cgroups"
----
+______________________________________________________________________
+
+## name: nsjail description: Use when configuring Linux sandboxing with nsjail, generating security profiles, or configuring process isolation for skills. metadata: author: xiuxian-artisan-workshop version: "1.0.0" source: "https://github.com/tao3k/xiuxian-artisan-workshop/tree/main/packages/ncl/sandbox/nsjail" routing_keywords: - "nsjail" - "sandbox" - "linux" - "namespace" - "container" - "isolation" - "process" - "security" - "chroot" - "cgroups"
 
 # Nsjail Skill
 

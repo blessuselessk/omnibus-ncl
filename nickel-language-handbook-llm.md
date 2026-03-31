@@ -2,12 +2,13 @@
 
 > **Getting Started**: Quick reference for language basics, suitable for LLMs to understand Nickel code.
 > **Companion Documents**:
+>
 > - [Nickel Interface Style Guide](nickel-interface-style.md) - User interface design patterns (Authority Guide)
 > - [Nickel Module System](nickel-modules.md) - Module system architecture
 > - [Nickel Best Practices](nickel-best-practices.md) - Code style and LLM notes
 > - [Nickel Type Validation Guide](nickel-type-validation-guide.md) - Advanced contracts and type validation
 
----
+______________________________________________________________________
 
 ## Recommended Reading Path
 
@@ -21,18 +22,18 @@ Module Organization: nickel-modules.md
 Advanced Contracts: nickel-type-validation-guide.md
 ```
 
----
+______________________________________________________________________
 
 ## 1. Language Overview
 
 Nickel is a **statically-typed configuration language** with:
 
-| Feature            | Description                                    |
+| Feature | Description |
 | ------------------ | ---------------------------------------------- |
-| **Evaluation**     | Call-by-need (lazy) with memoization           |
-| **Type System**    | Hindley-Milner + Row Polymorphism              |
-| **Paradigm**       | Functional, pure                               |
-| **Primary Use**    | Configuration files, build systems             |
+| **Evaluation** | Call-by-need (lazy) with memoization |
+| **Type System** | Hindley-Milner + Row Polymorphism |
+| **Paradigm** | Functional, pure |
+| **Primary Use** | Configuration files, build systems |
 | **Key Innovation** | First-class contracts for runtime verification |
 
 ### Design Philosophy
@@ -40,11 +41,11 @@ Nickel is a **statically-typed configuration language** with:
 Nickel combines the ergonomics of JSON with:
 
 1. **Type safety** via static typechecking
-2. **Abstraction** via functions and let-bindings
-3. **Safety nets** via contracts for dynamic checking
-4. **Extensibility** via row polymorphism for records
+1. **Abstraction** via functions and let-bindings
+1. **Safety nets** via contracts for dynamic checking
+1. **Extensibility** via row polymorphism for records
 
----
+______________________________________________________________________
 
 ## 2. Evaluation Model (Critical for LLM Understanding)
 
@@ -82,8 +83,8 @@ let rec loop = loop + 1 in loop
 Nickel's core operation is **merging records**, which is:
 
 1. **Recursive** - merges nested records
-2. **Ordered** - right values override left
-3. **Recursive merge** - fields named recursively are merged
+1. **Ordered** - right values override left
+1. **Recursive merge** - fields named recursively are merged
 
 ```nickel
 # Basic merge (right overrides left) - USE & OPERATOR
@@ -96,7 +97,7 @@ Nickel's core operation is **merging records**, which is:
 
 **IMPORTANT**: The `&` operator is the ONLY merge operator. There is NO `@@` operator!
 
----
+______________________________________________________________________
 
 ## 3. Type System
 
@@ -127,8 +128,8 @@ add_field { field = 1, other = 2 }
 Type variables use **delayed constraint resolution**:
 
 1. Type expressions contain `UnifVar` (unification variables)
-2. `UnifTable` acts as union-find structure
-3. Resolution occurs lazily (better error messages)
+1. `UnifTable` acts as union-find structure
+1. Resolution occurs lazily (better error messages)
 
 ```nickel
 # Type inferred as `forall a. a -> a` (identity)
@@ -138,7 +139,7 @@ let id = fun x => x in id
 let x = 1 in x + 1
 ```
 
----
+______________________________________________________________________
 
 ## 4. Syntax & AST Architecture
 
@@ -146,11 +147,11 @@ let x = 1 in x + 1
 
 Nickel uses **two AST representations**:
 
-| Parser AST                 | Mainline AST                   |
+| Parser AST | Mainline AST |
 | -------------------------- | ------------------------------ |
-| Lightweight                | Full evaluation representation |
-| Parse-time only            | Lazy evaluation support        |
-| No evaluation dependencies | Contains thunk info            |
+| Lightweight | Full evaluation representation |
+| Parse-time only | Lazy evaluation support |
+| No evaluation dependencies | Contains thunk info |
 
 **Conversion happens via `FromMainline`/`ToMainline` traits**.
 
@@ -204,7 +205,7 @@ array @ [element]
 "hello" ++ " " ++ "world"
 ```
 
----
+______________________________________________________________________
 
 ## 5. Contracts (Runtime Verification)
 
@@ -231,16 +232,16 @@ let ConfigContract = {
 
 ### Contract vs Type
 
-| Aspect      | Types        | Contracts  |
+| Aspect | Types | Contracts |
 | ----------- | ------------ | ---------- |
-| When        | Compile-time | Runtime    |
-| Enforcement | Typechecker  | Evaluation |
-| Coverage    | Partial      | Full       |
-| Performance | Free         | Has cost   |
+| When | Compile-time | Runtime |
+| Enforcement | Typechecker | Evaluation |
+| Coverage | Partial | Full |
+| Performance | Free | Has cost |
 
 **Best practice**: Use types for static guarantees, contracts for complex invariants.
 
----
+______________________________________________________________________
 
 ## 6. Standard Library (std)
 
@@ -423,7 +424,7 @@ nickel export --format toml config.ncl > config.toml
 
 **Validation**: Exports reject functions, unevaluated terms, and non-serializable values.
 
----
+______________________________________________________________________
 
 ## 7. CLI & REPL Commands
 
@@ -448,7 +449,7 @@ nickel pprint_ast <file.ncl>     # Pretty-print AST
 :quit                             # Exit
 ```
 
----
+______________________________________________________________________
 
 ## 8. Common Patterns for LLM Code Generation
 
@@ -540,20 +541,20 @@ base_config & network_config
 # => { host = "localhost", port = 8080, timeout = 30, retries = 3 }
 ```
 
----
+______________________________________________________________________
 
 ## 9. Error Handling
 
 ### Common Errors
 
-| Error                   | Cause                              | Solution                            |
+| Error | Cause | Solution |
 | ----------------------- | ---------------------------------- | ----------------------------------- |
-| `BlackholedError`       | Infinite recursion in lazy eval    | Break cycle                         |
-| `TypeError`             | Type mismatch                      | Add annotation or fix types         |
-| `ContractFail`          | Contract violation                 | Check runtime values                |
-| `InfiniteRecursion`     | Non-terminating computation        | Optimize or add base case           |
-| `Unbound identifier`    | Using `builtin.` instead of `std.` | Use `std.array`, `std.record`, etc. |
-| `Unexpected token '@@'` | Using wrong merge operator         | Use `&` instead                     |
+| `BlackholedError` | Infinite recursion in lazy eval | Break cycle |
+| `TypeError` | Type mismatch | Add annotation or fix types |
+| `ContractFail` | Contract violation | Check runtime values |
+| `InfiniteRecursion` | Non-terminating computation | Optimize or add base case |
+| `Unbound identifier` | Using `builtin.` instead of `std.` | Use `std.array`, `std.record`, etc. |
+| `Unexpected token '@@'` | Using wrong merge operator | Use `&` instead |
 
 ### Debugging Tips
 
@@ -572,16 +573,16 @@ let debug = fun x =>
 let force_eval = fun x : Number => x in
 ```
 
----
+______________________________________________________________________
 
 ## 10. Type System Details for LLM Reasoning
 
 ### Type Inference Algorithm
 
 1. **Walk AST** generating constraints
-2. **Collect unification variables** (`UnifVar`)
-3. **Run union-find** on type variables
-4. **Resolve constraints** to concrete types
+1. **Collect unification variables** (`UnifVar`)
+1. **Run union-find** on type variables
+1. **Resolve constraints** to concrete types
 
 ### Subtyping with Rows
 
@@ -605,18 +606,18 @@ let person : { name: String, age: Number } =
   { name = "Nick", age = 1 } in
 ```
 
----
+______________________________________________________________________
 
 ## 11. Mental Model Summary
 
 When writing Nickel, think:
 
 1. **Values are lazy** - computation defers until needed
-2. **Records are extensible** - types can have extra fields
-3. **Merge is recursive** - `&` merges deeply (ONLY use `&`, never `@@`)
-4. **Contracts validate** - runtime safety net
-5. **Types check statically** - compile-time guarantees
-6. **Use stdlib** - always use `std.` prefix for standard library functions
+1. **Records are extensible** - types can have extra fields
+1. **Merge is recursive** - `&` merges deeply (ONLY use `&`, never `@@`)
+1. **Contracts validate** - runtime safety net
+1. **Types check statically** - compile-time guarantees
+1. **Use stdlib** - always use `std.` prefix for standard library functions
 
 ### Quick Reference
 
@@ -640,7 +641,7 @@ std.string.join sep parts
 std.contract.custom ...
 ```
 
----
+______________________________________________________________________
 
 ## 12. When to Use Nickel
 
@@ -657,45 +658,45 @@ std.contract.custom ...
 - Performance-critical code
 - Imperative algorithms
 
----
+______________________________________________________________________
 
 ## 13. File Extension & Tooling
 
-| Artifact         | Extension                 |
+| Artifact | Extension |
 | ---------------- | ------------------------- |
-| Source files     | `.ncl`                    |
-| REPL output      | Plain text/JSON/YAML/TOML |
-| Type annotations | Inline with `:`           |
+| Source files | `.ncl` |
+| REPL output | Plain text/JSON/YAML/TOML |
+| Type annotations | Inline with `:` |
 
----
+______________________________________________________________________
 
 ## 14. Common Mistakes to Avoid
 
-| Mistake                       | Correct Approach                   |
+| Mistake | Correct Approach |
 | ----------------------------- | ---------------------------------- |
-| Using `builtin.` prefix       | Use `std.` (e.g., `std.array.map`) |
-| Using `@@` for merge          | Use `&`                            |
-| Using `++` for array concat   | Use `@` (e.g., `arr @ [x]`)        |
-| Using `builtin.string.concat` | Use `++` for strings               |
-| Using `builtin.fold`          | Use `std.array.fold_left`          |
-| Using `default` contract      | Use `?` operator                   |
+| Using `builtin.` prefix | Use `std.` (e.g., `std.array.map`) |
+| Using `@@` for merge | Use `&` |
+| Using `++` for array concat | Use `@` (e.g., `arr @ [x]`) |
+| Using `builtin.string.concat` | Use `++` for strings |
+| Using `builtin.fold` | Use `std.array.fold_left` |
+| Using `default` contract | Use `?` operator |
 
----
+______________________________________________________________________
 
 ## Summary
 
 Nickel is a pragmatic configuration language that brings static types and contracts to configuration management. Key takeaways:
 
 1. **Lazy evaluation** with memoization enables recursive definitions
-2. **Row polymorphism** provides extensible structural typing
-3. **Contracts** offer runtime verification for complex invariants
-4. **Merge with `&`** is the core composition operator
-5. **Use `std.` prefix** for all standard library functions
-6. **Multiple export formats** make it versatile for different tools
+1. **Row polymorphism** provides extensible structural typing
+1. **Contracts** offer runtime verification for complex invariants
+1. **Merge with `&`** is the core composition operator
+1. **Use `std.` prefix** for all standard library functions
+1. **Multiple export formats** make it versatile for different tools
 
 For comprehensive coding standards, see [Nickel Best Practices](nickel-best-practices.md).
 
----
+______________________________________________________________________
 
 ## 15. Advanced Idioms
 
@@ -733,7 +734,7 @@ let result = [1, 2, 3]
   |> std.array.filter (fun x => x > 2)
 ```
 
----
+______________________________________________________________________
 
 ## Related Documents
 

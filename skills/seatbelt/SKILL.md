@@ -1,21 +1,6 @@
----
-name: seatbelt
-description: Use when configuring macOS sandbox execution with Seatbelt profiles, generating sandbox-exec profiles, or testing macOS sandbox restrictions.
-metadata:
-  author: xiuxian-artisan-workshop
-  version: "1.1.0"
-  source: "https://github.com/tao3k/xiuxian-artisan-workshop/tree/main/packages/ncl/sandbox/seatbelt"
-  routing_keywords:
-    - "seatbelt"
-    - "sandbox-exec"
-    - "macos"
-    - "sandbox"
-    - "apple"
-    - "darwin"
-    - "sbpl"
-    - "entitlements"
-    - "mac"
----
+______________________________________________________________________
+
+## name: seatbelt description: Use when configuring macOS sandbox execution with Seatbelt profiles, generating sandbox-exec profiles, or testing macOS sandbox restrictions. metadata: author: xiuxian-artisan-workshop version: "1.1.0" source: "https://github.com/tao3k/xiuxian-artisan-workshop/tree/main/packages/ncl/sandbox/seatbelt" routing_keywords: - "seatbelt" - "sandbox-exec" - "macos" - "sandbox" - "apple" - "darwin" - "sbpl" - "entitlements" - "mac"
 
 # Seatbelt Skill
 

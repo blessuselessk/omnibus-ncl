@@ -2,22 +2,23 @@
 
 > **Foundation Document**: This document describes the core architecture and code organization patterns of the Nickel module system.
 > **Companion Documents**:
+>
 > - [Nickel Interface Style Guide](nickel-interface-style.md) - User interface design patterns (based on Organist Schema-Config)
 > - [Nickel Best Practices](nickel-best-practices.md) - Code style and LLM notes
 > - [Nickel Type Validation Guide](nickel-type-validation-guide.md) - Advanced contracts and type validation
 > - [Nickel Language Handbook (LLM Edition)](nickel-language-handbook-llm.md) - Language basics quick reference
 
----
+______________________________________________________________________
 
 ## Core Principles
 
 1. **Export Only Data** - Functions cannot be serialized, keep logic and data separate
-2. **Schema-Config Separation** - Define types (contracts) alongside values, see [Organist Interface Pattern](nickel-interface-style.md)
-3. **Record Merging** - Use `&` for incremental configuration
-4. **Contract Composition** - Layer contracts for defense-in-depth validation
-5. **Avoid Recursion** - Prohibit `field = field` (causes infinite recursion)
+1. **Schema-Config Separation** - Define types (contracts) alongside values, see [Organist Interface Pattern](nickel-interface-style.md)
+1. **Record Merging** - Use `&` for incremental configuration
+1. **Contract Composition** - Layer contracts for defense-in-depth validation
+1. **Avoid Recursion** - Prohibit `field = field` (causes infinite recursion)
 
----
+______________________________________________________________________
 
 ## 1. Module Architecture Patterns
 
@@ -55,7 +56,7 @@ For internal library modules, use simple exports:
 }
 ```
 
----
+______________________________________________________________________
 
 ## 2. Module Directory Structure
 
@@ -85,7 +86,7 @@ let Nsjail = import "nsjail/main.ncl" in
 }
 ```
 
----
+______________________________________________________________________
 
 ## 3. Record Merging
 
@@ -112,7 +113,7 @@ Go =
   },
 ```
 
----
+______________________________________________________________________
 
 ## 4. Contracts and Types
 
@@ -131,7 +132,7 @@ field | Type | optional
 mode | [|'option_a, 'option_b|]
 ```
 
----
+______________________________________________________________________
 
 ## 5. Critical: Avoid Recursion
 
@@ -152,7 +153,7 @@ Nickel detects self-references and throws "infinite recursion" errors.
 }
 ```
 
----
+______________________________________________________________________
 
 ## 6. Style Conventions
 
@@ -167,7 +168,7 @@ Nickel detects self-references and throws "infinite recursion" errors.
 | Strings | Double quotes | `"value"` |
 | Tags | Single quotes | `'option` |
 
----
+______________________________________________________________________
 
 ## 7. Usage Example
 
@@ -178,7 +179,7 @@ sandbox.lib.rlimits.small
 sandbox.lib.network.deny
 ```
 
----
+______________________________________________________________________
 
 ## 8. Verification Commands
 
@@ -193,7 +194,7 @@ nickel format --check lib/*.ncl
 nls main.ncl
 ```
 
----
+______________________________________________________________________
 
 ## References
 
