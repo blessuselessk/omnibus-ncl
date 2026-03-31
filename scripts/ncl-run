@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ncl-run — execute a .ncl file by dispatching to the right runtime
+#
+# Usage:
+#   ncl-run examples/workflow-export.ncl
+#   ncl-run --dry-run examples/workflow-export.ncl
+#   ncl-run --json examples/workflow-export.ncl
+
+# --- Tool resolution ---
+if command -v nickel &>/dev/null; then
+  ncl() { nickel "$@"; }
+elif command -v nix &>/dev/null; then
+  ncl() { nix run nixpkgs#nickel -- "$@"; }
+else
+  echo "error: nickel not found" >&2; exit 1
+fi
+
+if command -v jq &>/dev/null; then
+  jq_() { jq "$@"; }
+elif command -v nix &>/dev/null; then
+  jq_() { nix run nixpkgs#jq -- "$@"; }
+else
+  echo "error: jq not found" >&2; exit 1
+fi
+
+# --- Flags ---
+DRY_RUN=false
+JSON_ONLY=false
+VERBOSE=false
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --dry-run) DRY_RUN=true; shift ;;
+    --json)    JSON_ONLY=true; shift ;;
+    --verbose) VERBOSE=true; shift ;;
+    --help|-h)
+      echo "ncl-run — dispatch a .ncl file to the right runtime"
+      echo ""
+      echo "Usage: ncl-run [--dry-run|--json|--verbose] <file.ncl>"
+      echo ""
+      echo "Detects: GHA workflow, process-compose, envelope, porkg, seatbelt"
+      exit 0 ;;
+    -*) echo "Unknown flag: $1"; exit 1 ;;
+    *)  break ;;
+  esac
+done
+
+NCL_FILE="${1:?Usage: ncl-run <file.ncl>}"
+[[ -f "$NCL_FILE" ]] || { echo "error: $NCL_FILE not found" >&2; exit 1; }
+
+# --- Step 1: Try seatbelt (text export) ---
+TEXT=$(ncl export --format text "$NCL_FILE" 2>/dev/null || true)
+if [[ "$TEXT" == "(version 1)"* ]]; then
+  echo "==> Detected: seatbelt profile"
+  if $DRY_RUN; then
+    echo "==> Would run: sandbox-exec -f <profile> <command>"
+    exit 0
+  fi
+  TMP=$(mktemp /tmp/ncl-run-XXXXXX.sb)
+  echo "$TEXT" > "$TMP"
+  echo "==> Written to $TMP"
+  echo "==> Run: sandbox-exec -f $TMP <command>"
+  exit 0
+fi
+
+# --- Step 2: Export JSON ---
+JSON=$(ncl export --format json "$NCL_FILE") || { echo "error: export failed" >&2; exit 1; }
+
+if $JSON_ONLY; then
+  echo "$JSON" | jq_ .
+  exit 0
+fi
+
+# --- Step 3: Detect and dispatch ---
+
+# GitHub Actions workflow?
+if echo "$JSON" | jq_ -e '.jobs // empty | to_entries[0].value["runs-on"] // empty' &>/dev/null; then
+  NAME=$(echo "$JSON" | jq_ -r '.name // "unnamed"')
+  RUNNER=$(echo "$JSON" | jq_ -r '[.jobs[]["runs-on"]] | first')
+  STEPS=$(echo "$JSON" | jq_ '[.jobs[].steps | length] | add')
+  echo "==> Detected: GitHub Actions workflow"
+  echo "    Name: $NAME"
+  echo "    Runner: $RUNNER"
+  echo "    Steps: $STEPS"
+  if $DRY_RUN; then exit 0; fi
+  TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
+  echo "$JSON" | jq_ . > "$TMP"
+  echo "==> Written to $TMP"
+  echo "    cp $TMP .github/workflows/run.json"
+  exit 0
+fi
+
+# Process Compose?
+if echo "$JSON" | jq_ -e '.processes // empty | keys[0] // empty' &>/dev/null; then
+  PROCS=$(echo "$JSON" | jq_ -r '.processes | keys | join(", ")')
+  COUNT=$(echo "$JSON" | jq_ '.processes | length')
+  echo "==> Detected: process-compose config"
+  echo "    Processes ($COUNT): $PROCS"
+  if $DRY_RUN; then exit 0; fi
+  TMP=$(mktemp /tmp/ncl-run-XXXXXX.json)
+  echo "$JSON" | jq_ . > "$TMP"
+  if command -v process-compose &>/dev/null; then
+    echo "==> Starting..."
+    process-compose -f "$TMP" up
+  else
+    echo "==> Written to $TMP"
+    echo "    nix run nixpkgs#process-compose -- -f $TMP up"
+  fi
+  exit 0
+fi
+
+# Envelope?
+TARGET=$(echo "$JSON" | jq_ -r '.target.kind // empty' 2>/dev/null || true)
+if [[ -n "$TARGET" ]]; then
+  NAME=$(echo "$JSON" | jq_ -r '.name // "unnamed"')
+  NET=$(echo "$JSON" | jq_ -r '.constraints.network.mode // "?"' 2>/dev/null || echo "?")
+  FS=$(echo "$JSON" | jq_ -r '.constraints.fs.mode // "?"' 2>/dev/null || echo "?")
+  NESTED=$(echo "$JSON" | jq_ 'has("inner")' 2>/dev/null || echo false)
+  echo "==> Detected: envelope ($TARGET)"
+  echo "    Name: $NAME"
+  echo "    Network: $NET | FS: $FS | Nested: $NESTED"
+  if $DRY_RUN; then exit 0; fi
+  case "$TARGET" in
+    sandbox)
+      BACKEND=$(echo "$JSON" | jq_ -r '.target.sandbox_backend // "nsjail"')
+      echo "    Backend: $BACKEND"
+      ;;
+    workflow)
+      RUNNER=$(echo "$JSON" | jq_ -r '.target.runner_label // "ubuntu-latest"')
+      echo "    Runner: $RUNNER"
+      ;;
+  esac
+  echo "$JSON" | jq_ .
+  exit 0
+fi
+
+# porkg?
+if echo "$JSON" | jq_ -e '.worker.namespaces // empty' &>/dev/null; then
+  WNAME=$(echo "$JSON" | jq_ -r '.worker.name // "worker"')
+  JOBS=$(echo "$JSON" | jq_ '.jobs | length')
+  NS=$(echo "$JSON" | jq_ -r '[.worker.namespaces | to_entries[] | select(.value) | .key] | join(",")')
+  echo "==> Detected: porkg config"
+  echo "    Worker: $WNAME"
+  echo "    Jobs: $JOBS"
+  echo "    Namespaces: $NS"
+  if $DRY_RUN; then exit 0; fi
+  echo "$JSON" | jq_ .
+  exit 0
+fi
+
+# Fallback
+echo "$JSON" | jq_ .
