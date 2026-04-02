@@ -1,0 +1,193 @@
+{
+  "nodes": [
+    {
+      "composable": true,
+      "diagnosis": {
+        "completeness": 85,
+        "inferred": {
+          "constraints": {
+            "network": {
+              "mode": "full"
+            },
+            "note": "Code makes network requests"
+          },
+          "input_schema": {
+            "description": "No input (inferred: code uses curl to fetch)",
+            "type": "null"
+          },
+          "output_schema": null
+        },
+        "missing": [
+          "description",
+          "env"
+        ],
+        "present": [
+          "name",
+          "lang",
+          "code",
+          "input_schema",
+          "output_schema",
+          "constraints"
+        ],
+        "ready": true,
+        "suggestions": [
+          "Add description — one line explaining what this node does"
+        ]
+      },
+      "enriched": {
+        "code": "curl -s https://api.github.com/repos/porkg/porkg",
+        "constraints": {
+          "network": {
+            "mode": "full"
+          }
+        },
+        "input_schema": {
+          "type": "null"
+        },
+        "lang": "bash",
+        "name": "fetch",
+        "output_schema": {
+          "description": "GitHub repo JSON",
+          "type": "object"
+        }
+      },
+      "original": {
+        "code": "curl -s https://api.github.com/repos/porkg/porkg",
+        "constraints": {
+          "network": {
+            "mode": "full"
+          }
+        },
+        "input_schema": {
+          "type": "null"
+        },
+        "lang": "bash",
+        "name": "fetch",
+        "output_schema": {
+          "description": "GitHub repo JSON",
+          "type": "object"
+        }
+      },
+      "ready": true,
+      "state": "ready"
+    },
+    {
+      "composable": true,
+      "diagnosis": {
+        "completeness": 85,
+        "inferred": {
+          "constraints": {
+            "fs": {
+              "mode": "ro"
+            },
+            "network": {
+              "mode": "deny"
+            },
+            "note": "No network or file writes detected"
+          },
+          "input_schema": {
+            "description": "JSON input (inferred: code uses jq)",
+            "type": "object"
+          },
+          "output_schema": {
+            "description": "JSON output (inferred: jq produces JSON)",
+            "type": "object"
+          }
+        },
+        "missing": [
+          "description",
+          "env"
+        ],
+        "present": [
+          "name",
+          "lang",
+          "code",
+          "input_schema",
+          "output_schema",
+          "constraints"
+        ],
+        "ready": true,
+        "suggestions": [
+          "Add description — one line explaining what this node does"
+        ]
+      },
+      "enriched": {
+        "code": "jq '{name: .name, stars: .stargazers_count}'",
+        "constraints": {
+          "fs": {
+            "mode": "ro"
+          },
+          "network": {
+            "mode": "deny"
+          },
+          "resources": {
+            "max_cpu_seconds": 10,
+            "max_memory_mb": 64,
+            "timeout_seconds": 30
+          }
+        },
+        "input_schema": {
+          "type": "object"
+        },
+        "lang": "bash",
+        "name": "transform",
+        "output_schema": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "stars": {
+              "type": "number"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "original": {
+        "code": "jq '{name: .name, stars: .stargazers_count}'",
+        "constraints": {
+          "fs": {
+            "mode": "ro"
+          },
+          "network": {
+            "mode": "deny"
+          },
+          "resources": {
+            "max_cpu_seconds": 10,
+            "max_memory_mb": 64,
+            "timeout_seconds": 30
+          }
+        },
+        "input_schema": {
+          "type": "object"
+        },
+        "lang": "bash",
+        "name": "transform",
+        "output_schema": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "stars": {
+              "type": "number"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "ready": true,
+      "state": "ready"
+    }
+  ],
+  "pipeline_name": "fetch-and-transform",
+  "stats": {
+    "all_composable": true,
+    "all_ready": true,
+    "avg_completeness": 85,
+    "blocked_count": 0,
+    "blockers": [],
+    "composable_count": 2,
+    "ready_count": 2,
+    "total": 2
+  }
+}

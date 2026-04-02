@@ -1,0 +1,284 @@
+{
+  "attributes": [
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "bounty-id",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "amount-cents",
+      "value_type": "long"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "currency",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "bounty-status",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "payout-status",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "claimed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "paid-at",
+      "parent": "timestamp"
+    }
+  ],
+  "entities": [
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "bounty",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "bounty-id"
+        },
+        {
+          "annotations": [],
+          "attribute": "amount-cents"
+        },
+        {
+          "annotations": [],
+          "attribute": "currency"
+        },
+        {
+          "annotations": [],
+          "attribute": "bounty-status"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "bounty-placement",
+          "role": "placed-bounty"
+        },
+        {
+          "relation": "bounty-claim",
+          "role": "claimed-bounty"
+        },
+        {
+          "relation": "bounty-completion",
+          "role": "completed-bounty"
+        },
+        {
+          "relation": "bounty-payout",
+          "role": "paid-bounty"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "payout",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "amount-cents"
+        },
+        {
+          "annotations": [],
+          "attribute": "currency"
+        },
+        {
+          "annotations": [],
+          "attribute": "payout-status"
+        },
+        {
+          "annotations": [],
+          "attribute": "paid-at"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "bounty-payout",
+          "role": "payout-record"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "github-user",
+      "owns": [],
+      "plays": [
+        {
+          "relation": "bounty-placement",
+          "role": "placer"
+        },
+        {
+          "relation": "bounty-claim",
+          "role": "claimant"
+        },
+        {
+          "relation": "bounty-completion",
+          "role": "solver"
+        },
+        {
+          "relation": "bounty-payout",
+          "role": "payee"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "issue",
+      "owns": [],
+      "plays": [
+        {
+          "relation": "bounty-placement",
+          "role": "target-issue"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "pull-request",
+      "owns": [],
+      "plays": [
+        {
+          "relation": "bounty-completion",
+          "role": "solving-pr"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "bounty-placement",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "placer"
+        },
+        {
+          "annotations": [],
+          "role": "placed-bounty"
+        },
+        {
+          "annotations": [],
+          "role": "target-issue"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "bounty-claim",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "claimed-at"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "claimant"
+        },
+        {
+          "annotations": [],
+          "role": "claimed-bounty"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "bounty-completion",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "completed-at"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "solver"
+        },
+        {
+          "annotations": [],
+          "role": "completed-bounty"
+        },
+        {
+          "annotations": [],
+          "role": "solving-pr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "bounty-payout",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "paid-at"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "paid-bounty"
+        },
+        {
+          "annotations": [],
+          "role": "payout-record"
+        },
+        {
+          "annotations": [],
+          "role": "payee"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "comment": "A bounty solver contributed to the repository hosting the issue",
+      "name": "infer-bounty-contributor",
+      "then_clause": "    (contributor: $solver, contributed-to: $repo) isa contribution;",
+      "when_clause": "    $solver isa github-user;\n    (solver: $solver, completed-bounty: $bounty) isa bounty-completion;\n    (placer: $placer, placed-bounty: $bounty, target-issue: $issue) isa bounty-placement;\n    (host-repo: $repo, hosted-branch: $branch) isa hosting;\n    (branch-ref: $branch, branch-commit: $commit) isa branching;\n    (resolving-pr: $pr, resolved-issue: $issue) isa pr-resolution;"
+    },
+    {
+      "comment": "A PR resolving an issue with a bounty is bounty-funded",
+      "name": "infer-funded-pr",
+      "then_clause": "    (solver: $author, completed-bounty: $bounty, solving-pr: $pr) isa bounty-completion;",
+      "when_clause": "    $pr isa pull-request;\n    (resolving-pr: $pr, resolved-issue: $issue) isa pr-resolution;\n    (placed-bounty: $bounty, target-issue: $issue) isa bounty-placement;\n    $bounty has bounty-status \"active\";"
+    }
+  ]
+}

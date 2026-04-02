@@ -162,6 +162,18 @@ just md-test                # Run tests
 just md-snapshot            # Update test snapshots
 ```
 
+### TypeDB Knowledge Graph (`typedb-ncl/`)
+
+TypeDB schema layer for the master knowledge graph (git + GitHub + Algora bounties). Base schema lives in `../Prototypes/git-metrics/schema.tql` — git internals, GitHub, GitLab, code analysis, security, CI/CD. Meta layer (`types.ncl`, `schema.ncl`, `builders.ncl`) models TypeDB 3.0's type system in Nickel, reusable for any TypeQL generation. Domain modules extend the base: `algora.ncl` adds bounties, payouts, claims, completions, and wires them to existing git-metrics entities. TypeDB define is additive — compose base + extensions into a unified schema.
+
+```bash
+just tdb-algora             # Algora module as TypeQL
+just tdb-json               # Algora module as JSON
+just tdb-full               # Full schema (git-metrics base + extensions)
+just tdb-validate           # Validate typedb-ncl NCL files
+just tdb-snapshot           # Update test snapshot
+```
+
 ## Nickel Conventions
 
 The repo root has authoritative Nickel style guides — read these before writing .ncl code:

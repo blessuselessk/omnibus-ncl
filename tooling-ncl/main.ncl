@@ -12,8 +12,13 @@
 #   - apply_inferences: auto-fills from code analysis
 #   - to_ralph_event: formats diagnosis as event data
 #
+# Preload layer (the gate between creation and composition):
+#   - preload: diagnose + infer nodes, capture validation state
+#   - preload_all: batch preload with aggregate stats (the manifest)
+#   - compose_validated: only compose nodes that pass ComposableManifest
+#   - manifest_fingerprint: cache-friendly diff format for incremental runs
+#
 # What doesn't work yet:
-#   - No runtime loop — diagnose produces data, doesn't drive iteration
 #   - Ralph integration is config-only — needs the Rust binary to run
 #   - Schema checking is type-level only, no runtime validation of actual output
 {

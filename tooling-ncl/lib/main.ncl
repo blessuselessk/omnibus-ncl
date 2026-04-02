@@ -4,4 +4,5 @@
   pipe = import "pipe.ncl",
   builders = import "builders.ncl",
   diagnose = import "diagnose.ncl",
+  preload = import "preload.ncl",
 }

@@ -1,0 +1,115 @@
+{
+  "fingerprints": {
+    "snap_1": {
+      "transform": {
+        "completeness": 10,
+        "composable": false,
+        "present": [
+          "name"
+        ],
+        "ready": false,
+        "state": "bare"
+      }
+    },
+    "snap_2": {
+      "transform": {
+        "completeness": 85,
+        "composable": true,
+        "present": [
+          "name",
+          "lang",
+          "code",
+          "input_schema",
+          "output_schema",
+          "constraints"
+        ],
+        "ready": true,
+        "state": "ready"
+      }
+    },
+    "snap_3": {
+      "transform": {
+        "completeness": 85,
+        "composable": true,
+        "present": [
+          "name",
+          "lang",
+          "code",
+          "input_schema",
+          "output_schema",
+          "constraints"
+        ],
+        "ready": true,
+        "state": "ready"
+      }
+    }
+  },
+  "iterations": [
+    {
+      "note": "bare — just a name",
+      "result": {
+        "completeness": 10,
+        "composable": false,
+        "missing": [
+          "lang",
+          "code",
+          "description",
+          "input_schema",
+          "output_schema",
+          "constraints",
+          "env"
+        ],
+        "present": [
+          "name"
+        ],
+        "ready": false,
+        "state": "bare"
+      },
+      "step": 1
+    },
+    {
+      "note": "partial — has code + lang, inferences applied",
+      "result": {
+        "completeness": 85,
+        "composable": true,
+        "missing": [
+          "description",
+          "env"
+        ],
+        "present": [
+          "name",
+          "lang",
+          "code",
+          "input_schema",
+          "output_schema",
+          "constraints"
+        ],
+        "ready": true,
+        "state": "ready"
+      },
+      "step": 2
+    },
+    {
+      "note": "composable — schemas present, safe for ValidChain",
+      "result": {
+        "completeness": 85,
+        "composable": true,
+        "missing": [
+          "description",
+          "env"
+        ],
+        "present": [
+          "name",
+          "lang",
+          "code",
+          "input_schema",
+          "output_schema",
+          "constraints"
+        ],
+        "ready": true,
+        "state": "ready"
+      },
+      "step": 3
+    }
+  ]
+}

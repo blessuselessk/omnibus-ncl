@@ -493,6 +493,91 @@ env-snapshot:
     @echo "Snapshots updated"
 
 # ==============================================================================
+# TypeDB (Knowledge Graph Schema)
+# ==============================================================================
+
+# Export Algora module as TypeQL
+tdb-algora:
+    @nickel export --format text typedb-ncl/examples/algora-export.ncl
+
+# Export Algora module as JSON
+tdb-json:
+    @nickel export --format json typedb-ncl/examples/algora-json.ncl | jq .
+
+# Export full schema: git-metrics base + all extensions
+tdb-full:
+    @cat ../Prototypes/git-metrics/schema.tql
+    @echo ""
+    @echo "# Algora Bounty Extension"
+    @nickel export --format text typedb-ncl/examples/algora-export.ncl
+
+# Show bounty query templates
+tdb-queries:
+    @nickel export --format text typedb-ncl/examples/queries.ncl
+
+# Show ingestion insert templates
+tdb-ingest:
+    @nickel export --format text typedb-ncl/examples/ingestion.ncl
+
+# Validate typedb-ncl
+tdb-validate:
+    @echo "=== Validating typedb-ncl ==="
+    @nickel export --format text typedb-ncl/examples/algora-export.ncl > /dev/null && echo "algora TypeQL: OK"
+    @nickel export --format json typedb-ncl/examples/algora-json.ncl > /dev/null && echo "algora JSON: OK"
+    @nickel export --format text typedb-ncl/examples/queries.ncl > /dev/null && echo "queries: OK"
+    @nickel export --format text typedb-ncl/examples/ingestion.ncl > /dev/null && echo "ingestion: OK"
+    @echo "All typedb-ncl examples validated"
+
+# Update typedb-ncl test snapshot
+tdb-snapshot:
+    @nickel export --format json typedb-ncl/examples/algora-json.ncl | jq -S . > typedb-ncl/tests/snapshot.json
+    @echo "Snapshot updated"
+
+# ==============================================================================
+# Tooling NCL (Preload / Code Nodes)
+# ==============================================================================
+
+# Preload a pipeline and show manifest
+tn-preload:
+    @nickel export --format json tooling-ncl/examples/preload-basic.ncl | jq .
+
+# Preload and compose (full gated workflow)
+tn-compose:
+    @nickel export --format json tooling-ncl/examples/preload-compose.ncl | jq .
+
+# Show blocked nodes and ralph events
+tn-blocked:
+    @nickel export --format json tooling-ncl/examples/preload-blocked.ncl | jq .
+
+# Run tooling-ncl tests (contract assertions + snapshots)
+tn-test:
+    @bash tooling-ncl/tests/validate.sh
+
+# Update tooling-ncl test snapshots
+tn-snapshot:
+    @nickel export --format json tooling-ncl/examples/preload-basic.ncl | jq -S . > tooling-ncl/tests/snapshot-preload-basic.json
+    @nickel export --format json tooling-ncl/examples/preload-blocked.ncl | jq -S . > tooling-ncl/tests/snapshot-preload-blocked.json
+    @nickel export --format json tooling-ncl/examples/preload-incremental.ncl | jq -S . > tooling-ncl/tests/snapshot-preload-incremental.json
+    @echo "Snapshots updated"
+
+# Validate all tooling-ncl examples (export only, no assertions)
+tn-validate:
+    @echo "=== Validating tooling-ncl ==="
+    @nickel export --format json tooling-ncl/examples/preload-basic.ncl > /dev/null && echo "preload-basic: OK"
+    @nickel export --format json tooling-ncl/examples/preload-compose.ncl > /dev/null && echo "preload-compose: OK"
+    @nickel export --format json tooling-ncl/examples/preload-blocked.ncl > /dev/null && echo "preload-blocked: OK"
+    @nickel export --format json tooling-ncl/examples/preload-incremental.ncl > /dev/null && echo "preload-incremental: OK"
+    @nickel export --format json tooling-ncl/examples/diagnose-apply.ncl > /dev/null && echo "diagnose-apply: OK"
+    @nickel export --format json tooling-ncl/examples/diagnose-loop.ncl > /dev/null && echo "diagnose-loop: OK"
+    @nickel export --format json tooling-ncl/examples/diagnose-partial.ncl > /dev/null && echo "diagnose-partial: OK"
+    @nickel export --format json tooling-ncl/examples/diagnose-with-code.ncl > /dev/null && echo "diagnose-with-code: OK"
+    @nickel export --format json tooling-ncl/examples/diagnose-ralph-event.ncl > /dev/null && echo "diagnose-ralph-event: OK"
+    @nickel export --format json tooling-ncl/examples/fetch-compose.ncl > /dev/null && echo "fetch-compose: OK"
+    @nickel export --format json tooling-ncl/examples/pipeline-export.ncl > /dev/null && echo "pipeline-export: OK"
+    @nickel export --format json tooling-ncl/examples/markdown-script.ncl > /dev/null && echo "markdown-script: OK"
+    @echo "All tooling-ncl examples validated"
+
+# ==============================================================================
 # Pytest
 # ==============================================================================
 
@@ -598,6 +683,21 @@ help:
     @echo "  just md-validate         # Validate massless-driver NCL files"
     @echo "  just md-test             # Run tests"
     @echo "  just md-snapshot         # Update test snapshots"
+    @echo ""
+    @echo "TypeDB (Knowledge Graph Schema):"
+    @echo "  just tdb-algora          # Algora module as TypeQL"
+    @echo "  just tdb-json            # Algora module as JSON"
+    @echo "  just tdb-full            # Full schema (base + extensions)"
+    @echo "  just tdb-validate        # Validate typedb-ncl"
+    @echo "  just tdb-snapshot        # Update test snapshot"
+    @echo ""
+    @echo "Tooling NCL (Preload / Code Nodes):"
+    @echo "  just tn-preload          # Preload pipeline manifest"
+    @echo "  just tn-compose          # Preload and compose pipeline"
+    @echo "  just tn-blocked          # Show blocked nodes and events"
+    @echo "  just tn-validate         # Validate all tooling-ncl examples"
+    @echo "  just tn-test             # Run contract tests + snapshots"
+    @echo "  just tn-snapshot         # Update test snapshots"
     @echo ""
     @echo "Examples:"
     @echo "  just test-data-processor # Test data-processor example"

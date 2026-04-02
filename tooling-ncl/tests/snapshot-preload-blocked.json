@@ -1,0 +1,77 @@
+{
+  "fingerprint": {
+    "bare-node": {
+      "completeness": 10,
+      "composable": false,
+      "present": [
+        "name"
+      ],
+      "ready": false,
+      "state": "bare"
+    },
+    "partial-node": {
+      "completeness": 20,
+      "composable": false,
+      "present": [
+        "name",
+        "lang"
+      ],
+      "ready": false,
+      "state": "partial"
+    }
+  },
+  "node_states": [
+    {
+      "completeness": 10,
+      "composable": false,
+      "name": "bare-node",
+      "ready": false,
+      "state": "bare",
+      "suggestions": [
+        "Add code — the implementation that transforms input to output",
+        "Add lang — 'bash, 'nickel, 'nushell, 'python, or 'javascript",
+        "Add input_schema — what JSON shape does this node receive?",
+        "Add output_schema — what JSON shape does this node produce?",
+        "Add constraints — what can this code touch? (network, fs, resources)",
+        "Add description — one line explaining what this node does"
+      ]
+    },
+    {
+      "completeness": 20,
+      "composable": false,
+      "name": "partial-node",
+      "ready": false,
+      "state": "partial",
+      "suggestions": [
+        "Add code — the implementation that transforms input to output",
+        "Add input_schema — what JSON shape does this node receive?",
+        "Add output_schema — what JSON shape does this node produce?",
+        "Add constraints — what can this code touch? (network, fs, resources)",
+        "Add description — one line explaining what this node does"
+      ]
+    }
+  ],
+  "ralph_events": [
+    {
+      "payload": "Node 'bare-node' is 10%% complete.\nMissing: lang, code, description, input_schema, output_schema, constraints, env\n\nAdd code — the implementation that transforms input to output\nAdd lang — 'bash, 'nickel, 'nushell, 'python, or 'javascript\nAdd input_schema — what JSON shape does this node receive?\nAdd output_schema — what JSON shape does this node produce?\nAdd constraints — what can this code touch? (network, fs, resources)\nAdd description — one line explaining what this node does",
+      "topic": "node.preload"
+    },
+    {
+      "payload": "Node 'partial-node' is 20%% complete.\nMissing: code, description, input_schema, output_schema, constraints, env\n\nAdd code — the implementation that transforms input to output\nAdd input_schema — what JSON shape does this node receive?\nAdd output_schema — what JSON shape does this node produce?\nAdd constraints — what can this code touch? (network, fs, resources)\nAdd description — one line explaining what this node does",
+      "topic": "node.preload"
+    }
+  ],
+  "stats": {
+    "all_composable": false,
+    "all_ready": false,
+    "avg_completeness": 15,
+    "blocked_count": 2,
+    "blockers": [
+      "bare-node",
+      "partial-node"
+    ],
+    "composable_count": 0,
+    "ready_count": 0,
+    "total": 2
+  }
+}
