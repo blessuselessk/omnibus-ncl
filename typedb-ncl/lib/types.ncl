@@ -39,10 +39,11 @@
     },
 
   RelatesClause
-    | doc "A 'relates <role>' clause with optional cardinality"
+    | doc "A 'relates <role>' clause with optional cardinality and role inheritance"
     | not_exported
     = {
       role | String,
+      parent | String | optional,
       annotations | Array Annotation | default = [],
       cardinality | Cardinality | optional,
     },

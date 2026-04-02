@@ -67,7 +67,8 @@ in
 let render_relates = fun _rc =>
   let _has_card = has "cardinality" _rc in
   let _card = if _has_card then _rc.cardinality else { min = 0, max = 0 } in
-  "    relates %{_rc.role}%{annotations_suffix _rc.annotations _has_card _card}"
+  let sub_clause = if has "parent" _rc then " sub %{_rc.parent}" else "" in
+  "    relates %{_rc.role}%{sub_clause}%{annotations_suffix _rc.annotations _has_card _card}"
 in
 
 let render_entity = fun _ent =>

@@ -504,12 +504,9 @@ tdb-algora:
 tdb-json:
     @nickel export --format json typedb-ncl/examples/algora-json.ncl | jq .
 
-# Export full schema: git-metrics base + all extensions
+# Export full schema: git-metrics base + all extensions (native composition)
 tdb-full:
-    @cat ../Prototypes/git-metrics/schema.tql
-    @echo ""
-    @echo "# Algora Bounty Extension"
-    @nickel export --format text typedb-ncl/examples/algora-export.ncl
+    @nickel export --format text git-metrics-ncl/examples/full-export.ncl
 
 # Show bounty query templates
 tdb-queries:
@@ -531,6 +528,58 @@ tdb-validate:
 # Update typedb-ncl test snapshot
 tdb-snapshot:
     @nickel export --format json typedb-ncl/examples/algora-json.ncl | jq -S . > typedb-ncl/tests/snapshot.json
+    @echo "Snapshot updated"
+
+# ==============================================================================
+# Git Metrics (Knowledge Graph Schema)
+# ==============================================================================
+
+# Export full git-metrics schema as TypeQL
+gm-schema:
+    @nickel export --format text git-metrics-ncl/examples/schema-export.ncl
+
+# Export full git-metrics schema as JSON
+gm-json:
+    @nickel export --format json git-metrics-ncl/examples/schema-json.ncl | jq .
+
+# Export git-metrics + Algora extension composed (replaces cat+export)
+gm-full:
+    @nickel export --format text git-metrics-ncl/examples/full-export.ncl
+
+# Show git-core ingestion templates (commits, refs, files, blame)
+gm-ingest-git:
+    @nickel export --format text git-metrics-ncl/examples/ingest-git.ncl
+
+# Show GitHub platform ingestion templates
+gm-ingest-github:
+    @nickel export --format text git-metrics-ncl/examples/ingest-github.ncl
+
+# Show GitLab platform ingestion templates
+gm-ingest-gitlab:
+    @nickel export --format text git-metrics-ncl/examples/ingest-gitlab.ncl
+
+# Show all ingestion templates
+gm-ingest-all:
+    @nickel export --format text git-metrics-ncl/examples/ingest-all.ncl
+
+# Validate git-metrics-ncl
+gm-validate:
+    @echo "=== Validating git-metrics-ncl ==="
+    @nickel export --format text git-metrics-ncl/examples/schema-export.ncl > /dev/null && echo "schema TypeQL: OK"
+    @nickel export --format json git-metrics-ncl/examples/schema-json.ncl > /dev/null && echo "schema JSON: OK"
+    @nickel export --format text git-metrics-ncl/examples/full-export.ncl > /dev/null && echo "full (base+algora): OK"
+    @nickel export --format text git-metrics-ncl/examples/ingest-git.ncl > /dev/null && echo "ingest-git: OK"
+    @nickel export --format text git-metrics-ncl/examples/ingest-github.ncl > /dev/null && echo "ingest-github: OK"
+    @nickel export --format text git-metrics-ncl/examples/ingest-gitlab.ncl > /dev/null && echo "ingest-gitlab: OK"
+    @echo "All git-metrics-ncl examples validated"
+
+# Run git-metrics-ncl tests
+gm-test:
+    @bash git-metrics-ncl/tests/validate.sh
+
+# Update git-metrics-ncl test snapshot
+gm-snapshot:
+    @nickel export --format json git-metrics-ncl/examples/schema-json.ncl | jq -S . > git-metrics-ncl/tests/snapshot.json
     @echo "Snapshot updated"
 
 # ==============================================================================

@@ -1,0 +1,5997 @@
+{
+  "attributes": [
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "sha",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "name",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "email",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "login",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "path",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "url",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "ref-path",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "spdx-id",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "cve-id",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "external-id",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "number",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "platform-id",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "message",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "subject",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "body",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "content",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "description",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "title",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "label-text",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "pattern",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "section-header",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "tag-name",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "version",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "color",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "slug",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "context-name",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "target-url",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "regex-pattern",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "raw-details",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "log-message",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "dismiss-reason",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "lock-reason",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "failure-reason",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "secret-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [
+        "abstract"
+      ],
+      "kind": "attribute",
+      "name": "timestamp",
+      "value_type": "datetime"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "authored-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "committed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "created-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "updated-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "closed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "merged-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "published-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "started-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "completed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "resolved-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "dismissed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "fixed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "indexed-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "expires-at",
+      "parent": "timestamp"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "timezone",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "size",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "line-number",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "start-line",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "end-line",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "start-column",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "end-column",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "line-count",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "additions",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "deletions",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "file-count",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "percentage",
+      "value_type": "double"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "score",
+      "value_type": "double"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "similarity",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "index",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "count",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "ahead-by",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "behind-by",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "depth",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "duration",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "download-count",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "weight",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "priority",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "cvss-score",
+      "value_type": "double"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "time-estimate",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "time-spent",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "coverage",
+      "value_type": "double"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "confidence",
+      "value_type": "double"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "step-number",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "old-start",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "old-count",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "new-start",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "new-count",
+      "value_type": "integer"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-binary",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-merge",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-draft",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-merged",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-symbolic",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-annotated",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-bare",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-shallow",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-protected",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-active",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-locked",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-pinned",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-bot",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-resolved",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-outdated",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-detached",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-executable",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-gitignored",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-symlink",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-submodule",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-boundary",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-default",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-prerelease",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-latest",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-system-note",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-internal",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-confidential",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "is-valid",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "squash-on-merge",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "delete-source-branch",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "allow-force-push",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "allow-deletion",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "require-pull-request",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "require-code-owner-review",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "require-signature",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "require-linear-history",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "require-conversation-resolution",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "dismiss-stale-reviews",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "allow-failure",
+      "value_type": "boolean"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "file-mode",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "entry-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "ref-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "object-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "file-status",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "diff-line-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "merge-strategy",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "review-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "check-status",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "check-conclusion",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "severity",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "alert-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "alert-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "issue-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "issue-state-reason",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "pr-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "mergeable-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "merge-method",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "mr-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "pipeline-status",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "pipeline-source",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "job-status",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "deployment-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "status-check-state",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "annotation-level",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "rebase-action",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "conflict-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "resolution-strategy",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "reflog-operation",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "submodule-update-strategy",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "submodule-ignore-rule",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "in-progress-operation",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "author-association",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "user-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "diff-side",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "stash-scope",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "bisect-verdict",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "signature-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "language",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "encoding",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "content-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "platform",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "dependency-type",
+      "value_type": "string"
+    },
+    {
+      "annotations": [],
+      "kind": "attribute",
+      "name": "hook-name",
+      "value_type": "string"
+    }
+  ],
+  "entities": [
+    {
+      "annotations": [
+        "abstract"
+      ],
+      "kind": "entity",
+      "name": "git-object",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "size",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "object-graph",
+          "role": "object"
+        }
+      ]
+    },
+    {
+      "annotations": [
+        "abstract"
+      ],
+      "kind": "entity",
+      "name": "identity",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "email"
+        },
+        {
+          "annotations": [],
+          "attribute": "timezone",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "authoring",
+          "role": "author"
+        },
+        {
+          "relation": "committing",
+          "role": "committer"
+        },
+        {
+          "relation": "tagging-action",
+          "role": "tagger"
+        },
+        {
+          "relation": "blaming",
+          "role": "blamed-author"
+        },
+        {
+          "relation": "contribution",
+          "role": "contributor"
+        }
+      ]
+    },
+    {
+      "annotations": [
+        "abstract"
+      ],
+      "kind": "entity",
+      "name": "platform-user",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "platform-id"
+        },
+        {
+          "annotations": [],
+          "attribute": "login"
+        },
+        {
+          "annotations": [],
+          "attribute": "name",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "email",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-bot"
+        },
+        {
+          "annotations": [],
+          "attribute": "user-type",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "assignment",
+          "role": "assignee"
+        },
+        {
+          "relation": "assignment",
+          "role": "assigner"
+        },
+        {
+          "relation": "issue-authoring",
+          "role": "issue-author"
+        },
+        {
+          "relation": "pr-authoring",
+          "role": "pr-author"
+        },
+        {
+          "relation": "reviewing",
+          "role": "reviewer"
+        },
+        {
+          "relation": "commenting-action",
+          "role": "commenter"
+        },
+        {
+          "relation": "merging",
+          "role": "merger"
+        },
+        {
+          "relation": "closing",
+          "role": "closer"
+        },
+        {
+          "relation": "review-requesting",
+          "role": "requested-reviewer"
+        },
+        {
+          "relation": "team-membership",
+          "role": "member"
+        },
+        {
+          "relation": "deployment-action",
+          "role": "deployer"
+        },
+        {
+          "relation": "releasing",
+          "role": "releaser"
+        },
+        {
+          "relation": "dismissal",
+          "role": "dismisser"
+        },
+        {
+          "relation": "alert-resolution",
+          "role": "resolver"
+        }
+      ]
+    },
+    {
+      "annotations": [
+        "abstract"
+      ],
+      "kind": "entity",
+      "name": "trackable",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "number"
+        },
+        {
+          "annotations": [],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "body",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "closed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-locked"
+        },
+        {
+          "annotations": [],
+          "attribute": "lock-reason",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-pinned"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "assignment",
+          "role": "assigned-item"
+        },
+        {
+          "relation": "labeling",
+          "role": "labeled-item"
+        },
+        {
+          "relation": "milestoning",
+          "role": "milestoned-item"
+        },
+        {
+          "relation": "commenting-action",
+          "role": "commented-on"
+        },
+        {
+          "relation": "closing",
+          "role": "closed-item"
+        },
+        {
+          "relation": "reaction-on",
+          "role": "reacted-to"
+        },
+        {
+          "relation": "timeline-recording",
+          "role": "timeline-subject"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "blob",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "content",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-binary"
+        },
+        {
+          "annotations": [],
+          "attribute": "content-type",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "parent": "git-object",
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "tree",
+      "owns": [],
+      "parent": "git-object",
+      "plays": [
+        {
+          "relation": "tree-containment",
+          "role": "parent-tree"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "commit",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "message"
+        },
+        {
+          "annotations": [],
+          "attribute": "subject"
+        },
+        {
+          "annotations": [],
+          "attribute": "body",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "encoding",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-merge"
+        },
+        {
+          "annotations": [],
+          "attribute": "signature-type",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-valid",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "parent": "git-object",
+      "plays": [
+        {
+          "relation": "parentage",
+          "role": "child"
+        },
+        {
+          "relation": "parentage",
+          "role": "parent"
+        },
+        {
+          "relation": "authoring",
+          "role": "authored-commit"
+        },
+        {
+          "relation": "committing",
+          "role": "committed-commit"
+        },
+        {
+          "relation": "commit-tree",
+          "role": "committing-commit"
+        },
+        {
+          "relation": "branching",
+          "role": "branch-commit"
+        },
+        {
+          "relation": "tag-targeting",
+          "role": "tagged-object"
+        },
+        {
+          "relation": "ref-targeting",
+          "role": "targeted-commit"
+        },
+        {
+          "relation": "diffing",
+          "role": "before-commit"
+        },
+        {
+          "relation": "diffing",
+          "role": "after-commit"
+        },
+        {
+          "relation": "file-snapshot",
+          "role": "snapshot-commit"
+        },
+        {
+          "relation": "blaming",
+          "role": "blamed-commit"
+        },
+        {
+          "relation": "cherry-picking",
+          "role": "picked-commit"
+        },
+        {
+          "relation": "cherry-picking",
+          "role": "result-commit"
+        },
+        {
+          "relation": "rebasing-step",
+          "role": "original-commit"
+        },
+        {
+          "relation": "rebasing-step",
+          "role": "rewritten-commit"
+        },
+        {
+          "relation": "reverting",
+          "role": "reverted-commit"
+        },
+        {
+          "relation": "reverting",
+          "role": "revert-result"
+        },
+        {
+          "relation": "stashing",
+          "role": "stash-commit"
+        },
+        {
+          "relation": "check-targeting",
+          "role": "checked-commit"
+        },
+        {
+          "relation": "status-checking",
+          "role": "status-checked-commit"
+        },
+        {
+          "relation": "deployment-action",
+          "role": "deployed-commit"
+        },
+        {
+          "relation": "pr-committing",
+          "role": "pr-commit"
+        },
+        {
+          "relation": "pipeline-targeting",
+          "role": "pipeline-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "annotated-tag",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "message",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "signature-type",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-valid",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "parent": "git-object",
+      "plays": [
+        {
+          "relation": "tag-targeting",
+          "role": "tag-object"
+        },
+        {
+          "relation": "tagging-action",
+          "role": "tag"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "lightweight-tag",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "name"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "tag-targeting",
+          "role": "tag-object"
+        },
+        {
+          "relation": "ref-targeting",
+          "role": "ref"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "reference",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "ref-path"
+        },
+        {
+          "annotations": [],
+          "attribute": "ref-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-symbolic"
+        },
+        {
+          "annotations": [],
+          "attribute": "path",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "ref-targeting",
+          "role": "ref"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "reflog-entry",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "reflog-operation"
+        },
+        {
+          "annotations": [],
+          "attribute": "log-message"
+        },
+        {
+          "annotations": [],
+          "attribute": "index"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "reflog-recording",
+          "role": "entry"
+        },
+        {
+          "relation": "reflog-recording",
+          "role": "ref-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "repository",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-bare"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-shallow"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "hosting",
+          "role": "host-repo"
+        },
+        {
+          "relation": "submodule-inclusion",
+          "role": "parent-repo"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "remote",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "url"
+        },
+        {
+          "annotations": [],
+          "attribute": "path",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "hosting",
+          "role": "hosted-remote"
+        },
+        {
+          "relation": "remote-tracking",
+          "role": "tracked-remote"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "branch",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-active"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-protected"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "ahead-by",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "behind-by",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "hosting",
+          "role": "hosted-branch"
+        },
+        {
+          "relation": "branching",
+          "role": "branch-ref"
+        },
+        {
+          "relation": "remote-tracking",
+          "role": "local-branch"
+        },
+        {
+          "relation": "remote-tracking",
+          "role": "remote-branch"
+        },
+        {
+          "relation": "pr-branching",
+          "role": "base-branch"
+        },
+        {
+          "relation": "pr-branching",
+          "role": "head-branch"
+        },
+        {
+          "relation": "mr-branching",
+          "role": "source-branch"
+        },
+        {
+          "relation": "mr-branching",
+          "role": "target-branch"
+        },
+        {
+          "relation": "protection",
+          "role": "protected-branch"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "submodule",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "url"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "submodule-update-strategy",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "submodule-ignore-rule",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-active"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "submodule-inclusion",
+          "role": "included-submodule"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "hook",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "hook-name"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-active"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-executable"
+        },
+        {
+          "annotations": [],
+          "attribute": "language",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "content",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "hosting",
+          "role": "hosted-hook"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "worktree",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-locked"
+        },
+        {
+          "annotations": [],
+          "attribute": "lock-reason",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-bare"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "hosting",
+          "role": "hosted-worktree"
+        },
+        {
+          "relation": "branching",
+          "role": "branch-ref"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "file-entry",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "file-mode",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "size",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "language",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "encoding",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-binary",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-symlink"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-submodule"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-gitignored"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-status",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "tree-containment",
+          "role": "child-entry"
+        },
+        {
+          "relation": "file-snapshot",
+          "role": "snapshot-file"
+        },
+        {
+          "relation": "file-change",
+          "role": "changed-file"
+        },
+        {
+          "relation": "blaming",
+          "role": "blamed-file"
+        },
+        {
+          "relation": "ownership",
+          "role": "owned-file"
+        },
+        {
+          "relation": "dependency-source",
+          "role": "manifest-file"
+        },
+        {
+          "relation": "license-detection",
+          "role": "license-file"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "directory-entry",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "size",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "tree-containment",
+          "role": "parent-tree"
+        },
+        {
+          "relation": "tree-containment",
+          "role": "child-entry"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitignore-rule",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "pattern"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "line-number"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-default"
+        }
+      ],
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitattribute-rule",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "pattern"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        }
+      ],
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "diff",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "additions"
+        },
+        {
+          "annotations": [],
+          "attribute": "deletions"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-merge"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "diffing",
+          "role": "diff-result"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "diff-patch",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-status"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-binary"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-mode",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "similarity",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "additions"
+        },
+        {
+          "annotations": [],
+          "attribute": "deletions"
+        },
+        {
+          "annotations": [],
+          "attribute": "language",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "diff-containing",
+          "role": "contained-patch"
+        },
+        {
+          "relation": "hunk-containing",
+          "role": "patch-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "diff-hunk",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "old-start"
+        },
+        {
+          "annotations": [],
+          "attribute": "old-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "new-start"
+        },
+        {
+          "annotations": [],
+          "attribute": "new-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "section-header",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "hunk-containing",
+          "role": "contained-hunk"
+        },
+        {
+          "relation": "line-containing",
+          "role": "hunk-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "diff-line",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "diff-line-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "content"
+        },
+        {
+          "annotations": [],
+          "attribute": "line-number",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "line-containing",
+          "role": "contained-line"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "blame-result",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "blaming",
+          "role": "blame-output"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "blame-line",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "line-number"
+        },
+        {
+          "annotations": [],
+          "attribute": "content"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-boundary"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "blaming",
+          "role": "blamed-line"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "merge-operation",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "merge-strategy"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-merged"
+        },
+        {
+          "annotations": [],
+          "attribute": "message",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "merging-op",
+          "role": "merge-op"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "merge-conflict",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "conflict-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-resolved"
+        },
+        {
+          "annotations": [],
+          "attribute": "resolution-strategy",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "content",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "merging-op",
+          "role": "merge-conflict-item"
+        },
+        {
+          "relation": "rebasing-step",
+          "role": "step-conflict"
+        },
+        {
+          "relation": "cherry-picking",
+          "role": "pick-conflict"
+        },
+        {
+          "relation": "reverting",
+          "role": "revert-conflict"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "rebase-operation",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "is-active"
+        },
+        {
+          "annotations": [],
+          "attribute": "step-number",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "rebasing",
+          "role": "rebase-op"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "rebase-step",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "rebase-action"
+        },
+        {
+          "annotations": [],
+          "attribute": "step-number"
+        },
+        {
+          "annotations": [],
+          "attribute": "message",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "rebasing-step",
+          "role": "step"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "cherry-pick-operation",
+      "owns": [],
+      "plays": [
+        {
+          "relation": "cherry-picking",
+          "role": "pick-op"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "revert-operation",
+      "owns": [],
+      "plays": [
+        {
+          "relation": "reverting",
+          "role": "revert-op"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "stash-entry",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "index"
+        },
+        {
+          "annotations": [],
+          "attribute": "message"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "stash-scope",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "stashing",
+          "role": "stash"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "bisect-session",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "is-active"
+        },
+        {
+          "annotations": [],
+          "attribute": "step-number",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "bisecting",
+          "role": "session"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "bisect-step",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "bisect-verdict"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "bisecting",
+          "role": "step"
+        },
+        {
+          "relation": "bisecting",
+          "role": "tested-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "language-stats",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "language"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "line-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "size"
+        },
+        {
+          "annotations": [],
+          "attribute": "percentage"
+        }
+      ],
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "code-complexity",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "language"
+        },
+        {
+          "annotations": [],
+          "attribute": "score"
+        },
+        {
+          "annotations": [],
+          "attribute": "line-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "depth",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "dependency",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "version"
+        },
+        {
+          "annotations": [],
+          "attribute": "dependency-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-active",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "dependency-source",
+          "role": "dep"
+        },
+        {
+          "relation": "vulnerability-affecting",
+          "role": "affected-dep"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "vulnerability",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "cve-id",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "severity"
+        },
+        {
+          "annotations": [],
+          "attribute": "cvss-score",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "description"
+        },
+        {
+          "annotations": [],
+          "attribute": "version",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "fixed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "vulnerability-affecting",
+          "role": "vuln"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "license",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "spdx-id"
+        },
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "confidence",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "license-detection",
+          "role": "detected-license"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "contributor",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "additions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "deletions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "file-count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "percentage",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "parent": "identity",
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "contributor-alias",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "email"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "identity-aliasing",
+          "role": "alias"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "github-user",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "parent": "platform-user",
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "github-team",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "slug"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "team-membership",
+          "role": "team"
+        },
+        {
+          "relation": "review-requesting",
+          "role": "requested-team"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "github-label",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "color",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-default"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "labeling",
+          "role": "label"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "github-milestone",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "number"
+        },
+        {
+          "annotations": [],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "issue-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "closed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "milestoning",
+          "role": "milestone"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "issue",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "issue-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "issue-state-reason",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-pinned"
+        }
+      ],
+      "parent": "trackable",
+      "plays": [
+        {
+          "relation": "issue-authoring",
+          "role": "issue"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "pull-request",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "pr-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-draft"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-merged"
+        },
+        {
+          "annotations": [],
+          "attribute": "merged-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "merge-method",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "sha",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "additions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "deletions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "file-count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "mergeable-state",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "parent": "trackable",
+      "plays": [
+        {
+          "relation": "pr-authoring",
+          "role": "pr"
+        },
+        {
+          "relation": "pr-branching",
+          "role": "pr-item"
+        },
+        {
+          "relation": "pr-committing",
+          "role": "pr-item"
+        },
+        {
+          "relation": "reviewing",
+          "role": "reviewed-pr"
+        },
+        {
+          "relation": "review-requesting",
+          "role": "review-requested-pr"
+        },
+        {
+          "relation": "merging",
+          "role": "merged-pr"
+        },
+        {
+          "relation": "check-suite-association",
+          "role": "suite-pr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "review",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "review-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "body",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "author-association",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "reviewing",
+          "role": "review-item"
+        },
+        {
+          "relation": "dismissal",
+          "role": "dismissed-review"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "review-comment",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "body"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "line-number",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "start-line",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "diff-side",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-outdated"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "commenting-action",
+          "role": "comment"
+        },
+        {
+          "relation": "reaction-on",
+          "role": "reacted-to"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "comment-entity",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "body"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "author-association",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "commenting-action",
+          "role": "comment"
+        },
+        {
+          "relation": "reaction-on",
+          "role": "reacted-to"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "check-suite",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "check-status"
+        },
+        {
+          "annotations": [],
+          "attribute": "check-conclusion",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "check-suite-association",
+          "role": "suite"
+        },
+        {
+          "relation": "check-suite-containing",
+          "role": "suite"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "check-run",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "check-status"
+        },
+        {
+          "annotations": [],
+          "attribute": "check-conclusion",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "started-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "completed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "check-targeting",
+          "role": "check"
+        },
+        {
+          "relation": "check-suite-containing",
+          "role": "check-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "check-annotation",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "start-line"
+        },
+        {
+          "annotations": [],
+          "attribute": "end-line"
+        },
+        {
+          "annotations": [],
+          "attribute": "start-column",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "end-column",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "annotation-level"
+        },
+        {
+          "annotations": [],
+          "attribute": "title",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "message"
+        },
+        {
+          "annotations": [],
+          "attribute": "raw-details",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "check-annotating",
+          "role": "annotation"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "status-check",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "context-name"
+        },
+        {
+          "annotations": [],
+          "attribute": "status-check-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "target-url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "status-checking",
+          "role": "status-check-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "release",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "tag-name"
+        },
+        {
+          "annotations": [],
+          "attribute": "name",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "body",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-draft"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-prerelease"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-latest"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "published-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "releasing",
+          "role": "released-item"
+        },
+        {
+          "relation": "asset-containing",
+          "role": "release-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "release-asset",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "content-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "size"
+        },
+        {
+          "annotations": [],
+          "attribute": "download-count"
+        },
+        {
+          "annotations": [],
+          "attribute": "url"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "asset-containing",
+          "role": "asset"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "deployment",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "deployment-action",
+          "role": "deployment-item"
+        },
+        {
+          "relation": "deployment-statusing",
+          "role": "deployed-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "deployment-status",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "deployment-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "deployment-statusing",
+          "role": "status-entry"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "branch-protection-rule",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "pattern"
+        },
+        {
+          "annotations": [],
+          "attribute": "require-pull-request"
+        },
+        {
+          "annotations": [],
+          "attribute": "count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "dismiss-stale-reviews"
+        },
+        {
+          "annotations": [],
+          "attribute": "require-code-owner-review"
+        },
+        {
+          "annotations": [],
+          "attribute": "require-signature"
+        },
+        {
+          "annotations": [],
+          "attribute": "require-linear-history"
+        },
+        {
+          "annotations": [],
+          "attribute": "require-conversation-resolution"
+        },
+        {
+          "annotations": [],
+          "attribute": "allow-force-push"
+        },
+        {
+          "annotations": [],
+          "attribute": "allow-deletion"
+        }
+      ],
+      "plays": [
+        {
+          "relation": "protection",
+          "role": "rule"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "codeowner-rule",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "pattern"
+        },
+        {
+          "annotations": [],
+          "attribute": "path"
+        },
+        {
+          "annotations": [],
+          "attribute": "line-number"
+        }
+      ],
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "timeline-event",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "sha",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "timeline-recording",
+          "role": "event"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-user",
+      "owns": [],
+      "parent": "platform-user",
+      "plays": []
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-label",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "color",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "priority",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "labeling",
+          "role": "label"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-milestone",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "description",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "issue-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "milestoning",
+          "role": "milestone"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-merge-request",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "number"
+        },
+        {
+          "annotations": [],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "body",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "mr-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-draft"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-merged"
+        },
+        {
+          "annotations": [],
+          "attribute": "merged-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "sha",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "additions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "deletions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "file-count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "squash-on-merge"
+        },
+        {
+          "annotations": [],
+          "attribute": "delete-source-branch"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-confidential"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "closed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "mr-authoring",
+          "role": "mr"
+        },
+        {
+          "relation": "mr-branching",
+          "role": "mr-item"
+        },
+        {
+          "relation": "merging",
+          "role": "merged-pr"
+        },
+        {
+          "relation": "reviewing",
+          "role": "reviewed-pr"
+        },
+        {
+          "relation": "labeling",
+          "role": "labeled-item"
+        },
+        {
+          "relation": "milestoning",
+          "role": "milestoned-item"
+        },
+        {
+          "relation": "assignment",
+          "role": "assigned-item"
+        },
+        {
+          "relation": "commenting-action",
+          "role": "commented-on"
+        },
+        {
+          "relation": "pipeline-association",
+          "role": "pipeline-mr"
+        },
+        {
+          "relation": "discussion-on",
+          "role": "discussed-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-issue",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "number"
+        },
+        {
+          "annotations": [],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "body",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "issue-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-confidential"
+        },
+        {
+          "annotations": [],
+          "attribute": "weight",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "time-estimate",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "time-spent",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "closed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "issue-authoring",
+          "role": "issue"
+        },
+        {
+          "relation": "labeling",
+          "role": "labeled-item"
+        },
+        {
+          "relation": "milestoning",
+          "role": "milestoned-item"
+        },
+        {
+          "relation": "assignment",
+          "role": "assigned-item"
+        },
+        {
+          "relation": "commenting-action",
+          "role": "commented-on"
+        },
+        {
+          "relation": "discussion-on",
+          "role": "discussed-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-discussion",
+      "owns": [
+        {
+          "annotations": [
+            "key"
+          ],
+          "attribute": "external-id"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-resolved"
+        },
+        {
+          "annotations": [],
+          "attribute": "resolved-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "discussion-on",
+          "role": "discussion"
+        },
+        {
+          "relation": "discussion-noting",
+          "role": "discussion-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-note",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "body"
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "is-system-note"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-internal"
+        },
+        {
+          "annotations": [],
+          "attribute": "is-resolved"
+        },
+        {
+          "annotations": [],
+          "attribute": "path",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "line-number",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "discussion-noting",
+          "role": "note"
+        },
+        {
+          "relation": "commenting-action",
+          "role": "comment"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-pipeline",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "sha"
+        },
+        {
+          "annotations": [],
+          "attribute": "pipeline-status"
+        },
+        {
+          "annotations": [],
+          "attribute": "pipeline-source",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "duration",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "coverage",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "started-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "completed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "pipeline-targeting",
+          "role": "pipeline"
+        },
+        {
+          "relation": "pipeline-association",
+          "role": "pipeline-item"
+        },
+        {
+          "relation": "pipeline-staging",
+          "role": "pipeline-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-job",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "job-status"
+        },
+        {
+          "annotations": [],
+          "attribute": "duration",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "coverage",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "allow-failure"
+        },
+        {
+          "annotations": [],
+          "attribute": "failure-reason",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "started-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "completed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "pipeline-staging",
+          "role": "job"
+        },
+        {
+          "relation": "artifact-containing",
+          "role": "job-owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "gitlab-artifact",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "size"
+        },
+        {
+          "annotations": [],
+          "attribute": "content-type",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "expires-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "artifact-containing",
+          "role": "artifact"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "security-alert",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "alert-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "alert-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "severity"
+        },
+        {
+          "annotations": [],
+          "attribute": "cvss-score",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "cve-id",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "title"
+        },
+        {
+          "annotations": [],
+          "attribute": "description"
+        },
+        {
+          "annotations": [],
+          "attribute": "path",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "url",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "updated-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "fixed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "dismissed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "dismiss-reason",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "alert-resolution",
+          "role": "alert"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "entity",
+      "name": "secret-scanning-alert",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "alert-state"
+        },
+        {
+          "annotations": [],
+          "attribute": "secret-type"
+        },
+        {
+          "annotations": [],
+          "attribute": "path",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "sha",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "line-number",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at"
+        },
+        {
+          "annotations": [],
+          "attribute": "resolved-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [
+        {
+          "relation": "alert-resolution",
+          "role": "alert"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "parentage",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "child"
+        },
+        {
+          "annotations": [],
+          "role": "parent"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "tree-containment",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "file-mode"
+        },
+        {
+          "annotations": [],
+          "attribute": "entry-type"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "parent-tree"
+        },
+        {
+          "annotations": [],
+          "role": "child-entry"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "commit-tree",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "committing-commit"
+        },
+        {
+          "annotations": [],
+          "role": "root-tree"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "tag-targeting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "tag-object"
+        },
+        {
+          "annotations": [],
+          "role": "tagged-object"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "ref-targeting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "ref"
+        },
+        {
+          "annotations": [],
+          "role": "targeted-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "object-graph",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "object"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "reflog-recording",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "ref-owner"
+        },
+        {
+          "annotations": [],
+          "role": "entry"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "hosting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "host-repo"
+        },
+        {
+          "annotations": [],
+          "role": "hosted-branch"
+        },
+        {
+          "annotations": [],
+          "role": "hosted-remote"
+        },
+        {
+          "annotations": [],
+          "role": "hosted-hook"
+        },
+        {
+          "annotations": [],
+          "role": "hosted-worktree"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "branching",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "branch-ref"
+        },
+        {
+          "annotations": [],
+          "role": "branch-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "remote-tracking",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "local-branch"
+        },
+        {
+          "annotations": [],
+          "role": "remote-branch"
+        },
+        {
+          "annotations": [],
+          "role": "tracked-remote"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "submodule-inclusion",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "parent-repo"
+        },
+        {
+          "annotations": [],
+          "role": "included-submodule"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "protection",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "protected-branch"
+        },
+        {
+          "annotations": [],
+          "role": "rule"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "diffing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "before-commit"
+        },
+        {
+          "annotations": [],
+          "role": "after-commit"
+        },
+        {
+          "annotations": [],
+          "role": "diff-result"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "diff-containing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "parent": "diff",
+          "role": "diff-owner"
+        },
+        {
+          "annotations": [],
+          "role": "contained-patch"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "hunk-containing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "patch-owner"
+        },
+        {
+          "annotations": [],
+          "role": "contained-hunk"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "line-containing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "hunk-owner"
+        },
+        {
+          "annotations": [],
+          "role": "contained-line"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "file-snapshot",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "snapshot-commit"
+        },
+        {
+          "annotations": [],
+          "role": "snapshot-file"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "blaming",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "blamed-file"
+        },
+        {
+          "annotations": [],
+          "role": "blamed-commit"
+        },
+        {
+          "annotations": [],
+          "role": "blamed-author"
+        },
+        {
+          "annotations": [],
+          "role": "blamed-line"
+        },
+        {
+          "annotations": [],
+          "role": "blame-output"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "ownership",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "percentage",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "line-count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "owned-file"
+        },
+        {
+          "annotations": [],
+          "parent": "identity",
+          "role": "owner"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "merging-op",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "merge-op"
+        },
+        {
+          "annotations": [],
+          "role": "merge-conflict-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "rebasing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "rebase-op"
+        },
+        {
+          "annotations": [],
+          "parent": "commit",
+          "role": "onto-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "rebasing-step",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "step"
+        },
+        {
+          "annotations": [],
+          "role": "original-commit"
+        },
+        {
+          "annotations": [],
+          "role": "rewritten-commit"
+        },
+        {
+          "annotations": [],
+          "role": "step-conflict"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "cherry-picking",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pick-op"
+        },
+        {
+          "annotations": [],
+          "role": "picked-commit"
+        },
+        {
+          "annotations": [],
+          "role": "result-commit"
+        },
+        {
+          "annotations": [],
+          "role": "pick-conflict"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "reverting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "revert-op"
+        },
+        {
+          "annotations": [],
+          "role": "reverted-commit"
+        },
+        {
+          "annotations": [],
+          "role": "revert-result"
+        },
+        {
+          "annotations": [],
+          "role": "revert-conflict"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "stashing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "stash"
+        },
+        {
+          "annotations": [],
+          "role": "stash-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "bisecting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "session"
+        },
+        {
+          "annotations": [],
+          "role": "step"
+        },
+        {
+          "annotations": [],
+          "role": "tested-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "dependency-source",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "dep"
+        },
+        {
+          "annotations": [],
+          "role": "manifest-file"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "vulnerability-affecting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "vuln"
+        },
+        {
+          "annotations": [],
+          "role": "affected-dep"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "license-detection",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "confidence",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "detected-license"
+        },
+        {
+          "annotations": [],
+          "role": "license-file"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "authoring",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "authored-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "timezone",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "author"
+        },
+        {
+          "annotations": [],
+          "role": "authored-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "committing",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "committed-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "timezone",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "committer"
+        },
+        {
+          "annotations": [],
+          "role": "committed-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "tagging-action",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "created-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "tagger"
+        },
+        {
+          "annotations": [],
+          "role": "tag"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "identity-aliasing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "parent": "identity",
+          "role": "primary"
+        },
+        {
+          "annotations": [],
+          "role": "alias"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "contribution",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "count",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "additions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "deletions",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        },
+        {
+          "annotations": [],
+          "attribute": "created-at",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "contributor"
+        },
+        {
+          "annotations": [],
+          "role": "contributed-to"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "issue-authoring",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "issue-author"
+        },
+        {
+          "annotations": [],
+          "role": "issue"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "pr-authoring",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pr-author"
+        },
+        {
+          "annotations": [],
+          "role": "pr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "assignment",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "assignee"
+        },
+        {
+          "annotations": [],
+          "role": "assigner"
+        },
+        {
+          "annotations": [],
+          "role": "assigned-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "labeling",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "label"
+        },
+        {
+          "annotations": [],
+          "role": "labeled-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "milestoning",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "milestone"
+        },
+        {
+          "annotations": [],
+          "role": "milestoned-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "pr-branching",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pr-item"
+        },
+        {
+          "annotations": [],
+          "role": "base-branch"
+        },
+        {
+          "annotations": [],
+          "role": "head-branch"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "pr-committing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pr-item"
+        },
+        {
+          "annotations": [],
+          "role": "pr-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "reviewing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "reviewer"
+        },
+        {
+          "annotations": [],
+          "role": "reviewed-pr"
+        },
+        {
+          "annotations": [],
+          "role": "review-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "review-requesting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "review-requested-pr"
+        },
+        {
+          "annotations": [],
+          "role": "requested-reviewer"
+        },
+        {
+          "annotations": [],
+          "role": "requested-team"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "commenting-action",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "commenter"
+        },
+        {
+          "annotations": [],
+          "role": "commented-on"
+        },
+        {
+          "annotations": [],
+          "role": "comment"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "reaction-on",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        },
+        {
+          "annotations": [],
+          "attribute": "count"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "reacted-to"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "merging",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "merger"
+        },
+        {
+          "annotations": [],
+          "role": "merged-pr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "closing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "closer"
+        },
+        {
+          "annotations": [],
+          "role": "closed-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "dismissal",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "dismiss-reason",
+          "cardinality": {
+            "max": 1,
+            "min": 0
+          }
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "dismisser"
+        },
+        {
+          "annotations": [],
+          "role": "dismissed-review"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "check-targeting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "check"
+        },
+        {
+          "annotations": [],
+          "role": "checked-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "check-suite-containing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "suite"
+        },
+        {
+          "annotations": [],
+          "role": "check-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "check-suite-association",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "suite"
+        },
+        {
+          "annotations": [],
+          "role": "suite-pr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "check-annotating",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "parent": "check-run",
+          "role": "check-run"
+        },
+        {
+          "annotations": [],
+          "role": "annotation"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "status-checking",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "status-check-item"
+        },
+        {
+          "annotations": [],
+          "role": "status-checked-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "releasing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "releaser"
+        },
+        {
+          "annotations": [],
+          "role": "released-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "asset-containing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "release-owner"
+        },
+        {
+          "annotations": [],
+          "role": "asset"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "deployment-action",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "deployer"
+        },
+        {
+          "annotations": [],
+          "role": "deployment-item"
+        },
+        {
+          "annotations": [],
+          "role": "deployed-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "deployment-statusing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "deployed-item"
+        },
+        {
+          "annotations": [],
+          "role": "status-entry"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "team-membership",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "team"
+        },
+        {
+          "annotations": [],
+          "role": "member"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "timeline-recording",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "timeline-subject"
+        },
+        {
+          "annotations": [],
+          "role": "event"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "mr-authoring",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "parent": "platform-user",
+          "role": "mr-author"
+        },
+        {
+          "annotations": [],
+          "role": "mr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "mr-branching",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "mr-item"
+        },
+        {
+          "annotations": [],
+          "role": "source-branch"
+        },
+        {
+          "annotations": [],
+          "role": "target-branch"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "discussion-on",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "discussion"
+        },
+        {
+          "annotations": [],
+          "role": "discussed-item"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "discussion-noting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "discussion-owner"
+        },
+        {
+          "annotations": [],
+          "role": "note"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "pipeline-targeting",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pipeline"
+        },
+        {
+          "annotations": [],
+          "role": "pipeline-commit"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "pipeline-association",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pipeline-item"
+        },
+        {
+          "annotations": [],
+          "role": "pipeline-mr"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "pipeline-staging",
+      "owns": [
+        {
+          "annotations": [],
+          "attribute": "name"
+        }
+      ],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "pipeline-owner"
+        },
+        {
+          "annotations": [],
+          "role": "job"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "artifact-containing",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "job-owner"
+        },
+        {
+          "annotations": [],
+          "role": "artifact"
+        }
+      ]
+    },
+    {
+      "annotations": [],
+      "kind": "relation",
+      "name": "alert-resolution",
+      "owns": [],
+      "plays": [],
+      "relates": [
+        {
+          "annotations": [],
+          "role": "alert"
+        },
+        {
+          "annotations": [],
+          "role": "resolver"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "comment": "A commit with multiple parents is a merge commit",
+      "name": "infer-merge-commit",
+      "then_clause": "$c has is-merge true;",
+      "when_clause": "$c isa commit;\n(child: $c, parent: $p1) isa parentage;\n(child: $c, parent: $p2) isa parentage;\nnot { $p1 is $p2; };"
+    },
+    {
+      "comment": "If A is parent of B and B is parent of C, A is ancestor of C",
+      "name": "transitive-ancestry",
+      "then_clause": "(child: $c, parent: $a) isa parentage;",
+      "when_clause": "(child: $b, parent: $a) isa parentage;\n(child: $c, parent: $b) isa parentage;"
+    },
+    {
+      "comment": "A contributor who authored commits on a branch contributed to the repo",
+      "name": "infer-contribution",
+      "then_clause": "(contributor: $contributor, contributed-to: $repo) isa contribution;",
+      "when_clause": "$contributor isa contributor;\n(author: $contributor, authored-commit: $commit) isa authoring;\n(branch-ref: $branch, branch-commit: $commit) isa branching;\n(host-repo: $repo, hosted-branch: $branch) isa hosting;"
+    },
+    {
+      "comment": "File ownership inferred from blame majority",
+      "name": "infer-file-ownership",
+      "then_clause": "(owned-file: $file, owner: $author) isa ownership;",
+      "when_clause": "$author isa contributor;\n(blamed-file: $file, blamed-author: $author) isa blaming;"
+    }
+  ]
+}

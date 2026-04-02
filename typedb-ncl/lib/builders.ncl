@@ -39,6 +39,20 @@
     = fun _attr =>
       { attribute = _attr, annotations = ['unique] },
 
+  owns_card
+    | doc "Build an owns clause with cardinality: owns_card \"attr\" 0 1"
+    | not_exported
+    = fun _attr =>
+      fun _min =>
+        fun _max =>
+          { attribute = _attr, cardinality = { min = _min, max = _max } },
+
+  owns_opt
+    | doc "Build an owns @card(0..1) clause (optional attribute): owns_opt \"attr\""
+    | not_exported
+    = fun _attr =>
+      { attribute = _attr, cardinality = { min = 0, max = 1 } },
+
   plays
     | doc "Build a plays clause: plays \"authoring\" \"author\""
     | not_exported
@@ -59,6 +73,13 @@
       fun _min =>
         fun _max =>
           { role = _role, cardinality = { min = _min, max = _max } },
+
+  relates_sub
+    | doc "Build a relates with role inheritance: relates_sub \"owner\" \"identity\""
+    | not_exported
+    = fun _role =>
+      fun _parent =>
+        { role = _role, parent = _parent },
 
   # -- Type builders --
 
